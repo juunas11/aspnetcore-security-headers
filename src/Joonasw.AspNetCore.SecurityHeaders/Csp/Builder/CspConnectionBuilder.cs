@@ -18,6 +18,24 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Csp.Builder
             return this;
         }
 
+        public CspConnectionBuilder ToAnywhere()
+        {
+            _options.AllowAny = true;
+            return this;
+        }
+
+        public CspConnectionBuilder ToNowhere()
+        {
+            _options.AllowNone = true;
+            return this;
+        }
+
+        public CspConnectionBuilder OnlyOverHttps()
+        {
+            _options.AllowOnlyHttps = true;
+            return this;
+        }
+
         internal CspConnectSrcOptions BuildOptions()
         {
             return _options;

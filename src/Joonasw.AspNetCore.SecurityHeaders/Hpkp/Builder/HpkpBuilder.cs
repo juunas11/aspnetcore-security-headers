@@ -14,7 +14,7 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Hpkp.Builder
 
         public HpkpBuilder AddSha256Pin(string pin)
         {
-            _options.Pins.Add(pin);
+            _options.Pins.Add("pin-sha256=\"" + pin + "\"");
             return this;
         }
 

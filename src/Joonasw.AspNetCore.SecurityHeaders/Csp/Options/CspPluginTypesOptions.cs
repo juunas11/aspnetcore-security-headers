@@ -4,6 +4,10 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Csp.Options
 {
     public class CspPluginTypesOptions
     {
+        /// <summary>
+        /// Collection of MIME types allowed for loading resources
+        /// in &lt;object&gt; and &lt;embed&gt; tags.
+        /// </summary>
         public ICollection<string> AllowedMediaTypes { get; }
 
         public CspPluginTypesOptions()

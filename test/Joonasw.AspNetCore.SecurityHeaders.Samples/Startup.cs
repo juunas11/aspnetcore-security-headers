@@ -1,14 +1,11 @@
-﻿using System.Threading.Tasks;
+﻿using Joonasw.AspNetCore.SecurityHeaders.Samples.Middleware;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using System.IO;
-using Joonasw.AspNetCore.SecurityHeaders;
-using Microsoft.Extensions.FileProviders;
 
-namespace WebApplication1
+namespace Joonasw.AspNetCore.SecurityHeaders.Samples
 {
     // ReSharper disable once ClassNeverInstantiated.Global
     public class Startup
@@ -40,6 +37,7 @@ namespace WebApplication1
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug(LogLevel.Debug);
 
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -47,6 +45,7 @@ namespace WebApplication1
             }
             else
             {
+                app.UseHttpsEnforcement();
                 app.UseHsts(new HstsOptions
                 {
                     Seconds = 30 * 24 * 60 * 60,
@@ -54,39 +53,60 @@ namespace WebApplication1
                     Preload = false
                 });
 
-                //app.UseHpkp(hpkp =>
-                //{
-                //    hpkp.UseMaxAgeSeconds(30 * 24 * 60 * 60)
-                //        .AddSha256Pin("abc")
-                //        .AddSha256Pin("bcd")
-                //        .IncludeSubDomains()
-                //        .SetReportOnly()
-                //        .ReportViolationsTo("/hpkp-report");
-                //});
+                app.UseHpkp(hpkp =>
+                {
+                    hpkp.UseMaxAgeSeconds(30 * 24 * 60 * 60)
+                        .AddSha256Pin("nrmpk4ZI3wbRBmUZIT5aKAgP0LlKHRgfA2Snjzeg9iY=")
+                        .SetReportOnly()
+                        .ReportViolationsTo("/hpkp-report");
+                });
             }
             
             app.UseStaticFiles();
-            app.UseStaticFiles(new StaticFileOptions
-            {
-                FileProvider = new PhysicalFileProvider(
-                    Path.Combine(Directory.GetCurrentDirectory(), "static"))
-            });
 
             app.UseCsp(csp =>
             {
+                //csp.EnableSandbox()
+                //    .AllowScripts();
                 csp.AllowScripts
                     .FromSelf()
-                    .From("www.google.com")
-                    .AllowUnsafeInline()
-                    .AllowUnsafeEval()
+                    .From("localhost:1591")
+                    .From("ajax.aspnetcdn.com")
                     .AddNonce();
 
                 csp.AllowStyles
                     .FromSelf()
-                    .From("www.google.com")
+                    .From("ajax.aspnetcdn.com")
                     .AddNonce();
 
-                csp.SetReportOnly();
+                csp.AllowImages
+                    .FromSelf();
+
+                csp.AllowConnections
+                    .ToSelf();
+
+                csp.AllowAudioAndVideo
+                    .FromNowhere();
+
+                csp.AllowChildren
+                    .FromNowhere();
+
+                csp.AllowConnections
+                    .To("ws://localhost:1591")
+                    .To("http://localhost:1591")
+                    .ToSelf();
+
+                csp.AllowFonts
+                    .FromSelf()
+                    .From("ajax.aspnetcdn.com");
+
+                csp.AllowPlugins
+                    .FromNowhere();
+
+                csp.AllowFraming
+                    .FromNowhere();
+
+                //csp.SetReportOnly();
                 csp.ReportViolationsTo("/csp-report");
             });
 

@@ -5,22 +5,39 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Csp.Options
     public abstract class CspSrcOptionsBase
     {
         private readonly string _directiveName;
-        public ICollection<string> AllowedSources { get; set; }
-        public bool AllowSelf { get; set; }
-        public bool AddNonce { get; set; }
-        public bool AllowUnsafeInline { get; set; }
-        public bool AllowUnsafeEval { get; set; }
-        public bool AllowNone { get; set; }
-        public bool AllowOnlyHttps { get; set; }
-        public bool AllowDataScheme { get; set; }
 
-        public CspSrcOptionsBase(string directiveName)
+        /// <summary>
+        /// Collection of sources from where these resources can be loaded.
+        /// </summary>
+        public ICollection<string> AllowedSources { get; set; }
+        /// <summary>
+        /// Allow loading these resources from the same domain as the app.
+        /// </summary>
+        public bool AllowSelf { get; set; }
+        /// <summary>
+        /// Block loading of these resources.
+        /// </summary>
+        public bool AllowNone { get; set; }
+        /// <summary>
+        /// Allow loading only through secure channels.
+        /// </summary>
+        public bool AllowOnlyHttps { get; set; }
+        /// <summary>
+        /// Allows loading via data scheme, e.g. Base64-encoded images.
+        /// </summary>
+        public bool AllowDataScheme { get; set; }
+        /// <summary>
+        /// Allows any source except data:, blob:, and filesystem: schemes.
+        /// </summary>
+        public bool AllowAny { get; set; }
+
+        protected CspSrcOptionsBase(string directiveName)
         {
             _directiveName = directiveName + " ";
             AllowedSources = new List<string>();
         }
 
-        public string ToString(CspNonceService nonceService)
+        protected virtual ICollection<string> GetParts(ICspNonceService nonceService)
         {
             ICollection<string> parts = new List<string>();
 
@@ -30,11 +47,14 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Csp.Options
             }
             else
             {
+                if (AllowAny)
+                {
+                    parts.Add("*");
+                }
                 if (AllowSelf)
                 {
                     parts.Add("'self'");
                 }
-
                 if (AllowOnlyHttps)
                 {
                     parts.Add("https:");
@@ -48,22 +68,13 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Csp.Options
                 {
                     parts.Add(allowedSource);
                 }
-
-                if (AddNonce)
-                {
-                    parts.Add($"'nonce-{nonceService.GetNonce()}'");
-                }
-
-                if (AllowUnsafeEval)
-                {
-                    parts.Add("'unsafe-eval'");
-                }
-
-                if (AllowUnsafeInline)
-                {
-                    parts.Add("'unsafe-inline'");
-                }
             }
+            return parts;
+        }
+
+        public string ToString(ICspNonceService nonceService)
+        {
+            ICollection<string> parts = GetParts(nonceService);
 
             if (parts.Count == 0)
             {

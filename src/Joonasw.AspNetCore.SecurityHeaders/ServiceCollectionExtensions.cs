@@ -7,7 +7,7 @@ namespace Joonasw.AspNetCore.SecurityHeaders
     {
         public static IServiceCollection AddCsp(this IServiceCollection services, int nonceByteAmount = 32)
         {
-            return services.AddScoped<CspNonceService>(svcProvider => new CspNonceService(nonceByteAmount));
+            return services.AddScoped<ICspNonceService>(svcProvider => new CspNonceService(nonceByteAmount));
         }
     }
 }

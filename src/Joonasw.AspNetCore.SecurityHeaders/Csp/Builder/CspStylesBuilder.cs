@@ -1,4 +1,5 @@
-﻿using Joonasw.AspNetCore.SecurityHeaders.Csp.Options;
+﻿using System;
+using Joonasw.AspNetCore.SecurityHeaders.Csp.Options;
 
 namespace Joonasw.AspNetCore.SecurityHeaders.Csp.Builder
 {
@@ -6,15 +7,29 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Csp.Builder
     {
         private readonly CspStyleSrcOptions _options = new CspStyleSrcOptions();
 
+        public void FromNowhere()
+        {
+            _options.AllowNone = true;
+        }
+
         public CspStylesBuilder FromSelf()
         {
             _options.AllowSelf = true;
             return this;
         }
 
-        public CspStylesBuilder From(string source)
+        public CspStylesBuilder From(string uri)
         {
-            _options.AllowedSources.Add(source);
+            if (uri == null) throw new ArgumentNullException(nameof(uri));
+            if (uri.Length == 0) throw new ArgumentException("Uri can't be empty", nameof(uri));
+
+            _options.AllowedSources.Add(uri);
+            return this;
+        }
+
+        public CspStylesBuilder FromAnywhere()
+        {
+            _options.AllowAny = true;
             return this;
         }
 
@@ -30,7 +45,13 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Csp.Builder
             return this;
         }
 
-        internal CspStyleSrcOptions BuildOptions()
+        public CspStylesBuilder OnlyOverHttps()
+        {
+            _options.AllowOnlyHttps = true;
+            return this;
+        }
+
+        public CspStyleSrcOptions BuildOptions()
         {
             return _options;
         }

@@ -75,7 +75,7 @@
     </DotNetCliToolReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Joonasw.AspNetCore.SecurityHeaders\Joonasw.AspNetCore.SecurityHeaders.csproj" />
+    <ProjectReference Include="..\..\src\Joonasw.AspNetCore.SecurityHeaders\Joonasw.AspNetCore.SecurityHeaders.csproj" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

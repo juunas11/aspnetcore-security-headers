@@ -5,7 +5,6 @@
         public CspDefaultSrcOptions()
             : base("default-src")
         {
-            
         }
     }
 }

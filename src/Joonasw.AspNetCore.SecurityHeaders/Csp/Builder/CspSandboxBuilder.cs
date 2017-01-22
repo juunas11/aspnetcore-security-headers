@@ -57,7 +57,7 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Csp.Builder
             return this;
         }
 
-        internal CspSandboxOptions BuildOptions()
+        public CspSandboxOptions BuildOptions()
         {
             return _options;
         }

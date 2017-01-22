@@ -3,7 +3,7 @@ using System.Security.Cryptography;
 
 namespace Joonasw.AspNetCore.SecurityHeaders.Csp
 {
-    public class CspNonceService
+    public class CspNonceService : ICspNonceService
     {
         private static readonly RandomNumberGenerator _rng = RandomNumberGenerator.Create();
         private readonly string _nonce;

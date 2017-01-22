@@ -9,20 +9,51 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Csp
     {
         private readonly RequestDelegate _next;
         private readonly CspOptions _options;
+        private readonly string _headerName;
+        private readonly string _headerValue;
 
         public CspMiddleware(RequestDelegate next, CspOptions options)
         {
+            if (options == null)
+            {
+                throw new ArgumentNullException(nameof(options));
+            }
+
             _next = next;
             _options = options;
+            // If a nonce is needed to be generated, we can't cache the header value
+            if (options.IsNonceNeeded)
+            {
+                _headerName = null;
+                _headerValue = null;
+            }
+            else
+            {
+                //If nonces are not needed, we can cache them immediately
+                Tuple<string, string> header = options.ToString(null);
+                _headerName = header.Item1;
+                _headerValue = header.Item2;
+            }
         }
 
         public async Task Invoke(HttpContext context)
         {
-            var nonceService = (CspNonceService)context.RequestServices.GetService(typeof(CspNonceService));
+            string headerName;
+            string headerValue;
+            if (_options.IsNonceNeeded)
+            {
+                var nonceService = (ICspNonceService) context.RequestServices.GetService(typeof(ICspNonceService));
+                Tuple<string, string> header = _options.ToString(nonceService);
+                headerName = header.Item1;
+                headerValue = header.Item2;
+            }
+            else
+            {
+                headerName = _headerName;
+                headerValue = _headerValue;
+            }
 
-            Tuple<string, string> header = _options.ToString(nonceService);
-
-            context.Response.Headers.Add(header.Item1, header.Item2);
+            context.Response.Headers.Add(headerName, headerValue);
             await _next.Invoke(context);
         }
     }

@@ -5,7 +5,6 @@
         public CspChildSrcOptions()
             : base("child-src")
         {
-            
         }
     }
 }
