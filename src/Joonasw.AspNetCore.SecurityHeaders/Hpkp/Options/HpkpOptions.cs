@@ -12,14 +12,6 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Hpkp.Options
         public bool ReportOnly { get; set; }
         public string ReportUri { get; set; }
 
-
-        //Public-Key-Pins: (or Public-Key-Pins-Report-Only:)
-        //pin-sha256="cUPcTAZWKaASuYWhhneDttWpY3oBAkE3h2+soZS7sWs=";
-        //pin-sha256="M8HztCzM3elUxkcjR2S5P4hhyBNf6lHkmjAHKhpGPWE=";
-        //max-age=5184000; includeSubDomains;
-        //report-uri="https://www.example.org/hpkp-report"
-
-
         public string HeaderName => ReportOnly ? ReportOnlyHeaderName : BlockingHeaderName;
 
         public string HeaderValue
