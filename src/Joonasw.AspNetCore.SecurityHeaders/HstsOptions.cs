@@ -1,5 +1,8 @@
 ﻿namespace Joonasw.AspNetCore.SecurityHeaders
 {
+    /// <summary>
+    /// Options for the HTTP Strict Transport Security header.
+    /// </summary>
     public class HstsOptions
     {
         /// <summary>
