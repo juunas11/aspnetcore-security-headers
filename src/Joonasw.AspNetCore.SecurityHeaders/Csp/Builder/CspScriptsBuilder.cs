@@ -3,21 +3,38 @@ using Joonasw.AspNetCore.SecurityHeaders.Csp.Options;
 
 namespace Joonasw.AspNetCore.SecurityHeaders.Csp.Builder
 {
+    /// <summary>
+    /// Builder for Content Security Policy
+    /// rules related to JavaScript.
+    /// </summary>
     public class CspScriptsBuilder
     {
         private readonly CspScriptSrcOptions _options = new CspScriptSrcOptions();
 
+        /// <summary>
+        /// Block all JavaScript.
+        /// </summary>
         public void FromNowhere()
         {
             _options.AllowNone = true;
         }
 
+        /// <summary>
+        /// Allow JavaScript from current domain.
+        /// </summary>
+        /// <returns>The builder for call chaining</returns>
         public CspScriptsBuilder FromSelf()
         {
             _options.AllowSelf = true;
             return this;
         }
 
+        /// <summary>
+        /// Allow JavaScript from the given
+        /// <paramref name="uri"/>.
+        /// </summary>
+        /// <param name="uri">The URI to allow.</param>
+        /// <returns>The builder for call chaining</returns>
         public CspScriptsBuilder From(string uri)
         {
             if(uri == null) throw new ArgumentNullException(nameof(uri));
@@ -30,15 +47,20 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Csp.Builder
         /// <summary>
         /// Allow inline scripts.
         /// If you have an XSS vulnerability, this will allow them to execute.
-        /// Cannot be enabled together with AddNonce
+        /// Cannot be enabled together with AddNonce.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The builder for call chaining</returns>
         public CspScriptsBuilder AllowUnsafeInline()
         {
             _options.AllowUnsafeInline = true;
             return this;
         }
 
+        /// <summary>
+        /// Allow usage of eval(). Do not enable unless you really
+        /// need it.
+        /// </summary>
+        /// <returns>The builder for call chaining</returns>
         public CspScriptsBuilder AllowUnsafeEval()
         {
             _options.AllowUnsafeEval = true;
@@ -50,22 +72,31 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Csp.Builder
         /// adds it to the CSP header. Allows inline scripts that
         /// have the nonce attribute set to the random value on
         /// the script element.
-        /// Note that you must call AddCsp() on the service
-        /// collection for this to work.
+        /// Note that you must call AddCsp() on the service collection
+        /// in ConfigureServices() to add the necessary dependencies.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The builder for call chaining</returns>
         public CspScriptsBuilder AddNonce()
         {
             _options.AddNonce = true;
             return this;
         }
 
+        /// <summary>
+        /// Allow JavaScript from anywhere, except
+        /// data:, blob:, and filesystem: schemes.
+        /// </summary>
+        /// <returns>The builder for call chaining</returns>
         public CspScriptsBuilder FromAnywhere()
         {
             _options.AllowAny = true;
             return this;
         }
 
+        /// <summary>
+        /// Allow JavaScript only over secure connections.
+        /// </summary>
+        /// <returns>The builder for call chaining</returns>
         public CspScriptsBuilder OnlyOverHttps()
         {
             _options.AllowOnlyHttps = true;
