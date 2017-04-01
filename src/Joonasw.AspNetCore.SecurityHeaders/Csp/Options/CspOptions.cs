@@ -49,7 +49,7 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Csp.Options
         /// </summary>
         public CspMediaSrcOptions MediaSrc { get; set; }
         /// <summary>
-        /// Rules to apply for &lt;object&gt;, &lt;embed&gt; and 
+        /// Rules to apply for &lt;object&gt;, &lt;embed&gt; and
         /// &lt;applet&gt; elements.
         /// </summary>
         public CspObjectSrcOptions ObjectSrc { get; set; }
@@ -78,8 +78,12 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Csp.Options
         /// The URL where violation reports should be sent.
         /// </summary>
         public string ReportUri { get; set; }
+		/// <summary>
+		/// If true, the X-Header will be included in the rsponse.
+		/// </summary>
+		public bool IncludeXHeader { get; set; }
 
-        public bool IsNonceNeeded => ScriptSrc.AddNonce || StyleSrc.AddNonce;
+		public bool IsNonceNeeded => ScriptSrc.AddNonce || StyleSrc.AddNonce;
 
         public CspOptions()
         {

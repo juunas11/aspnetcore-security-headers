@@ -51,7 +51,7 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Csp.Builder
         /// Set up rules for plugins in e.g. &lt;object&gt; elements.
         /// </summary>
         public CspPluginBuilder AllowPlugins { get; } = new CspPluginBuilder();
-        
+
         /// <summary>
         /// Enables sandboxing of the app in the browser.
         /// </summary>
@@ -61,7 +61,7 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Csp.Builder
             _options.EnableSandbox = true;
             return _sandboxBuilder;
         }
-        
+
         /// <summary>
         /// Sets the CSP policy to Report-Only.
         /// Nothing is blocked, violations are only reported.
@@ -82,9 +82,25 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Csp.Builder
             if(uri.Length == 0) throw new ArgumentException("Uri can't be empty", nameof(uri));
 
             _options.ReportUri = uri;
-        }
+		}
 
-        public CspOptions BuildCspOptions()
+		/// <summary>
+		/// Configures the middelware to include the X-Header.
+		/// </summary>
+		public void IncludeXHeader()
+		{
+			_options.IncludeXHeader = true;
+		}
+
+		/// <summary>
+		/// Configures the middelware to exclude the X-Header.
+		/// </summary>
+		public void ExcludeXHeader()
+		{
+			_options.IncludeXHeader = false;
+		}
+
+		public CspOptions BuildCspOptions()
         {
             _options.ScriptSrc = AllowScripts.BuildOptions();
             _options.StyleSrc = AllowStyles.BuildOptions();

@@ -54,6 +54,17 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Tests
             CspOptions options = builder.BuildCspOptions();
 
             Assert.True(options.ReportOnly);
-        }
-    }
+		}
+
+		[Fact]
+		public void IncludeXHeader_SetsIncludeXHeaderToTrue()
+		{
+			var builder = new CspBuilder();
+
+			builder.IncludeXHeader();
+			CspOptions options = builder.BuildCspOptions();
+
+			Assert.True(options.IncludeXHeader);
+		}
+	}
 }
