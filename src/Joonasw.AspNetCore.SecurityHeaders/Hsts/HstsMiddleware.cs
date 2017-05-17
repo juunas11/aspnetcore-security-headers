@@ -1,38 +1,18 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 
 namespace Joonasw.AspNetCore.SecurityHeaders.Hsts
 {
     public class HstsMiddleware
     {
-        private readonly RequestDelegate _next;
         private const string HeaderName = "Strict-Transport-Security";
+        private readonly RequestDelegate _next;
         private readonly string _headerValue;
 
         public HstsMiddleware(RequestDelegate next, HstsOptions options)
         {
-            if (options == null)
-            {
-                throw new ArgumentNullException(nameof(options));
-            }
-            if (options.DurationSeconds <= 0)
-            {
-                throw new ArgumentOutOfRangeException(nameof(options.DurationSeconds), "HSTS duration must be positive");
-            }
-
             _next = next;
-            
-            string headerValue = "max-age=" + options.DurationSeconds;
-            if (options.IncludeSubDomains)
-            {
-                headerValue += "; includeSubDomains";
-            }
-            if (options.Preload)
-            {
-                headerValue += "; preload";
-            }
-            _headerValue = headerValue;
+            _headerValue = options.BuildHeaderValue();
         }
 
         public async Task Invoke(HttpContext context)
