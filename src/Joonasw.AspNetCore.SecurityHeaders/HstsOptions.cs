@@ -1,27 +1,41 @@
-﻿namespace Joonasw.AspNetCore.SecurityHeaders
+﻿using System;
+
+namespace Joonasw.AspNetCore.SecurityHeaders
 {
     /// <summary>
     /// Options for the HTTP Strict Transport Security header.
     /// </summary>
     public class HstsOptions
     {
+        public HstsOptions(TimeSpan duration, bool includeSubDomains = false, bool preload = false)
+        {
+            Duration = duration;
+            IncludeSubDomains = includeSubDomains;
+            Preload = preload;
+        }
+
         /// <summary>
-        /// Gets or sets the number of seconds browsers should remember that
-        /// this URL should only be accessed over HTTPS. Must be set.
+        /// Gets the duration browsers should remember that
+        /// this domain should only be accessed over HTTPS.
         /// </summary>
-        public int Seconds { get; set; }
+        public TimeSpan Duration { get; }
+
         /// <summary>
-        /// Gets or sets if this rule also applies to any subdomains.
-        /// Only set to true if you are willing to say that you
-        /// will not need to have any HTTP subdomains.
+        /// Gets the duration browsers should remember
+        /// this domain should only be accessed over HTTPS,
+        /// in seconds.
         /// </summary>
-        public bool IncludeSubDomains { get; set; }
+        public int DurationSeconds => (int) Duration.TotalSeconds;
+
         /// <summary>
-        /// Gets or sets if this domain should be allowed to be
-        /// added to preload lists in browsers. Only set to true
-        /// if you are willing to hard-code this rule to modern
-        /// browsers.
+        /// Gets if this rule also applies to any subdomains.
         /// </summary>
-        public bool Preload { get; set; }
+        public bool IncludeSubDomains { get; }
+
+        /// <summary>
+        /// Gets if this domain should be allowed to be
+        /// added to preload lists in browsers.
+        /// </summary>
+        public bool Preload { get; }
     }
 }

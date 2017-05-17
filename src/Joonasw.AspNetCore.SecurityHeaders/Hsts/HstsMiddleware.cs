@@ -16,14 +16,14 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Hsts
             {
                 throw new ArgumentNullException(nameof(options));
             }
-            if (options.Seconds <= 0)
+            if (options.DurationSeconds <= 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(options.Seconds), "Expiry time must be positive");
+                throw new ArgumentOutOfRangeException(nameof(options.DurationSeconds), "HSTS duration must be positive");
             }
 
             _next = next;
             
-            string headerValue = "max-age=" + options.Seconds;
+            string headerValue = "max-age=" + options.DurationSeconds;
             if (options.IncludeSubDomains)
             {
                 headerValue += "; includeSubDomains";
