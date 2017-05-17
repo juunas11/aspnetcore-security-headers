@@ -7,6 +7,18 @@ namespace Joonasw.AspNetCore.SecurityHeaders
     /// </summary>
     public class HstsOptions
     {
+        /// <summary>
+        /// Defines the parameters for the HSTS header sent
+        /// to clients.
+        /// </summary>
+        /// <param name="duration">The amount of time the clients should remember that
+        /// this domain should only be accessed over HTTPS.</param>
+        /// <param name="includeSubDomains">If true, clients will also apply the rule on
+        /// any subdomains of the current domain. Enable this only if you know what you are doing.
+        /// False by default.</param>
+        /// <param name="preload">If true, allows this rule to be built into browsers,
+        /// preventing the first insecure connection. Enable this only if you know what you are doing.
+        /// False by default.</param>
         public HstsOptions(TimeSpan duration, bool includeSubDomains = false, bool preload = false)
         {
             Duration = duration;
