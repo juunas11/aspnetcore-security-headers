@@ -1,4 +1,6 @@
-﻿namespace Joonasw.AspNetCore.SecurityHeaders
+﻿using System;
+
+namespace Joonasw.AspNetCore.SecurityHeaders
 {
     /// <summary>
     /// Options for the HTTP Strict Transport Security header.
@@ -6,22 +8,46 @@
     public class HstsOptions
     {
         /// <summary>
-        /// Gets or sets the number of seconds browsers should remember that
-        /// this URL should only be accessed over HTTPS. Must be set.
+        /// Defines the parameters for the HSTS header sent
+        /// to clients.
         /// </summary>
-        public int Seconds { get; set; }
+        /// <param name="duration">The amount of time the clients should remember that
+        /// this domain should only be accessed over HTTPS.</param>
+        /// <param name="includeSubDomains">If true, clients will also apply the rule on
+        /// any subdomains of the current domain. Enable this only if you know what you are doing.
+        /// False by default.</param>
+        /// <param name="preload">If true, allows this rule to be built into browsers,
+        /// preventing the first insecure connection. Enable this only if you know what you are doing.
+        /// False by default.</param>
+        public HstsOptions(TimeSpan duration, bool includeSubDomains = false, bool preload = false)
+        {
+            Duration = duration;
+            IncludeSubDomains = includeSubDomains;
+            Preload = preload;
+        }
+
         /// <summary>
-        /// Gets or sets if this rule also applies to any subdomains.
-        /// Only set to true if you are willing to say that you
-        /// will not need to have any HTTP subdomains.
+        /// Gets the duration browsers should remember that
+        /// this domain should only be accessed over HTTPS.
         /// </summary>
-        public bool IncludeSubDomains { get; set; }
+        public TimeSpan Duration { get; }
+
         /// <summary>
-        /// Gets or sets if this domain should be allowed to be
-        /// added to preload lists in browsers. Only set to true
-        /// if you are willing to hard-code this rule to modern
-        /// browsers.
+        /// Gets the duration browsers should remember
+        /// this domain should only be accessed over HTTPS,
+        /// in seconds.
         /// </summary>
-        public bool Preload { get; set; }
+        public int DurationSeconds => (int) Duration.TotalSeconds;
+
+        /// <summary>
+        /// Gets if this rule also applies to any subdomains.
+        /// </summary>
+        public bool IncludeSubDomains { get; }
+
+        /// <summary>
+        /// Gets if this domain should be allowed to be
+        /// added to preload lists in browsers.
+        /// </summary>
+        public bool Preload { get; }
     }
 }
