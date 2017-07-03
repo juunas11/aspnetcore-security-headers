@@ -60,6 +60,12 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Csp.Options
                     parts.Add(allowedSource);
                 }
             }
+
+            if(parts.Count == 0)
+            {
+                return string.Empty;
+            }
+
             return "frame-ancestors " + string.Join(" ", parts);
         }
     }
