@@ -1,29 +1,21 @@
-<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="15.0">
+﻿<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="15.0">
   <PropertyGroup>
     <TargetFramework>netstandard1.5</TargetFramework>
     <Version>1.1.1</Version>
     <Title>Joonasw.AspNetCore.SecurityHeaders</Title>
     <Authors>Joonas Westlin</Authors>
-    <LicenseUrl>https://github.com/juunas11/aspnetcore-security-headers/blob/master/LICENSE.txt</LicenseUrl>
-    <ProjectUrl>https://github.com/juunas11/aspnetcore-security-headers</ProjectUrl>
     <Description>Middleware for adding security headers to an ASP.NET Core application. Allows you to easily add Content Security Policy, Strict Transport Security, and Public Key Pins to an app.</Description>
-    <ReleaseNotes>Added comments for all public interfaces.</ReleaseNotes>
     <Copyright>Copyright 2017 Joonas Westlin</Copyright>
-    <Tags>aspnetcore security headers hsts hpkp csp</Tags>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageProjectUrl>https://github.com/juunas11/aspnetcore-security-headers</PackageProjectUrl>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageLicenseUrl>https://github.com/juunas11/aspnetcore-security-headers/blob/master/LICENSE.txt</PackageLicenseUrl>
-    <PackageReleaseNotes>Fixed bug with frame-ancestors directive being included always.</PackageReleaseNotes>
+    <PackageProjectUrl>https://github.com/juunas11/aspnetcore-security-headers</PackageProjectUrl>
+    <PackageReleaseNotes>Updated HSTS options</PackageReleaseNotes>
     <PackageTags>aspnetcore security headers hsts hpkp csp</PackageTags>
+    <RepositoryUrl>https://github.com/juunas11/aspnetcore-security-headers</RepositoryUrl>
   </PropertyGroup>
-  <!--<ItemGroup>
-    <Compile Include="**\*.cs" />
-    <EmbeddedResource Include="**\*.resx" />
-  </ItemGroup>-->
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="1.0.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="1.0.0" />
-    <!--<PackageReference Include="NETStandard.Library" Version="1.6.1" />-->
     <PackageReference Include="Microsoft.AspNetCore.Razor.Runtime" Version="1.0.0" />
   </ItemGroup>
 </Project>
