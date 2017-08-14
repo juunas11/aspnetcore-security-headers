@@ -11,17 +11,12 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Samples
     // ReSharper disable once ClassNeverInstantiated.Global
     public class Startup
     {
-        public Startup(IHostingEnvironment env)
+        public Startup(IConfiguration configuration)
         {
-            var builder = new ConfigurationBuilder()
-                .SetBasePath(env.ContentRootPath)
-                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
-                .AddEnvironmentVariables();
-            Configuration = builder.Build();
+            Configuration = configuration;
         }
 
-        public IConfigurationRoot Configuration { get; }
+        public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -35,10 +30,6 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Samples
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-            loggerFactory.AddDebug(LogLevel.Debug);
-
-
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -102,7 +93,7 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Samples
                 csp.AllowFraming
                     .FromNowhere();
 
-                //csp.SetReportOnly();
+                csp.SetReportOnly();
                 csp.ReportViolationsTo("/csp-report");
             });
 
