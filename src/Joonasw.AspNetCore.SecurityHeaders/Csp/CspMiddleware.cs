@@ -54,7 +54,11 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Csp
             }
 
             context.Response.Headers.Add(headerName, headerValue);
-            await _next.Invoke(context);
+			if (_options.IncludeXHeader)
+			{
+				context.Response.Headers.Add(String.Concat("X-", headerName), headerValue);
+			}
+			await _next.Invoke(context);
         }
     }
 }
