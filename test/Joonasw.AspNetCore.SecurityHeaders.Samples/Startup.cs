@@ -1,4 +1,6 @@
-﻿using Joonasw.AspNetCore.SecurityHeaders.Samples.Middleware;
+﻿using Joonasw.AspNetCore.SecurityHeaders.Hpkp.Options;
+using Joonasw.AspNetCore.SecurityHeaders.Csp.Options;
+using Joonasw.AspNetCore.SecurityHeaders.Samples.Middleware;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -22,6 +24,8 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Samples
         public void ConfigureServices(IServiceCollection services)
         {
             services.Configure<HstsOptions>(Configuration.GetSection("Hsts"));
+            services.Configure<CspOptions>(Configuration.GetSection("Csp"));
+            services.Configure<HpkpOptions>(Configuration.GetSection("Hpkp"));
 
             // Add framework services.
             services.AddMvc();
@@ -52,6 +56,9 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Samples
                         .SetReportOnly()
                         .ReportViolationsTo("/hpkp-report");
                 });
+
+                // Replace previous call to use injected options loaded from the appsettings.json file
+                // app.UseHpkp();
             }
 
             app.UseStaticFiles();
@@ -101,6 +108,9 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Samples
                 csp.SetReportOnly();
                 csp.ReportViolationsTo("/csp-report");
             });
+
+            // Replace previous call to use injected options loaded from the appsettings.json file
+            // app.UseCsp();
 
             app.UseMvc(routes =>
             {

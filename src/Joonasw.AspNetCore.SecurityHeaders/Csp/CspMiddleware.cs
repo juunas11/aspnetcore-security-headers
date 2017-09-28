@@ -12,7 +12,7 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Csp
         private readonly CspOptions _options;
         private readonly string _headerName;
         private readonly string _headerValue;
-        
+
         public CspMiddleware(RequestDelegate next, IOptions<CspOptions> options)
         {
             if (options == null)
