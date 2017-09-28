@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Options;
 
 namespace Joonasw.AspNetCore.SecurityHeaders.Hsts
 {
@@ -9,10 +10,10 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Hsts
         private readonly RequestDelegate _next;
         private readonly string _headerValue;
 
-        public HstsMiddleware(RequestDelegate next, HstsOptions options)
+        public HstsMiddleware(RequestDelegate next, IOptions<HstsOptions> options)
         {
             _next = next;
-            _headerValue = options.BuildHeaderValue();
+            _headerValue = options.Value.BuildHeaderValue();
         }
 
         public async Task Invoke(HttpContext context)
