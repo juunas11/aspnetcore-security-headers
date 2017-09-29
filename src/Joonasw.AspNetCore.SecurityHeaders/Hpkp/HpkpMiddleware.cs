@@ -1,5 +1,4 @@
 ﻿using System.Threading.Tasks;
-using Joonasw.AspNetCore.SecurityHeaders.Hpkp.Options;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
 

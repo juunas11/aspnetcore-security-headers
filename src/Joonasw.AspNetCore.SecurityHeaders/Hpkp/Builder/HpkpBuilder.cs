@@ -1,6 +1,4 @@
-﻿using Joonasw.AspNetCore.SecurityHeaders.Hpkp.Options;
-
-namespace Joonasw.AspNetCore.SecurityHeaders.Hpkp.Builder
+﻿namespace Joonasw.AspNetCore.SecurityHeaders.Hpkp.Builder
 {
     /// <summary>
     /// Builder for building HTTP

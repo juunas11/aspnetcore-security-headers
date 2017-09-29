@@ -1,10 +1,8 @@
 ﻿using System;
 using Joonasw.AspNetCore.SecurityHeaders.Csp;
 using Joonasw.AspNetCore.SecurityHeaders.Csp.Builder;
-using Joonasw.AspNetCore.SecurityHeaders.Csp.Options;
 using Joonasw.AspNetCore.SecurityHeaders.Hpkp;
 using Joonasw.AspNetCore.SecurityHeaders.Hpkp.Builder;
-using Joonasw.AspNetCore.SecurityHeaders.Hpkp.Options;
 using Joonasw.AspNetCore.SecurityHeaders.Hsts;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.Options;

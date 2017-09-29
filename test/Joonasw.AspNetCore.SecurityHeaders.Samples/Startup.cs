@@ -1,6 +1,4 @@
-﻿using Joonasw.AspNetCore.SecurityHeaders.Hpkp.Options;
-using Joonasw.AspNetCore.SecurityHeaders.Csp.Options;
-using Joonasw.AspNetCore.SecurityHeaders.Samples.Middleware;
+﻿using Joonasw.AspNetCore.SecurityHeaders.Samples.Middleware;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
