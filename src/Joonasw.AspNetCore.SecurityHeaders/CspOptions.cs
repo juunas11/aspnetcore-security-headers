@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Joonasw.AspNetCore.SecurityHeaders.Csp;
+using Joonasw.AspNetCore.SecurityHeaders.Csp.Options;
 
-namespace Joonasw.AspNetCore.SecurityHeaders.Csp.Options
+namespace Joonasw.AspNetCore.SecurityHeaders
 {
     public class CspOptions
     {

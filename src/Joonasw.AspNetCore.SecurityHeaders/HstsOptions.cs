@@ -7,6 +7,11 @@ namespace Joonasw.AspNetCore.SecurityHeaders
     /// </summary>
     public class HstsOptions
     {
+        public HstsOptions()
+        {
+
+        }
+
         /// <summary>
         /// Defines the parameters for the HSTS header sent
         /// to clients.
@@ -30,24 +35,24 @@ namespace Joonasw.AspNetCore.SecurityHeaders
         /// Gets the duration browsers should remember that
         /// this domain should only be accessed over HTTPS.
         /// </summary>
-        public TimeSpan Duration { get; }
+        public TimeSpan Duration { get; set; } = TimeSpan.FromDays(30);
 
         /// <summary>
         /// Gets the duration browsers should remember
         /// this domain should only be accessed over HTTPS,
         /// in seconds.
         /// </summary>
-        public int DurationSeconds => (int) Duration.TotalSeconds;
+        public int DurationSeconds => (int)Duration.TotalSeconds;
 
         /// <summary>
         /// Gets if this rule also applies to any subdomains.
         /// </summary>
-        public bool IncludeSubDomains { get; }
+        public bool IncludeSubDomains { get; set; }
 
         /// <summary>
         /// Gets if this domain should be allowed to be
         /// added to preload lists in browsers.
         /// </summary>
-        public bool Preload { get; }
+        public bool Preload { get; set; }
     }
 }

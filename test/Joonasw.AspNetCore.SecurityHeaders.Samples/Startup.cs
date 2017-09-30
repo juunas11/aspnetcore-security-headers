@@ -21,6 +21,10 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Samples
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<HstsOptions>(Configuration.GetSection("Hsts"));
+            services.Configure<CspOptions>(Configuration.GetSection("Csp"));
+            services.Configure<HpkpOptions>(Configuration.GetSection("Hpkp"));
+
             // Add framework services.
             services.AddMvc();
 
@@ -40,6 +44,9 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Samples
                 app.UseHttpsEnforcement();
                 app.UseHsts(new HstsOptions(TimeSpan.FromDays(30), includeSubDomains: false, preload: false));
 
+                // Replace previous call to use injected options loaded from the appsettings.json file
+                // app.UseHsts();
+
                 app.UseHpkp(hpkp =>
                 {
                     hpkp.UseMaxAgeSeconds(30 * 24 * 60 * 60)
@@ -47,8 +54,11 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Samples
                         .SetReportOnly()
                         .ReportViolationsTo("/hpkp-report");
                 });
+
+                // Replace previous call to use injected options loaded from the appsettings.json file
+                // app.UseHpkp();
             }
-            
+
             app.UseStaticFiles();
 
             app.UseCsp(csp =>
@@ -97,12 +107,15 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Samples
                 csp.ReportViolationsTo("/csp-report");
             });
 
+            // Replace previous call to use injected options loaded from the appsettings.json file
+            // app.UseCsp();
+
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
                     name: "csp-report",
                     template: "csp-report",
-                    defaults: new {controller = "Report", action = "Csp"});
+                    defaults: new { controller = "Report", action = "Csp" });
 
                 routes.MapRoute(
                     name: "hpkp-report",

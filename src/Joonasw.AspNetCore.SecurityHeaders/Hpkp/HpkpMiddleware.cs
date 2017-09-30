@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
-using Joonasw.AspNetCore.SecurityHeaders.Hpkp.Options;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Options;
 
 namespace Joonasw.AspNetCore.SecurityHeaders.Hpkp
 {
@@ -10,11 +10,11 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Hpkp
         private readonly string _headerName;
         private readonly string _headerValue;
 
-        public HpkpMiddleware(RequestDelegate next, HpkpOptions options)
+        public HpkpMiddleware(RequestDelegate next, IOptions<HpkpOptions> options)
         {
             _next = next;
-            _headerName = options.HeaderName;
-            _headerValue = options.HeaderValue;
+            _headerName = options.Value.HeaderName;
+            _headerValue = options.Value.HeaderValue;
         }
 
         public async Task Invoke(HttpContext context)
