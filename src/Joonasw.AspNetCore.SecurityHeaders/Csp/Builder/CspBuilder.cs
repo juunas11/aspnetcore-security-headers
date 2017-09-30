@@ -86,18 +86,18 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Csp.Builder
 
         public CspOptions BuildCspOptions()
         {
-            _options.ScriptSrc = AllowScripts.BuildOptions();
-            _options.StyleSrc = AllowStyles.BuildOptions();
-            _options.ChildSrc = AllowChildren.BuildOptions();
-            _options.ConnectSrc = AllowConnections.BuildOptions();
-            _options.DefaultSrc = ByDefaultAllow.BuildOptions();
-            _options.FontSrc = AllowFonts.BuildOptions();
+            _options.Script = AllowScripts.BuildOptions();
+            _options.Style = AllowStyles.BuildOptions();
+            _options.Child = AllowChildren.BuildOptions();
+            _options.Connect = AllowConnections.BuildOptions();
+            _options.Default = ByDefaultAllow.BuildOptions();
+            _options.Font = AllowFonts.BuildOptions();
             _options.FormAction = AllowFormActions.BuildOptions();
             _options.FrameAncestors = AllowFraming.BuildOptions();
-            _options.ImgSrc = AllowImages.BuildOptions();
-            _options.MediaSrc = AllowAudioAndVideo.BuildOptions();
+            _options.Img = AllowImages.BuildOptions();
+            _options.Media = AllowAudioAndVideo.BuildOptions();
             Tuple<CspObjectSrcOptions, CspPluginTypesOptions> pluginOptions = AllowPlugins.BuildOptions();
-            _options.ObjectSrc = pluginOptions.Item1;
+            _options.Object = pluginOptions.Item1;
             _options.PluginTypes = pluginOptions.Item2;
             _options.Sandbox = _sandboxBuilder.BuildOptions();
             return _options;

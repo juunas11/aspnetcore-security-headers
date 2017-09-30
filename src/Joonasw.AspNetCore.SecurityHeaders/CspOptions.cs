@@ -15,28 +15,28 @@ namespace Joonasw.AspNetCore.SecurityHeaders
         /// <summary>
         /// Rules to apply for JavaScript.
         /// </summary>
-        public CspScriptSrcOptions ScriptSrc { get; set; }
+        public CspScriptSrcOptions Script { get; set; }
         /// <summary>
         /// Rules to apply for CSS.
         /// </summary>
-        public CspStyleSrcOptions StyleSrc { get; set; }
+        public CspStyleSrcOptions Style { get; set; }
         /// <summary>
         /// Default rules to apply if no directive is
         /// present for the resource type.
         /// </summary>
-        public CspDefaultSrcOptions DefaultSrc { get; set; }
+        public CspDefaultSrcOptions Default { get; set; }
         /// <summary>
         /// Rules to apply for web workers and nested frames.
         /// </summary>
-        public CspChildSrcOptions ChildSrc { get; set; }
+        public CspChildSrcOptions Child { get; set; }
         /// <summary>
         /// Rules to apply for AJAX, WebSockets and EventSource.
         /// </summary>
-        public CspConnectSrcOptions ConnectSrc { get; set; }
+        public CspConnectSrcOptions Connect { get; set; }
         /// <summary>
         /// Rules to apply for fonts.
         /// </summary>
-        public CspFontSrcOptions FontSrc { get; set; }
+        public CspFontSrcOptions Font { get; set; }
         /// <summary>
         /// Rules to apply for forms.
         /// </summary>
@@ -44,17 +44,17 @@ namespace Joonasw.AspNetCore.SecurityHeaders
         /// <summary>
         /// Rules to apply for images.
         /// </summary>
-        public CspImgSrcOptions ImgSrc { get; set; }
+        public CspImgSrcOptions Img { get; set; }
         /// <summary>
         /// Rules to apply for audio and video, e.g.
         /// &lt;audio&gt; and &lt;video&gt; elements.
         /// </summary>
-        public CspMediaSrcOptions MediaSrc { get; set; }
+        public CspMediaSrcOptions Media { get; set; }
         /// <summary>
         /// Rules to apply for &lt;object&gt;, &lt;embed&gt; and 
         /// &lt;applet&gt; elements.
         /// </summary>
-        public CspObjectSrcOptions ObjectSrc { get; set; }
+        public CspObjectSrcOptions Object { get; set; }
         /// <summary>
         /// Rules to apply for other apps wishing to embed this app,
         /// e.g. in an iframe.
@@ -81,20 +81,20 @@ namespace Joonasw.AspNetCore.SecurityHeaders
         /// </summary>
         public string ReportUri { get; set; }
 
-        public bool IsNonceNeeded => ScriptSrc.AddNonce || StyleSrc.AddNonce;
+        public bool IsNonceNeeded => Script.AddNonce || Style.AddNonce;
 
         public CspOptions()
         {
-            ScriptSrc = new CspScriptSrcOptions();
-            StyleSrc = new CspStyleSrcOptions();
-            DefaultSrc = new CspDefaultSrcOptions();
-            ChildSrc = new CspChildSrcOptions();
-            ConnectSrc = new CspConnectSrcOptions();
-            FontSrc = new CspFontSrcOptions();
+            Script = new CspScriptSrcOptions();
+            Style = new CspStyleSrcOptions();
+            Default = new CspDefaultSrcOptions();
+            Child = new CspChildSrcOptions();
+            Connect = new CspConnectSrcOptions();
+            Font = new CspFontSrcOptions();
             FormAction = new CspFormActionOptions();
-            ImgSrc = new CspImgSrcOptions();
-            MediaSrc = new CspMediaSrcOptions();
-            ObjectSrc = new CspObjectSrcOptions();
+            Img = new CspImgSrcOptions();
+            Media = new CspMediaSrcOptions();
+            Object = new CspObjectSrcOptions();
             FrameAncestors = new CspFrameAncestorsOptions();
             PluginTypes = new CspPluginTypesOptions();
             Sandbox = new CspSandboxOptions();
@@ -113,16 +113,16 @@ namespace Joonasw.AspNetCore.SecurityHeaders
             }
             ICollection<string> values = new List<string>
             {
-                DefaultSrc.ToString(nonceService),
-                ScriptSrc.ToString(nonceService),
-                StyleSrc.ToString(nonceService),
-                ChildSrc.ToString(nonceService),
-                ConnectSrc.ToString(nonceService),
-                FontSrc.ToString(nonceService),
+                Default.ToString(nonceService),
+                Script.ToString(nonceService),
+                Style.ToString(nonceService),
+                Child.ToString(nonceService),
+                Connect.ToString(nonceService),
+                Font.ToString(nonceService),
                 FormAction.ToString(nonceService),
-                ImgSrc.ToString(nonceService),
-                MediaSrc.ToString(nonceService),
-                ObjectSrc.ToString(nonceService),
+                Img.ToString(nonceService),
+                Media.ToString(nonceService),
+                Object.ToString(nonceService),
                 FrameAncestors.ToString(),
                 PluginTypes.ToString()
             };

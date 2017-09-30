@@ -18,9 +18,9 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Samples
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // Setup mapping from config file to configuration
             services.Configure<HstsOptions>(Configuration.GetSection("Hsts"));
             services.Configure<CspOptions>(Configuration.GetSection("Csp"));
             services.Configure<HpkpOptions>(Configuration.GetSection("Hpkp"));
@@ -28,10 +28,10 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Samples
             // Add framework services.
             services.AddMvc();
 
+            // Add CSP nonce support
             services.AddCsp(nonceByteAmount: 32);
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             if (env.IsDevelopment())
@@ -42,73 +42,69 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Samples
             else
             {
                 app.UseHttpsEnforcement();
-                app.UseHsts(new HstsOptions(TimeSpan.FromDays(30), includeSubDomains: false, preload: false));
 
-                // Replace previous call to use injected options loaded from the appsettings.json file
-                // app.UseHsts();
+                app.UseHsts();
+                // Manual configuration
+                //app.UseHsts(new HstsOptions(TimeSpan.FromDays(30), includeSubDomains: false, preload: false));
 
-                app.UseHpkp(hpkp =>
-                {
-                    hpkp.UseMaxAgeSeconds(30 * 24 * 60 * 60)
-                        .AddSha256Pin("nrmpk4ZI3wbRBmUZIT5aKAgP0LlKHRgfA2Snjzeg9iY=")
-                        .SetReportOnly()
-                        .ReportViolationsTo("/hpkp-report");
-                });
-
-                // Replace previous call to use injected options loaded from the appsettings.json file
-                // app.UseHpkp();
+                app.UseHpkp();
+                // Manual configuration
+                //app.UseHpkp(hpkp =>
+                //{
+                //    hpkp.UseMaxAgeSeconds(30 * 24 * 60 * 60)
+                //        .AddSha256Pin("nrmpk4ZI3wbRBmUZIT5aKAgP0LlKHRgfA2Snjzeg9iY=")
+                //        .SetReportOnly()
+                //        .ReportViolationsTo("/hpkp-report");
+                //});
             }
 
             app.UseStaticFiles();
 
-            app.UseCsp(csp =>
-            {
-                //csp.EnableSandbox()
-                //    .AllowScripts();
-                csp.AllowScripts
-                    .FromSelf()
-                    .From("localhost:1591")
-                    .From("ajax.aspnetcdn.com")
-                    .AddNonce();
+            app.UseCsp();
 
-                csp.AllowStyles
-                    .FromSelf()
-                    .From("ajax.aspnetcdn.com")
-                    .AddNonce();
+            // Manual configuration
+            //app.UseCsp(csp =>
+            //{
+            //    //csp.EnableSandbox()
+            //    //    .AllowScripts();
+            //    csp.AllowScripts
+            //        .FromSelf()
+            //        .From("localhost:1591")
+            //        .From("ajax.aspnetcdn.com")
+            //        .AddNonce();
 
-                csp.AllowImages
-                    .FromSelf();
+            //    csp.AllowStyles
+            //        .FromSelf()
+            //        .From("ajax.aspnetcdn.com")
+            //        .AddNonce();
 
-                csp.AllowConnections
-                    .ToSelf();
+            //    csp.AllowImages
+            //        .FromSelf();
 
-                csp.AllowAudioAndVideo
-                    .FromNowhere();
+            //    csp.AllowAudioAndVideo
+            //        .FromNowhere();
 
-                csp.AllowChildren
-                    .FromNowhere();
+            //    csp.AllowChildren
+            //        .FromNowhere();
 
-                csp.AllowConnections
-                    .To("ws://localhost:1591")
-                    .To("http://localhost:1591")
-                    .ToSelf();
+            //    csp.AllowConnections
+            //        .To("ws://localhost:1591")
+            //        .To("http://localhost:1591")
+            //        .ToSelf();
 
-                csp.AllowFonts
-                    .FromSelf()
-                    .From("ajax.aspnetcdn.com");
+            //    csp.AllowFonts
+            //        .FromSelf()
+            //        .From("ajax.aspnetcdn.com");
 
-                csp.AllowPlugins
-                    .FromNowhere();
+            //    csp.AllowPlugins
+            //        .FromNowhere();
 
-                csp.AllowFraming
-                    .FromNowhere();
+            //    csp.AllowFraming
+            //        .FromNowhere();
 
-                csp.SetReportOnly();
-                csp.ReportViolationsTo("/csp-report");
-            });
-
-            // Replace previous call to use injected options loaded from the appsettings.json file
-            // app.UseCsp();
+            //    csp.SetReportOnly();
+            //    csp.ReportViolationsTo("/csp-report");
+            //});
 
             app.UseMvc(routes =>
             {
