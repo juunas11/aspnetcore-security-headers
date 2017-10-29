@@ -39,6 +39,7 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Csp.Builder
         /// Set up rules for audio and video in e.g. HTML5 audio and video elements.
         /// </summary>
         public CspMediaBuilder AllowAudioAndVideo { get; } = new CspMediaBuilder();
+
         /// <summary>
         /// Set up rules for form action targets.
         /// </summary>
@@ -82,6 +83,16 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Csp.Builder
             if(uri.Length == 0) throw new ArgumentException("Uri can't be empty", nameof(uri));
 
             _options.ReportUri = uri;
+        }
+
+        public void SetUpgradeInsecureRequests()
+        {
+            _options.UpgradeInsecureRequests = true;
+        }
+
+        public void SetBlockAllMixedContent()
+        {
+            _options.BlockAllMixedContent = true;
         }
 
         public CspOptions BuildCspOptions()

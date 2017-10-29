@@ -31,9 +31,9 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Csp
             else
             {
                 //If nonces are not needed, we can cache them immediately
-                Tuple<string, string> header = _options.ToString(null);
-                _headerName = header.Item1;
-                _headerValue = header.Item2;
+                var (headerName, headerValue) = _options.ToString(null);
+                _headerName = headerName;
+                _headerValue = headerValue;
             }
         }
 
@@ -44,9 +44,7 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Csp
             if (_options.IsNonceNeeded)
             {
                 var nonceService = (ICspNonceService)context.RequestServices.GetService(typeof(ICspNonceService));
-                Tuple<string, string> header = _options.ToString(nonceService);
-                headerName = header.Item1;
-                headerValue = header.Item2;
+                (headerName, headerValue) = _options.ToString(nonceService);
             }
             else
             {

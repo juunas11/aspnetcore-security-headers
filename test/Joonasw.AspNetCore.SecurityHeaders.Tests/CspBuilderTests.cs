@@ -55,5 +55,27 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Tests
 
             Assert.True(options.ReportOnly);
         }
+
+        [Fact]
+        public void SetUpgradeInsecureRequests_SetsUpgradeInsecureRequestsToTrue()
+        {
+            var builder = new CspBuilder();
+
+            builder.SetUpgradeInsecureRequests();
+            CspOptions options = builder.BuildCspOptions();
+
+            Assert.True(options.UpgradeInsecureRequests);
+        }
+
+        [Fact]
+        public void SetBlockAllMixedContent_SetsBlockAllMixedContentToTrue()
+        {
+            var builder = new CspBuilder();
+
+            builder.SetBlockAllMixedContent();
+            CspOptions options = builder.BuildCspOptions();
+
+            Assert.True(options.BlockAllMixedContent);
+        }
     }
 }

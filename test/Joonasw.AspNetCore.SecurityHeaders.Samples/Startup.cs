@@ -104,6 +104,7 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Samples
 
             //    csp.SetReportOnly();
             //    csp.ReportViolationsTo("/csp-report");
+            //    csp.SetUpgradeInsecureRequests(); //Upgrade HTTP URIs to HTTPS
             //});
 
             app.UseMvc(routes =>

@@ -83,6 +83,24 @@ namespace Joonasw.AspNetCore.SecurityHeaders
 
         public bool IsNonceNeeded => Script.AddNonce || Style.AddNonce;
 
+        /// <summary>
+        /// If true, the upgrade-insecure-requests directive
+        /// will be included in the policy.
+        /// It will force the browser to download resources
+        /// declared with insecure URLs (http://) through
+        /// HTTPS instead. Note this does not replace
+        /// HSTS, it only applies to content on the page.
+        /// </summary>
+        public bool UpgradeInsecureRequests { get; set; }
+
+        /// <summary>
+        /// If true, the block-all-mixed-content directive
+        /// will be included in the policy.
+        /// Prevents loading of resources over an insecure
+        /// channel.
+        /// </summary>
+        public bool BlockAllMixedContent { get; set; }
+
         public CspOptions()
         {
             Script = new CspScriptSrcOptions();
@@ -100,7 +118,7 @@ namespace Joonasw.AspNetCore.SecurityHeaders
             Sandbox = new CspSandboxOptions();
         }
 
-        public Tuple<string, string> ToString(ICspNonceService nonceService)
+        public (string headerName, string headerValue) ToString(ICspNonceService nonceService)
         {
             string headerName;
             if (ReportOnly)
@@ -111,7 +129,7 @@ namespace Joonasw.AspNetCore.SecurityHeaders
             {
                 headerName = "Content-Security-Policy";
             }
-            ICollection<string> values = new List<string>
+            var values = new List<string>
             {
                 Default.ToString(nonceService),
                 Script.ToString(nonceService),
@@ -126,6 +144,14 @@ namespace Joonasw.AspNetCore.SecurityHeaders
                 FrameAncestors.ToString(),
                 PluginTypes.ToString()
             };
+            if (BlockAllMixedContent)
+            {
+                values.Insert(0, "block-all-mixed-content");
+            }
+            if (UpgradeInsecureRequests)
+            {
+                values.Insert(0, "upgrade-insecure-requests");
+            }
             if (EnableSandbox)
             {
                 values.Add(Sandbox.ToString());
@@ -137,7 +163,7 @@ namespace Joonasw.AspNetCore.SecurityHeaders
 
             string headerValue = string.Join(";", values.Where(s => s.Length > 0));
 
-            return new Tuple<string, string>(headerName, headerValue);
+            return (headerName, headerValue);
         }
     }
 }
