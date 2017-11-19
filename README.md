@@ -51,7 +51,7 @@ app.UseCsp(csp =>
         .FromNowhere();
 
     // Contained iframes can be sourced from:
-    csp.AllowChildren
+    csp.AllowFrames
         .FromNowhere(); //Nowhere, no iframes allowed
 
     // Allow AJAX, WebSocket and EventSource connections to:
