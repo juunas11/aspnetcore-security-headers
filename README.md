@@ -2,7 +2,7 @@
 
 This library allows you to add Content Security Policy, Strict Transport Security and Public Key Pin headers via middleware.
 
-You can get the library from NuGet: https://www.nuget.org/packages/Joonasw.AspNetCore.SecurityHeaders
+You can get the library from NuGet: [https://www.nuget.org/packages/Joonasw.AspNetCore.SecurityHeaders](https://www.nuget.org/packages/Joonasw.AspNetCore.SecurityHeaders)
 
 ## Example configuration
 
@@ -31,7 +31,7 @@ app.UseCsp(csp =>
     // If nothing is mentioned for a resource class, allow from this domain
     csp.ByDefaultAllow
         .FromSelf();
-    
+
     // Allow JavaScript from:
     csp.AllowScripts
         .FromSelf() //This domain
@@ -82,9 +82,9 @@ app.UseCsp(csp =>
 });
 ```
 
-Content Security Policy can be quite daunting. Here is a nice page to find out what the options do: https://content-security-policy.com/.
+Content Security Policy can be quite daunting. Here is a nice page to find out what the options do: [https://content-security-policy.com/](https://content-security-policy.com/.)
 
-For violation reports, I recommend using Scott Helme's Report URI service at https://report-uri.io/.
+For violation reports, I recommend using Scott Helme's Report URI service at [https://report-uri.io/](https://report-uri.io/).
 
 ## Nonces
 
@@ -134,7 +134,7 @@ csp.AllowStyles
 
 Then to use the nonce tag helper, we need to import it in *_ViewImports.cshtml*:
 
-```
+```c#
 @addTagHelper *, Joonasw.AspNetCore.SecurityHeaders
 ```
 
@@ -154,4 +154,3 @@ Then we just need to use it in the Razor view:
 ```
 
 Now a unique nonce is generated every request and inserted into the CSP header + the elements you want.
-
