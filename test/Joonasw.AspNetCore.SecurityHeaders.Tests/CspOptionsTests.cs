@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Joonasw.AspNetCore.SecurityHeaders.Csp.Options;
 using Xunit;
 
 namespace Joonasw.AspNetCore.SecurityHeaders.Tests
@@ -69,6 +70,27 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Tests
 
             Assert.Equal("Content-Security-Policy", headerName);
             Assert.Equal("default-src 'self';script-src userscripts.example.com;img-src *;media-src media1.com media2.com", headerValue);
+        }
+
+        [Fact]
+        public void WorkerAndFrameOptions_ResultIsCorrect()
+        {
+            var options = new CspOptions
+            {
+                Frame = new CspFrameSrcOptions
+                {
+                    AllowAny = true
+                },
+                Worker = new CspWorkerSrcOptions
+                {
+                    AllowSelf = true
+                }
+            };
+
+            var (headerName, headerValue) = options.ToString(null);
+
+            Assert.Equal("Content-Security-Policy", headerName);
+            Assert.Equal("frame-src *;worker-src 'self'", headerValue);
         }
 
         [Fact]

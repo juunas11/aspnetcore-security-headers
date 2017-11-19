@@ -77,5 +77,18 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Tests
 
             Assert.True(options.BlockAllMixedContent);
         }
+
+        [Fact]
+        public void WithFramesAndWorkers_ReturnsCorrectHeader()
+        {
+            var builder = new CspBuilder();
+
+            builder.AllowFrames.From("https://www.google.com");
+            builder.AllowWorkers.FromSelf().OnlyOverHttps();
+
+            var headerValue = builder.BuildCspOptions().ToString(null).headerValue;
+
+            Assert.Equal("frame-src https://www.google.com;worker-src 'self' https:", headerValue);
+        }
     }
 }

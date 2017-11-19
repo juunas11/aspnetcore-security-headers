@@ -20,8 +20,9 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Csp.Builder
         /// </summary>
         public CspDefaultBuilder ByDefaultAllow { get; } = new CspDefaultBuilder();
         /// <summary>
-        /// Set up rules for embedded content in e.g. iframes.
+        /// Set up rules for embedded content in e.g. iframes.  This has been dropped from web standards and replaced with specific rules for frames and workers
         /// </summary>
+        [Obsolete("Has been replaced with AllowFrames and AllowWorkers")]
         public CspChildBuilder AllowChildren { get; } = new CspChildBuilder();
         /// <summary>
         /// Set up rules for images.
@@ -49,10 +50,17 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Csp.Builder
         /// </summary>
         public CspFrameAncestorsBuilder AllowFraming { get; } = new CspFrameAncestorsBuilder();
         /// <summary>
+        /// Set up rules for frames and iframes.
+        /// </summary>
+        public CspFrameBuilder AllowFrames { get; } = new CspFrameBuilder();
+        /// <summary>
         /// Set up rules for plugins in e.g. &lt;object&gt; elements.
         /// </summary>
         public CspPluginBuilder AllowPlugins { get; } = new CspPluginBuilder();
-        
+        /// <summary>
+        /// Set up rules for workers, shared workers and service workers.
+        /// </summary>
+        public CspWorkerBuilder AllowWorkers { get; } = new CspWorkerBuilder();
         /// <summary>
         /// Enables sandboxing of the app in the browser.
         /// </summary>
@@ -111,6 +119,8 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Csp.Builder
             _options.Object = pluginOptions.Item1;
             _options.PluginTypes = pluginOptions.Item2;
             _options.Sandbox = _sandboxBuilder.BuildOptions();
+            _options.Frame = AllowFrames.BuildOptions();
+            _options.Worker = AllowWorkers.BuildOptions();
             return _options;
         }
     }
