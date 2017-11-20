@@ -27,7 +27,8 @@ namespace Joonasw.AspNetCore.SecurityHeaders
         public CspDefaultSrcOptions Default { get; set; }
         /// <summary>
         /// Rules to apply for web workers and nested frames.
-        /// This has been removed from web standards and replaced with specific rules for frames and workers
+        /// This has been removed from web standards and
+        /// replaced with specific rules for frames and workers.
         /// </summary>
         [Obsolete("Replaced with Frame and Worker")]
         public CspChildSrcOptions Child { get; set; }
@@ -53,7 +54,7 @@ namespace Joonasw.AspNetCore.SecurityHeaders
         /// </summary>
         public CspMediaSrcOptions Media { get; set; }
         /// <summary>
-        /// Rules to apply for &lt;object&gt;, &lt;embed&gt; and 
+        /// Rules to apply for &lt;object&gt;, &lt;embed&gt; and
         /// &lt;applet&gt; elements.
         /// </summary>
         public CspObjectSrcOptions Object { get; set; }
@@ -63,7 +64,7 @@ namespace Joonasw.AspNetCore.SecurityHeaders
         /// </summary>
         public CspFrameAncestorsOptions FrameAncestors { get; set; }
         /// <summary>
-        /// Rules to apply for related to &lt;frame&gt; and &lt;iframe&gt; sources.
+        /// Rules to apply for &lt;frame&gt; and &lt;iframe&gt; sources.
         /// </summary>
         public CspFrameSrcOptions Frame { get; set; }
         /// <summary>
@@ -72,7 +73,8 @@ namespace Joonasw.AspNetCore.SecurityHeaders
         /// </summary>
         public CspPluginTypesOptions PluginTypes { get; set; }
         /// <summary>
-        /// Rules to apply for related to Worker, SharedWorker and ServiceWorker script sources.
+        /// Rules to apply for Worker, SharedWorker and
+        /// ServiceWorker script sources.
         /// </summary>
         public CspWorkerSrcOptions Worker { get; set; }
         /// <summary>
@@ -116,7 +118,9 @@ namespace Joonasw.AspNetCore.SecurityHeaders
             Script = new CspScriptSrcOptions();
             Style = new CspStyleSrcOptions();
             Default = new CspDefaultSrcOptions();
+#pragma warning disable CS0618 // Type or member is obsolete
             Child = new CspChildSrcOptions();
+#pragma warning restore CS0618 // Type or member is obsolete
             Connect = new CspConnectSrcOptions();
             Font = new CspFontSrcOptions();
             FormAction = new CspFormActionOptions();
@@ -146,7 +150,9 @@ namespace Joonasw.AspNetCore.SecurityHeaders
                 Default.ToString(nonceService),
                 Script.ToString(nonceService),
                 Style.ToString(nonceService),
+#pragma warning disable CS0618 // Type or member is obsolete
                 Child.ToString(nonceService),
+#pragma warning restore CS0618 // Type or member is obsolete
                 Connect.ToString(nonceService),
                 Font.ToString(nonceService),
                 FormAction.ToString(nonceService),

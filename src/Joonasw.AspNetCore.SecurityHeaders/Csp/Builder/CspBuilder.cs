@@ -70,7 +70,7 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Csp.Builder
             _options.EnableSandbox = true;
             return _sandboxBuilder;
         }
-        
+
         /// <summary>
         /// Sets the CSP policy to Report-Only.
         /// Nothing is blocked, violations are only reported.
@@ -107,7 +107,9 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Csp.Builder
         {
             _options.Script = AllowScripts.BuildOptions();
             _options.Style = AllowStyles.BuildOptions();
+#pragma warning disable CS0618 // Type or member is obsolete
             _options.Child = AllowChildren.BuildOptions();
+#pragma warning restore CS0618 // Type or member is obsolete
             _options.Connect = AllowConnections.BuildOptions();
             _options.Default = ByDefaultAllow.BuildOptions();
             _options.Font = AllowFonts.BuildOptions();

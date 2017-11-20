@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using System;
 
 namespace Joonasw.AspNetCore.SecurityHeaders.Samples
 {
@@ -84,7 +83,10 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Samples
             //    csp.AllowAudioAndVideo
             //        .FromNowhere();
 
-            //    csp.AllowChildren
+            //    csp.AllowFrames
+            //        .FromNowhere();
+
+            //    csp.AllowWorkers
             //        .FromNowhere();
 
             //    csp.AllowConnections

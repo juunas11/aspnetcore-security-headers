@@ -1,6 +1,5 @@
 using System;
 using Joonasw.AspNetCore.SecurityHeaders.Csp.Builder;
-using Joonasw.AspNetCore.SecurityHeaders.Csp.Options;
 using Xunit;
 
 namespace Joonasw.AspNetCore.SecurityHeaders.Tests
