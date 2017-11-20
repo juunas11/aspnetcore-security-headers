@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="15.0">
   <PropertyGroup>
     <TargetFramework>netstandard1.5</TargetFramework>
-    <Version>2.1.0</Version>
+    <Version>2.2.0</Version>
     <Title>Joonasw.AspNetCore.SecurityHeaders</Title>
     <Authors>Joonas Westlin</Authors>
     <Description>Middleware for adding security headers to an ASP.NET Core application. Allows you to easily add Content Security Policy, Strict Transport Security, and Public Key Pins to an app.</Description>
@@ -9,7 +9,7 @@
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageLicenseUrl>https://github.com/juunas11/aspnetcore-security-headers/blob/master/LICENSE.txt</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/juunas11/aspnetcore-security-headers</PackageProjectUrl>
-    <PackageReleaseNotes>Updated HSTS options</PackageReleaseNotes>
+    <PackageReleaseNotes>Added support for the new frame-src and worker-src directives which replace child-src.</PackageReleaseNotes>
     <PackageTags>aspnetcore security headers hsts hpkp csp</PackageTags>
     <RepositoryUrl>https://github.com/juunas11/aspnetcore-security-headers</RepositoryUrl>
   </PropertyGroup>
