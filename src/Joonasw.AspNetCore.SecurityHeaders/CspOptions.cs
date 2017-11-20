@@ -27,7 +27,9 @@ namespace Joonasw.AspNetCore.SecurityHeaders
         public CspDefaultSrcOptions Default { get; set; }
         /// <summary>
         /// Rules to apply for web workers and nested frames.
+        /// This has been removed from web standards and replaced with specific rules for frames and workers
         /// </summary>
+        [Obsolete("Replaced with Frame and Worker")]
         public CspChildSrcOptions Child { get; set; }
         /// <summary>
         /// Rules to apply for AJAX, WebSockets and EventSource.
@@ -61,10 +63,18 @@ namespace Joonasw.AspNetCore.SecurityHeaders
         /// </summary>
         public CspFrameAncestorsOptions FrameAncestors { get; set; }
         /// <summary>
+        /// Rules to apply for related to &lt;frame&gt; and &lt;iframe&gt; sources.
+        /// </summary>
+        public CspFrameSrcOptions Frame { get; set; }
+        /// <summary>
         /// Rules for what MIME types are allowed for plugins,
         /// e.g. in &lt;object&gt; elements.
         /// </summary>
         public CspPluginTypesOptions PluginTypes { get; set; }
+        /// <summary>
+        /// Rules to apply for related to Worker, SharedWorker and ServiceWorker script sources.
+        /// </summary>
+        public CspWorkerSrcOptions Worker { get; set; }
         /// <summary>
         /// If true, the browser will execute the page in a
         /// tightly controlled sandbox.
@@ -116,6 +126,8 @@ namespace Joonasw.AspNetCore.SecurityHeaders
             FrameAncestors = new CspFrameAncestorsOptions();
             PluginTypes = new CspPluginTypesOptions();
             Sandbox = new CspSandboxOptions();
+            Frame = new CspFrameSrcOptions();
+            Worker = new CspWorkerSrcOptions();
         }
 
         public (string headerName, string headerValue) ToString(ICspNonceService nonceService)
@@ -142,7 +154,9 @@ namespace Joonasw.AspNetCore.SecurityHeaders
                 Media.ToString(nonceService),
                 Object.ToString(nonceService),
                 FrameAncestors.ToString(),
-                PluginTypes.ToString()
+                PluginTypes.ToString(),
+                Frame.ToString(nonceService),
+                Worker.ToString(nonceService)
             };
             if (BlockAllMixedContent)
             {
