@@ -39,20 +39,26 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Csp
 
         public async Task Invoke(HttpContext context)
         {
-            string headerName;
-            string headerValue;
-            if (_options.IsNonceNeeded)
+            var sendingHeaderContext = new CspSendingHeaderContext(context);
+            await _options.SendingHeader(sendingHeaderContext);
+
+            if (!sendingHeaderContext.ShouldNotSend)
             {
-                var nonceService = (ICspNonceService)context.RequestServices.GetService(typeof(ICspNonceService));
-                (headerName, headerValue) = _options.ToString(nonceService);
-            }
-            else
-            {
-                headerName = _headerName;
-                headerValue = _headerValue;
+                string headerName;
+                string headerValue;
+                if (_options.IsNonceNeeded)
+                {
+                    var nonceService = (ICspNonceService)context.RequestServices.GetService(typeof(ICspNonceService));
+                    (headerName, headerValue) = _options.ToString(nonceService);
+                }
+                else
+                {
+                    headerName = _headerName;
+                    headerValue = _headerValue;
+                }
+                context.Response.Headers.Add(headerName, headerValue);
             }
 
-            context.Response.Headers.Add(headerName, headerValue);
             await _next.Invoke(context);
         }
     }

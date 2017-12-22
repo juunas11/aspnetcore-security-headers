@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Joonasw.AspNetCore.SecurityHeaders.Csp;
 using Joonasw.AspNetCore.SecurityHeaders.Csp.Options;
 
@@ -112,6 +113,18 @@ namespace Joonasw.AspNetCore.SecurityHeaders
         /// channel.
         /// </summary>
         public bool BlockAllMixedContent { get; set; }
+
+        /// <summary>
+        /// A delegate assigned to this property will be invoked when the related method
+        /// is called.
+        /// </summary>
+        public Func<CspSendingHeaderContext, Task> OnSendingHeader { get; set; } = context => Task.CompletedTask;
+
+        /// <summary>
+        /// Implements the interface method by invoking the related delegate method.
+        /// </summary>
+        /// <param name="context"></param>
+        public virtual Task SendingHeader(CspSendingHeaderContext context) => OnSendingHeader(context);
 
         public CspOptions()
         {

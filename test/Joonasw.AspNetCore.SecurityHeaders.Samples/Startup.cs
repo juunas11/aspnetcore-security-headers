@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using System.Threading.Tasks;
 
 namespace Joonasw.AspNetCore.SecurityHeaders.Samples
 {
@@ -107,6 +108,12 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Samples
             //    csp.SetReportOnly();
             //    csp.ReportViolationsTo("/csp-report");
             //    csp.SetUpgradeInsecureRequests(); //Upgrade HTTP URIs to HTTPS
+
+            //    csp.OnSendingHeader = context =>
+            //    {
+            //        context.ShouldNotSend = context.HttpContext.Request.Path.StartsWithSegments("/api");
+            //        return Task.CompletedTask;
+            //    };
             //});
 
             app.UseMvc(routes =>

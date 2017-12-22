@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Joonasw.AspNetCore.SecurityHeaders.Csp.Options;
 
 namespace Joonasw.AspNetCore.SecurityHeaders.Csp.Builder
@@ -61,6 +62,9 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Csp.Builder
         /// Set up rules for workers, shared workers and service workers.
         /// </summary>
         public CspWorkerBuilder AllowWorkers { get; } = new CspWorkerBuilder();
+
+        public Func<CspSendingHeaderContext, Task> OnSendingHeader { get; set; } = context => Task.CompletedTask;
+
         /// <summary>
         /// Enables sandboxing of the app in the browser.
         /// </summary>
@@ -123,6 +127,8 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Csp.Builder
             _options.Sandbox = _sandboxBuilder.BuildOptions();
             _options.Frame = AllowFrames.BuildOptions();
             _options.Worker = AllowWorkers.BuildOptions();
+
+            _options.OnSendingHeader = OnSendingHeader;
             return _options;
         }
     }
