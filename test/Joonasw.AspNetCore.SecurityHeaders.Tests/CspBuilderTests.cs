@@ -2,7 +2,6 @@ using System;
 using System.Threading.Tasks;
 using Joonasw.AspNetCore.SecurityHeaders.Csp;
 using Joonasw.AspNetCore.SecurityHeaders.Csp.Builder;
-using Microsoft.AspNetCore.Http;
 using Xunit;
 
 namespace Joonasw.AspNetCore.SecurityHeaders.Tests

@@ -127,7 +127,6 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Csp.Builder
             _options.Sandbox = _sandboxBuilder.BuildOptions();
             _options.Frame = AllowFrames.BuildOptions();
             _options.Worker = AllowWorkers.BuildOptions();
-
             _options.OnSendingHeader = OnSendingHeader;
             return _options;
         }
