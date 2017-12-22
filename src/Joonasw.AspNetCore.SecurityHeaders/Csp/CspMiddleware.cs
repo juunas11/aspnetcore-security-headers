@@ -40,7 +40,7 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Csp
         public async Task Invoke(HttpContext context)
         {
             var sendingHeaderContext = new CspSendingHeaderContext(context);
-            await _options.SendingHeader(sendingHeaderContext);
+            await _options.OnSendingHeader(sendingHeaderContext);
 
             if (!sendingHeaderContext.ShouldNotSend)
             {

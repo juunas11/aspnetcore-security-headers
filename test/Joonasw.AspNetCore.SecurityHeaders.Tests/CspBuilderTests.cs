@@ -104,7 +104,7 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Tests
             };
 
             var sendingHeaderContext = new CspSendingHeaderContext(null);
-            await builder.BuildCspOptions().SendingHeader(sendingHeaderContext);
+            await builder.BuildCspOptions().OnSendingHeader(sendingHeaderContext);
 
             Assert.Equal(true, sendingHeaderContext.ShouldNotSend);
         }

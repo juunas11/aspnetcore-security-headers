@@ -115,16 +115,11 @@ namespace Joonasw.AspNetCore.SecurityHeaders
         public bool BlockAllMixedContent { get; set; }
 
         /// <summary>
-        /// A delegate assigned to this property will be invoked when the related method
-        /// is called.
+        /// A delegate assigned to this property will be invoked when the <c>CspMiddleware</c> is
+        /// about to send the CSP header.
+        /// The default implementation always sends the CSP header.
         /// </summary>
         public Func<CspSendingHeaderContext, Task> OnSendingHeader { get; set; } = context => Task.CompletedTask;
-
-        /// <summary>
-        /// Implements the interface method by invoking the related delegate method.
-        /// </summary>
-        /// <param name="context"></param>
-        public virtual Task SendingHeader(CspSendingHeaderContext context) => OnSendingHeader(context);
 
         public CspOptions()
         {
