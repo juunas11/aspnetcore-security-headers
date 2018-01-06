@@ -119,7 +119,7 @@ namespace Joonasw.AspNetCore.SecurityHeaders
         /// about to send the CSP header.
         /// The default implementation always sends the CSP header.
         /// </summary>
-        public Func<CspSendingHeaderContext, Task> OnSendingHeader { get; set; } = context => Task.CompletedTask;
+        public Func<CspSendingHeaderContext, Task> OnSendingHeader { get; set; }
 
         public CspOptions()
         {
@@ -140,6 +140,7 @@ namespace Joonasw.AspNetCore.SecurityHeaders
             Sandbox = new CspSandboxOptions();
             Frame = new CspFrameSrcOptions();
             Worker = new CspWorkerSrcOptions();
+            OnSendingHeader = context => Task.CompletedTask;
         }
 
         public (string headerName, string headerValue) ToString(ICspNonceService nonceService)

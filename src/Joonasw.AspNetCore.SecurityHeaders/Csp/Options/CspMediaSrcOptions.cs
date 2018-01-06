@@ -5,7 +5,7 @@
         public CspMediaSrcOptions()
             : base("media-src")
         {
-            
+
         }
     }
 }

@@ -5,7 +5,7 @@
         public CspObjectSrcOptions()
             : base("object-src")
         {
-            
+
         }
     }
 }

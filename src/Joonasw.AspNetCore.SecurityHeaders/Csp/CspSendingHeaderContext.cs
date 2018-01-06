@@ -4,10 +4,7 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Csp
 {
     public class CspSendingHeaderContext
     {
-        /// <summary>
-        /// The http context.
-        /// </summary>
-        public readonly HttpContext HttpContext;
+        public HttpContext HttpContext { get; }
 
         /// <summary>
         /// <c>true</c> iff the CSP header should not be sent, <c>false</c> otherwise.

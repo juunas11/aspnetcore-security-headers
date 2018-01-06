@@ -5,7 +5,7 @@
         public CspImgSrcOptions()
             : base("img-src")
         {
-            
+
         }
     }
 }

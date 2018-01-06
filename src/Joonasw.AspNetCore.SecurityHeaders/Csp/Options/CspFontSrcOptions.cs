@@ -5,7 +5,7 @@
         public CspFontSrcOptions()
             : base("font-src")
         {
-            
+
         }
     }
 }

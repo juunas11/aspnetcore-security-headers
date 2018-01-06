@@ -5,7 +5,7 @@
         public CspFormActionOptions()
             : base("form-action")
         {
-            
+
         }
     }
 }

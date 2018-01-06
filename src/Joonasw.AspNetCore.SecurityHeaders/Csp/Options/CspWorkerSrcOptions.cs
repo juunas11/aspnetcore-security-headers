@@ -5,7 +5,7 @@
         public CspWorkerSrcOptions()
             : base("worker-src")
         {
-            
+
         }
     }
 }

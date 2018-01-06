@@ -5,7 +5,7 @@
         public CspFrameSrcOptions()
             : base("frame-src")
         {
-            
+
         }
     }
 }
