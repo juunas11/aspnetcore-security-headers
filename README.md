@@ -79,6 +79,13 @@ app.UseCsp(csp =>
     csp.SetReportOnly();
     // Where should the violation reports be sent to?
     csp.ReportViolationsTo("/csp-report");
+
+    // Do not include the CSP header for requests to the /api endpoints
+    csp.OnSendingHeader = context =>
+    {
+        context.ShouldNotSend = context.HttpContext.Request.Path.StartsWithSegments("/api");
+        return Task.CompletedTask;
+    };
 });
 ```
 

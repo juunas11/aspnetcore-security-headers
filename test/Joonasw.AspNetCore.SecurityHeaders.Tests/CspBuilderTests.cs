@@ -1,4 +1,6 @@
 using System;
+using System.Threading.Tasks;
+using Joonasw.AspNetCore.SecurityHeaders.Csp;
 using Joonasw.AspNetCore.SecurityHeaders.Csp.Builder;
 using Xunit;
 
@@ -88,6 +90,23 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Tests
             var headerValue = builder.BuildCspOptions().ToString(null).headerValue;
 
             Assert.Equal("frame-src https://www.google.com;worker-src 'self' https:", headerValue);
+        }
+
+        [Fact]
+        public async Task OnSendingHeader_ShouldNotSendTest()
+        {
+            var builder = new CspBuilder();
+
+            builder.OnSendingHeader = context =>
+            {
+                context.ShouldNotSend = true;
+                return Task.CompletedTask;
+            };
+
+            var sendingHeaderContext = new CspSendingHeaderContext(null);
+            await builder.BuildCspOptions().OnSendingHeader(sendingHeaderContext);
+
+            Assert.Equal(true, sendingHeaderContext.ShouldNotSend);
         }
     }
 }

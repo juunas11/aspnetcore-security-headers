@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Joonasw.AspNetCore.SecurityHeaders.Csp;
 using Joonasw.AspNetCore.SecurityHeaders.Csp.Options;
 
@@ -112,6 +113,13 @@ namespace Joonasw.AspNetCore.SecurityHeaders
         /// channel.
         /// </summary>
         public bool BlockAllMixedContent { get; set; }
+
+        /// <summary>
+        /// A delegate assigned to this property will be invoked when the <c>CspMiddleware</c> is
+        /// about to send the CSP header.
+        /// The default implementation always sends the CSP header.
+        /// </summary>
+        public Func<CspSendingHeaderContext, Task> OnSendingHeader { get; set; } = context => Task.CompletedTask;
 
         public CspOptions()
         {
