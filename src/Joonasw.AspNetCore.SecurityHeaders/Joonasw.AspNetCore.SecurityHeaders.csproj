@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="15.0">
   <PropertyGroup>
     <TargetFrameworks>netstandard1.5;netstandard2.0</TargetFrameworks>
-    <Version>2.3.0</Version>
+    <Version>2.4.0</Version>
     <Title>Joonasw.AspNetCore.SecurityHeaders</Title>
     <Authors>Joonas Westlin</Authors>
     <Description>Middleware for adding security headers to an ASP.NET Core application. Allows you to easily add Content Security Policy, Strict Transport Security, and Public Key Pins to an app.</Description>
@@ -9,7 +9,7 @@
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageLicenseUrl>https://github.com/juunas11/aspnetcore-security-headers/blob/master/LICENSE.txt</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/juunas11/aspnetcore-security-headers</PackageProjectUrl>
-    <PackageReleaseNotes>Added ability to decide if CSP headers should be included in a request.</PackageReleaseNotes>
+    <PackageReleaseNotes>Added support for .NET Standard 2.0.</PackageReleaseNotes>
     <PackageTags>aspnetcore security headers hsts hpkp csp</PackageTags>
     <RepositoryUrl>https://github.com/juunas11/aspnetcore-security-headers</RepositoryUrl>
   </PropertyGroup>
