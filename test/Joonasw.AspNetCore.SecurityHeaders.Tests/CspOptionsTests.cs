@@ -25,7 +25,7 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Tests
             var options = new CspOptions
             {
                 UpgradeInsecureRequests = true,
-                Default = new Csp.Options.CspDefaultSrcOptions
+                Default = new CspDefaultSrcOptions
                 {
                     AllowOnlyHttps = true
                 }
@@ -41,15 +41,15 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Tests
         {
             var options = new CspOptions
             {
-                Default = new Csp.Options.CspDefaultSrcOptions
+                Default = new CspDefaultSrcOptions
                 {
                     AllowSelf = true
                 },
-                Img = new Csp.Options.CspImgSrcOptions
+                Img = new CspImgSrcOptions
                 {
                     AllowAny = true
                 },
-                Media = new Csp.Options.CspMediaSrcOptions
+                Media = new CspMediaSrcOptions
                 {
                     AllowedSources = new List<string>
                     {
@@ -57,7 +57,7 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Tests
                         "media2.com"
                     }
                 },
-                Script = new Csp.Options.CspScriptSrcOptions
+                Script = new CspScriptSrcOptions
                 {
                     AllowedSources = new List<string>
                     {
@@ -98,7 +98,7 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Tests
         {
             var options = new CspOptions
             {
-                Default = new Csp.Options.CspDefaultSrcOptions
+                Default = new CspDefaultSrcOptions
                 {
                     AllowAny = true
                 }
@@ -114,7 +114,7 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Tests
         {
             var options = new CspOptions
             {
-                Default = new Csp.Options.CspDefaultSrcOptions
+                Default = new CspDefaultSrcOptions
                 {
                     AllowAny = true
                 },
