@@ -62,6 +62,12 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Csp.Builder
         /// Set up rules for workers, shared workers and service workers.
         /// </summary>
         public CspWorkerBuilder AllowWorkers { get; } = new CspWorkerBuilder();
+        /// <summary>
+        /// Set up rules for allowed &lt;base&gt; element sources.
+        /// It is used to control what can be used as the base URI
+        /// for the document.
+        /// </summary>
+        public CspBaseUriBuilder AllowBaseUri { get; } = new CspBaseUriBuilder();
 
         public Func<CspSendingHeaderContext, Task> OnSendingHeader { get; set; } = context => Task.CompletedTask;
 
@@ -127,6 +133,7 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Csp.Builder
             _options.Sandbox = _sandboxBuilder.BuildOptions();
             _options.Frame = AllowFrames.BuildOptions();
             _options.Worker = AllowWorkers.BuildOptions();
+            _options.BaseUri = AllowBaseUri.BuildOptions();
             _options.OnSendingHeader = OnSendingHeader;
             return _options;
         }

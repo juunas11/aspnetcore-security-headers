@@ -138,5 +138,21 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Tests
 
             Assert.Equal("block-all-mixed-content", policy);
         }
+
+        [Fact]
+        public void BaseUriSelf_ValueIsCorrect()
+        {
+            var options = new CspOptions
+            {
+                BaseUri = new CspBaseUriOptions
+                {
+                    AllowSelf = true
+                }
+            };
+
+            string policy = options.ToString(null).headerValue;
+
+            Assert.Equal("base-uri 'self'", policy);
+        }
     }
 }

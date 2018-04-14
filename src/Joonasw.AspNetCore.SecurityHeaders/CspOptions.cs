@@ -79,6 +79,13 @@ namespace Joonasw.AspNetCore.SecurityHeaders
         /// </summary>
         public CspWorkerSrcOptions Worker { get; set; }
         /// <summary>
+        /// Restricts the URIs which can be used in a
+        /// document's &lt;base&gt; element, and subsequently
+        /// be the document's base URI.
+        /// If not set, any URL is allowed.
+        /// </summary>
+        public CspBaseUriOptions BaseUri { get; set; }
+        /// <summary>
         /// If true, the browser will execute the page in a
         /// tightly controlled sandbox.
         /// Similar to the sandbox attribute on iframes.
@@ -140,6 +147,7 @@ namespace Joonasw.AspNetCore.SecurityHeaders
             Sandbox = new CspSandboxOptions();
             Frame = new CspFrameSrcOptions();
             Worker = new CspWorkerSrcOptions();
+            BaseUri = new CspBaseUriOptions();
             OnSendingHeader = context => Task.CompletedTask;
         }
 
@@ -171,7 +179,8 @@ namespace Joonasw.AspNetCore.SecurityHeaders
                 FrameAncestors.ToString(),
                 PluginTypes.ToString(),
                 Frame.ToString(nonceService),
-                Worker.ToString(nonceService)
+                Worker.ToString(nonceService),
+                BaseUri.ToString(nonceService)
             };
             if (BlockAllMixedContent)
             {
