@@ -1,6 +1,6 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
-using Joonasw.AspNetCore.SecurityHeaders.Csp.Options;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
 
@@ -8,6 +8,8 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Csp
 {
     public class CspMiddleware
     {
+        private const string CspHeaderName = "Content-Security-Policy";
+        private const string CspReportOnlyHeaderName = "Content-Security-Policy-Report-Only";
         private readonly RequestDelegate _next;
         private readonly CspOptions _options;
         private readonly string _headerName;
@@ -39,28 +41,39 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Csp
 
         public async Task Invoke(HttpContext context)
         {
-            var sendingHeaderContext = new CspSendingHeaderContext(context);
-            //Call the per-request check if CSP should be sent
-            await _options.OnSendingHeader(sendingHeaderContext);
-
-            if (!sendingHeaderContext.ShouldNotSend)
+            // Check if a CSP header has already been added to the response
+            // This can happen for example if a middleware re-executes the pipeline
+            if (!ContainsCspHeader(context.Response))
             {
-                string headerName;
-                string headerValue;
-                if (_options.IsNonceNeeded)
+                var sendingHeaderContext = new CspSendingHeaderContext(context);
+                //Call the per-request check if CSP should be sent
+                await _options.OnSendingHeader(sendingHeaderContext);
+
+                if (!sendingHeaderContext.ShouldNotSend)
                 {
-                    var nonceService = (ICspNonceService)context.RequestServices.GetService(typeof(ICspNonceService));
-                    (headerName, headerValue) = _options.ToString(nonceService);
+                    string headerName;
+                    string headerValue;
+                    if (_options.IsNonceNeeded)
+                    {
+                        var nonceService = (ICspNonceService)context.RequestServices.GetService(typeof(ICspNonceService));
+                        (headerName, headerValue) = _options.ToString(nonceService);
+                    }
+                    else
+                    {
+                        headerName = _headerName;
+                        headerValue = _headerValue;
+                    }
+                    context.Response.Headers.Add(headerName, headerValue);
                 }
-                else
-                {
-                    headerName = _headerName;
-                    headerValue = _headerValue;
-                }
-                context.Response.Headers.Add(headerName, headerValue);
             }
 
             await _next.Invoke(context);
+        }
+
+        private bool ContainsCspHeader(HttpResponse response)
+        {
+            return response.Headers.Any(h => h.Key.Equals(CspHeaderName, StringComparison.OrdinalIgnoreCase)
+                || h.Key.Equals(CspReportOnlyHeaderName, StringComparison.OrdinalIgnoreCase));
         }
     }
 }
