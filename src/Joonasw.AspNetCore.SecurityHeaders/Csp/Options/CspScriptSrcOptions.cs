@@ -8,6 +8,7 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Csp.Options
         public bool AddNonce { get; set; }
         public bool AllowUnsafeEval { get; set; }
         public bool AllowUnsafeInline { get; set; }
+        public bool StrictDynamic { get; set; }
         public CspScriptSrcOptions()
             : base("script-src")
         {
@@ -33,6 +34,10 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Csp.Options
             if (AllowUnsafeInline)
             {
                 parts.Add("'unsafe-inline'");
+            }
+            if (StrictDynamic)
+            {
+                parts.Add("'strict-dynamic'");
             }
             return parts;
         }
