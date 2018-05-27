@@ -103,7 +103,16 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Csp.Builder
             return this;
         }
 
-        public CspScriptsBuilder StrictDynamic()
+        /// <summary>
+        /// Allow scripts that have been loaded with
+        /// a trusted hash/nonce to load additional
+        /// scripts.
+        /// This enabled a &quot;strict&quot; mode
+        /// for scripts, requiring a hash or nonce
+        /// on all of them.
+        /// </summary>
+        /// <returns>The builder for call chaining</returns>
+        public CspScriptsBuilder WithStrictDynamic()
         {
             _options.StrictDynamic = true;
             return this;

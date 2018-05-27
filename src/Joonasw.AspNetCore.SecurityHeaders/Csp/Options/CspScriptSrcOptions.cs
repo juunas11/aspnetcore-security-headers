@@ -8,6 +8,14 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Csp.Options
         public bool AddNonce { get; set; }
         public bool AllowUnsafeEval { get; set; }
         public bool AllowUnsafeInline { get; set; }
+        /// <summary>
+        /// Allow scripts that have been loaded with
+        /// a trusted hash/nonce to load additional
+        /// scripts.
+        /// This enabled a &quot;strict&quot; mode
+        /// for scripts, requiring a hash or nonce
+        /// on all of them.
+        /// </summary>
         public bool StrictDynamic { get; set; }
         public CspScriptSrcOptions()
             : base("script-src")

@@ -113,14 +113,24 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Tests
         }
 
         [Fact]
-        public void StrictTynamic_SetsStrictDynamicToTrue()
+        public void WithStrictDynamic_SetsStrictDynamicToTrue()
         {
             var builder = new CspScriptsBuilder();
 
-            builder.StrictDynamic();
+            builder.WithStrictDynamic();
             CspScriptSrcOptions options = builder.BuildOptions();
 
             Assert.True(options.StrictDynamic);
+        }
+
+        [Fact]
+        public void WithoutWithStrictDynamic_LeavesStrictDynamicToFalse()
+        {
+            var builder = new CspScriptsBuilder();
+
+            CspScriptSrcOptions options = builder.BuildOptions();
+
+            Assert.False(options.StrictDynamic);
         }
     }
 }
