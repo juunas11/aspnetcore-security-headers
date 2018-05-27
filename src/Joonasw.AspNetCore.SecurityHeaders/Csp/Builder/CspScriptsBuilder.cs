@@ -103,6 +103,12 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Csp.Builder
             return this;
         }
 
+        public CspScriptsBuilder StrictDynamic()
+        {
+            _options.StrictDynamic = true;
+            return this;
+        }
+
         public CspScriptSrcOptions BuildOptions()
         {
             return _options;

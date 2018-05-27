@@ -111,5 +111,16 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Tests
 
             Assert.True(options.AllowOnlyHttps);
         }
+
+        [Fact]
+        public void StrictTynamic_SetsStrictDynamicToTrue()
+        {
+            var builder = new CspScriptsBuilder();
+
+            builder.StrictDynamic();
+            CspScriptSrcOptions options = builder.BuildOptions();
+
+            Assert.True(options.StrictDynamic);
+        }
     }
 }
