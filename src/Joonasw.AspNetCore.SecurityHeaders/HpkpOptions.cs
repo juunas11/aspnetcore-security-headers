@@ -4,8 +4,8 @@ namespace Joonasw.AspNetCore.SecurityHeaders
 {
     public class HpkpOptions
     {
-        private const string ReportOnlyHeaderName = "Public-Key-Pins-Report-Only";
-        private const string BlockingHeaderName = "Public-Key-Pins";
+        public const string ReportOnlyHeaderName = "Public-Key-Pins-Report-Only";
+        public const string BlockingHeaderName = "Public-Key-Pins";
         public int MaxAgeSeconds { get; set; }
         public IList<string> Pins { get; set; } = new List<string>();
         public bool IncludeSubDomains { get; set; }

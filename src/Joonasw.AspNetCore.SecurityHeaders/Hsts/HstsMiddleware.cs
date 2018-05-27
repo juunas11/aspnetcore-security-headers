@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
 
@@ -20,11 +22,16 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Hsts
         {
             //HSTS can only be applied to secure requests according to spec
             // there really is no point adding it to insecure ones since MiTM can just strip the header
-            if (context.Request.IsHttps)
+            if (context.Request.IsHttps && !ContainsHstsHeader(context.Response))
             {
                 context.Response.Headers.Add(HeaderName, _headerValue);
             }
             await _next(context);
+        }
+
+        private bool ContainsHstsHeader(HttpResponse response)
+        {
+            return response.Headers.Any(h => h.Key.Equals(HeaderName, StringComparison.OrdinalIgnoreCase));
         }
     }
 }
