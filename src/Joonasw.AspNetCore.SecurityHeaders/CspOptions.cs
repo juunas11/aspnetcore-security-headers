@@ -78,13 +78,17 @@ namespace Joonasw.AspNetCore.SecurityHeaders
         /// ServiceWorker script sources.
         /// </summary>
         public CspWorkerSrcOptions Worker { get; set; }
-        /// <summary>
-        /// Restricts the URIs which can be used in a
-        /// document's &lt;base&gt; element, and subsequently
-        /// be the document's base URI.
-        /// If not set, any URL is allowed.
-        /// </summary>
-        public CspBaseUriOptions BaseUri { get; set; }
+		/// <summary>
+	    /// Rules to apply for pre-fetching/pre-rendering content
+	    /// </summary>
+	    public CspPrefetchSrcOptions Prefetch { get; set; }
+		/// <summary>
+		/// Restricts the URIs which can be used in a
+		/// document's &lt;base&gt; element, and subsequently
+		/// be the document's base URI.
+		/// If not set, any URL is allowed.
+		/// </summary>
+		public CspBaseUriOptions BaseUri { get; set; }
         /// <summary>
         /// If true, the browser will execute the page in a
         /// tightly controlled sandbox.
@@ -128,7 +132,7 @@ namespace Joonasw.AspNetCore.SecurityHeaders
         /// </summary>
         public Func<CspSendingHeaderContext, Task> OnSendingHeader { get; set; }
 
-        public CspOptions()
+	    public CspOptions()
         {
             Script = new CspScriptSrcOptions();
             Style = new CspStyleSrcOptions();
@@ -147,6 +151,7 @@ namespace Joonasw.AspNetCore.SecurityHeaders
             Sandbox = new CspSandboxOptions();
             Frame = new CspFrameSrcOptions();
             Worker = new CspWorkerSrcOptions();
+			Prefetch = new CspPrefetchSrcOptions();
             BaseUri = new CspBaseUriOptions();
             OnSendingHeader = context => Task.CompletedTask;
         }
@@ -180,6 +185,7 @@ namespace Joonasw.AspNetCore.SecurityHeaders
                 PluginTypes.ToString(),
                 Frame.ToString(nonceService),
                 Worker.ToString(nonceService),
+				Prefetch.ToString(nonceService),
                 BaseUri.ToString(nonceService)
             };
             if (BlockAllMixedContent)
