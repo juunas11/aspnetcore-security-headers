@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Joonasw.AspNetCore.SecurityHeaders
+namespace Joonasw.AspNetCore.SecurityHeaders.Hsts
 {
     /// <summary>
     /// Options for the HTTP Strict Transport Security header.

@@ -1,10 +1,12 @@
-﻿using Joonasw.AspNetCore.SecurityHeaders.Samples.Middleware;
+﻿using Joonasw.AspNetCore.SecurityHeaders.Csp;
+using Joonasw.AspNetCore.SecurityHeaders.Hpkp;
+using Joonasw.AspNetCore.SecurityHeaders.Hsts;
+using Joonasw.AspNetCore.SecurityHeaders.Samples.Middleware;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using System.Threading.Tasks;
 
 namespace Joonasw.AspNetCore.SecurityHeaders.Samples
 {
@@ -114,6 +116,75 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Samples
             //        context.ShouldNotSend = context.HttpContext.Request.Path.StartsWithSegments("/api");
             //        return Task.CompletedTask;
             //    };
+            //});
+
+            app.UseXFrameOptions();
+            // Manual Configuration
+            //app.UseXFrameOptions(new XFrameOptionsOptions(XFrameOptionsOptions.XFrameOptionsValues.Deny));
+
+            app.UseXXssProtection();
+            // Manual Configuration
+            //app.UseXXssProtection(new XXssProtectionOptions(false, false));
+
+            app.UseXContentTypeOptions();
+            // Manual Configuration
+            //app.UseXContentTypeOptions(new XContentTypeOptionsOptions(true));
+
+            app.UseReferrerPolicy();
+            // Manual Configuration
+            //app.UseReferrerPolicy(
+            //    new ReferrerPolicyOptions(ReferrerPolicyOptions.ReferrerPolicyValues.NoReferrerWhenDowngrade));
+
+            app.UseExpectCT();
+            // Manual Configuration
+            //app.UseExpectCT(
+            //    new ExpectCTOptions(TimeSpan.FromSeconds(30), "/expect-ct-report", true));
+
+            app.UseFeaturePolicy();
+            // Manual Configuration
+            //app.UseFeaturePolicy(fp =>
+            //{
+            //    fp.AllowGeolocation
+            //        .FromSelf()
+            //        .From("https://google.com");
+
+            //    fp.AllowMidi
+            //        .FromAnywhere();
+
+            //    fp.AllowNotifications
+            //        .FromSelf();
+
+            //    fp.AllowPush
+            //        .FromNowhere();
+
+            //    fp.AllowSyncXhr
+            //        .FromNowhere();
+
+            //    fp.AllowMicrophone
+            //        .FromAnywhere();
+
+            //    fp.AllowCamera
+            //        .FromNowhere();
+
+            //    fp.AllowMagnetometer
+            //        .FromSelf();
+
+            //    fp.AllowGyroscope
+            //        .FromSelf()
+            //        .From("https://google.com")
+            //        .From("https://www.yahoo.com");
+
+            //    fp.AllowSpeaker
+            //        .FromNowhere();
+
+            //    fp.AllowVibrate
+            //        .FromNowhere();
+
+            //    fp.AllowFullscreen
+            //        .FromSelf();
+
+            //    fp.AllowPayment.
+            //        FromNowhere();
             //});
 
             app.UseMvc(routes =>
