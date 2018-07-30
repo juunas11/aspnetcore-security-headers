@@ -196,7 +196,7 @@ namespace Joonasw.AspNetCore.SecurityHeaders
         }
 
         /// <summary>
-        /// Adds a Content Security Policy header
+        /// Adds a Feature Policy header
         /// to the response.
         /// </summary>
         /// <param name="app">The <see cref="IApplicationBuilder"/></param>
@@ -213,7 +213,7 @@ namespace Joonasw.AspNetCore.SecurityHeaders
         }
 
         /// <summary>
-        /// Adds a Content Security Policy header
+        /// Adds a Feature Policy header
         /// to the response.
         /// </summary>
         /// <param name="app">The <see cref="IApplicationBuilder"/></param>

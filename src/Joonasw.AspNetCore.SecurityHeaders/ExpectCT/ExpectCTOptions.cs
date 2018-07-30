@@ -16,9 +16,14 @@ namespace Joonasw.AspNetCore.SecurityHeaders.ExpectCT
         /// Defines the parameters for the Expect-CT header sent to clients.
         /// NOT CURRENTLY SUPPORTED
         /// </summary>
-        /// <param name="maxAge">The required max-age directive specifies the number of seconds that the browser should cache and apply the received policy for, whether enforced or report-only.</param>
-        /// <param name="reportUri">the report-uri directive specifies where the browser should send reports if it does not receive valid CT information. This is specified as an absolute URI.</param>
-        /// <param name="enforce">The optional enforce directive controls whether the browser should enforce the policy or treat it as report-only mode. The directive has no value so you simply include it or not depending on whether or not you want the browser to enforce the policy or just report on it.</param>
+        /// <param name="maxAge">The required max-age directive specifies the number of seconds that
+        /// the browser should cache and apply the received policy for, whether enforced or report-only.</param>
+        /// <param name="reportUri">the report-uri directive specifies where the browser should send reports
+        /// if it does not receive valid CT information. This is specified as an absolute URI.</param>
+        /// <param name="enforce">The optional enforce directive controls whether the browser should
+        /// enforce the policy or treat it as report-only mode. The directive has no value so you simply
+        /// include it or not depending on whether or not you want the browser to enforce the policy
+        /// or just report on it.</param>
         public ExpectCTOptions(TimeSpan maxAge, string reportUri, bool enforce = false)
         {
             MaxAge = maxAge;
@@ -61,7 +66,7 @@ namespace Joonasw.AspNetCore.SecurityHeaders.ExpectCT
                     value += "enforce";
                 }
 
-                value += ";" + "max-age=" + DurationSeconds;
+                value += "; " + "max-age=" + DurationSeconds;
 
                 if (ReportUri != null)
                 {
