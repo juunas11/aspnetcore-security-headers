@@ -2,9 +2,9 @@
 {
     public class CspPrefetchSrcOptions : CspSrcOptionsBase
     {
-	    public CspPrefetchSrcOptions()
-		    : base("prefetch-src")
-	    {
-	    }
+        public CspPrefetchSrcOptions()
+            : base("prefetch-src")
+        {
+        }
     }
 }

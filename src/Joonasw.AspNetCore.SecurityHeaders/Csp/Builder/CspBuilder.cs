@@ -62,16 +62,16 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Csp.Builder
         /// Set up rules for workers, shared workers and service workers.
         /// </summary>
         public CspWorkerBuilder AllowWorkers { get; } = new CspWorkerBuilder();
-	    /// <summary>
-	    /// Sets up rules for where this app can pre-fetch/pre-render content from
-	    /// </summary>
-	    public CspPrefetchBuilder AllowPrefetch { get; } = new CspPrefetchBuilder();
-		/// <summary>
-		/// Set up rules for allowed &lt;base&gt; element sources.
-		/// It is used to control what can be used as the base URI
-		/// for the document.
-		/// </summary>
-		public CspBaseUriBuilder AllowBaseUri { get; } = new CspBaseUriBuilder();
+        /// <summary>
+        /// Sets up rules for where this app can pre-fetch/pre-render content from
+        /// </summary>
+        public CspPrefetchBuilder AllowPrefetch { get; } = new CspPrefetchBuilder();
+        /// <summary>
+        /// Set up rules for allowed &lt;base&gt; element sources.
+        /// It is used to control what can be used as the base URI
+        /// for the document.
+        /// </summary>
+        public CspBaseUriBuilder AllowBaseUri { get; } = new CspBaseUriBuilder();
 
         public Func<CspSendingHeaderContext, Task> OnSendingHeader { get; set; } = context => Task.CompletedTask;
 

@@ -92,17 +92,17 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Tests
             Assert.Equal("frame-src https://www.google.com;worker-src 'self' https:", headerValue);
         }
 
-		[Fact]
-		public void WithPrefetch_ReturnsCorrectHeader()
-		{
-			var builder = new CspBuilder();
+        [Fact]
+        public void WithPrefetch_ReturnsCorrectHeader()
+        {
+	        var builder = new CspBuilder();
 
-			builder.AllowPrefetch.From("https://www.google.com");
+	        builder.AllowPrefetch.From("https://www.google.com");
 
-			var headerValue = builder.BuildCspOptions().ToString(null).headerValue;
+	        var headerValue = builder.BuildCspOptions().ToString(null).headerValue;
 
-			Assert.Equal("prefetch-src https://www.google.com", headerValue);
-		}
+	        Assert.Equal("prefetch-src https://www.google.com", headerValue);
+        }
 
         [Fact]
         public async Task OnSendingHeader_ShouldNotSendTest()
