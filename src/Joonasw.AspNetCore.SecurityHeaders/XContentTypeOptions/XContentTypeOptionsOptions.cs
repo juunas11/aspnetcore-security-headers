@@ -2,6 +2,9 @@
 {
     public class XContentTypeOptionsOptions
     {
+        /// <summary>
+        /// Defines the X-Content-Type-Options header with the 'nosniff' option
+        /// </summary>
         public XContentTypeOptionsOptions()
         {
             
@@ -9,7 +12,6 @@
 
         /// <summary>
         /// Defines the X-Content-Type-Options header and whether to allow sniffing
-        /// NoSniff is turned on by default
         /// </summary>
         /// <param name="allowSniffing"></param>
         public XContentTypeOptionsOptions(bool allowSniffing)

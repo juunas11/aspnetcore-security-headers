@@ -59,6 +59,34 @@
         /// Set up rules for Payment use
         /// </summary>
         public FeaturePolicyPaymentBuilder AllowPayment { get; } = new FeaturePolicyPaymentBuilder();
+        /// <summary>
+        /// Set up rules for Accelerometer use
+        /// </summary>
+        public FeaturePolicyAccelerometerBuilder AllowAccelerometer { get; } = new FeaturePolicyAccelerometerBuilder();
+        /// <summary>
+        /// Set up rules for Ambient Light Sensor use
+        /// </summary>
+        public FeaturePolicyAmbientLightSensorBuilder AllowAmbientLightSensor { get; } = new FeaturePolicyAmbientLightSensorBuilder();
+        /// <summary>
+        /// Set up rules for Autoplay use
+        /// </summary>
+        public FeaturePolicyAutoplayBuilder AllowAutoplay { get; } = new FeaturePolicyAutoplayBuilder();
+        /// <summary>
+        /// Set up rules for Encrypted Media use
+        /// </summary>
+        public FeaturePolicyEncryptedMediaBuilder AllowEncryptedMedia { get; } = new FeaturePolicyEncryptedMediaBuilder();
+        /// <summary>
+        /// Set up rules for Picture in Picture use
+        /// </summary>
+        public FeaturePolicyPictureInPictureBuilder AllowPictureInPicture { get; } = new FeaturePolicyPictureInPictureBuilder();
+        /// <summary>
+        /// Set up rules for USB use
+        /// </summary>
+        public FeaturePolicyUsbBuilder AllowUsb { get; } = new FeaturePolicyUsbBuilder();
+        /// <summary>
+        /// Set up rules for VR use
+        /// </summary>
+        public FeaturePolicyVrBuilder AllowVr { get; } = new FeaturePolicyVrBuilder();
 
         internal FeaturePolicyOptions BuildFeaturePolicyOptions()
         {
@@ -75,6 +103,13 @@
             _options.VibrateOptions = AllowVibrate.BuildOptions();
             _options.FullscreenOptions = AllowFullscreen.BuildOptions();
             _options.PaymentOptions = AllowPayment.BuildOptions();
+            _options.AccelerometerOptions = AllowAccelerometer.BuildOptions();
+            _options.AmbientLightSensorOptions = AllowAmbientLightSensor.BuildOptions();
+            _options.AutoplayOptions = AllowAutoplay.BuildOptions();
+            _options.EncryptedMediaOptions = AllowEncryptedMedia.BuildOptions();
+            _options.PictureInPictureOptions = AllowPictureInPicture.BuildOptions();
+            _options.UsbOptions = AllowUsb.BuildOptions();
+            _options.VrOptions = AllowVr.BuildOptions();
 
             return _options;
         }

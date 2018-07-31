@@ -22,6 +22,13 @@ namespace Joonasw.AspNetCore.SecurityHeaders.FeaturePolicy
             VibrateOptions = new FeaturePolicyVibrateOptions();
             FullscreenOptions = new FeaturePolicyFullscreenOptions();
             PaymentOptions = new FeaturePolicyPaymentOptions();
+            AccelerometerOptions = new FeaturePolicyAccelerometerOptions();
+            AmbientLightSensorOptions = new FeaturePolicyAmbientLightSensorOptions();
+            AutoplayOptions = new FeaturePolicyAutoplayOptions();
+            EncryptedMediaOptions = new FeaturePolicyEncryptedMediaOptions();
+            PictureInPictureOptions = new FeaturePolicyPictureInPictureOptions();
+            UsbOptions = new FeaturePolicyUsbOptions();
+            VrOptions = new FeaturePolicyVrOptions();
         }
 
         public FeaturePolicyGeolocationOptions GeolocationOptions { get; set; }
@@ -37,8 +44,15 @@ namespace Joonasw.AspNetCore.SecurityHeaders.FeaturePolicy
         public FeaturePolicyVibrateOptions VibrateOptions { get; set; }
         public FeaturePolicyFullscreenOptions FullscreenOptions { get; set; }
         public FeaturePolicyPaymentOptions PaymentOptions { get; set; }
+        public FeaturePolicyAccelerometerOptions AccelerometerOptions { get; set; }
+        public FeaturePolicyAmbientLightSensorOptions AmbientLightSensorOptions { get; set; }
+        public FeaturePolicyAutoplayOptions AutoplayOptions { get; set; }
+        public FeaturePolicyEncryptedMediaOptions EncryptedMediaOptions { get; set; }
+        public FeaturePolicyPictureInPictureOptions PictureInPictureOptions { get; set; }
+        public FeaturePolicyUsbOptions UsbOptions { get; set; }
+        public FeaturePolicyVrOptions VrOptions { get; set; }
 
-        internal enum FeaturePolicyValues
+        internal enum FeaturePolicyValue
         {
             [DefaultValue("geolocation")]
             Geolocation = 0,
@@ -66,6 +80,20 @@ namespace Joonasw.AspNetCore.SecurityHeaders.FeaturePolicy
             Fullscreen = 11,
             [DefaultValue("payment")]
             Payment = 12,
+            [DefaultValue("accelerometer")]
+            Accelerometer = 13,
+            [DefaultValue("ambient-light-sensor")]
+            AmbientLightSensor = 14,
+            [DefaultValue("autoplay")]
+            Autoplay = 15,
+            [DefaultValue("encrypted-media")]
+            EncryptedMedia = 16,
+            [DefaultValue("picture-in-picture")]
+            PictureInPicture = 17,
+            [DefaultValue("usb")]
+            Usb = 18,
+            [DefaultValue("vr")]
+            Vr = 19
         }
 
         /// <summary>
@@ -88,7 +116,14 @@ namespace Joonasw.AspNetCore.SecurityHeaders.FeaturePolicy
                 SpeakerOptions.ToString(),
                 VibrateOptions.ToString(),
                 FullscreenOptions.ToString(),
-                PaymentOptions.ToString()
+                PaymentOptions.ToString(),
+                AccelerometerOptions.ToString(),
+                AmbientLightSensorOptions.ToString(),
+                AutoplayOptions.ToString(),
+                EncryptedMediaOptions.ToString(),
+                PictureInPictureOptions.ToString(),
+                UsbOptions.ToString(),
+                VrOptions.ToString()
             };
             return string.Join("; ", optionValues.Where(s => s.Length > 0));
         }

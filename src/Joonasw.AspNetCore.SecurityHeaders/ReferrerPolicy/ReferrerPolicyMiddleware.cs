@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
 
@@ -13,13 +15,21 @@ namespace Joonasw.AspNetCore.SecurityHeaders.ReferrerPolicy
         public ReferrerPolicyMiddleware(RequestDelegate next, IOptions<ReferrerPolicyOptions> options)
         {
             _next = next;
-            _headerValue = options.Value.ReferrerPolicyValue.DefaultValue();
+            _headerValue = options.Value.HeaderValue.DefaultValue();
         }
 
         public async Task Invoke(HttpContext context)
         {
-            context.Response.Headers.Add(HeaderName, _headerValue);
+            if (!ContainsReferrerPolicyHeader(context.Response))
+            {
+                context.Response.Headers.Add(HeaderName, _headerValue);
+            }
             await _next(context);
+        }
+
+        private static bool ContainsReferrerPolicyHeader(HttpResponse response)
+        {
+            return response.Headers.Any(h => h.Key.Equals(HeaderName, StringComparison.OrdinalIgnoreCase));
         }
     }
 }

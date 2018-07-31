@@ -5,6 +5,9 @@ namespace Joonasw.AspNetCore.SecurityHeaders.XFrameOptions
 {
     public class XFrameOptionsOptions
     {
+        /// <summary>
+        /// Defines the parameters for the X-Frame-Options header with the 'deny' option set
+        /// </summary>
         public XFrameOptionsOptions()
         {
             
@@ -23,7 +26,9 @@ namespace Joonasw.AspNetCore.SecurityHeaders.XFrameOptions
             HeaderValue = value;
 
             if (value == XFrameOptionsValues.AllowFrom && string.IsNullOrWhiteSpace(allowFromUrl))
+            {
                 throw new ArgumentException("ALLOW-FROM URL string cannot be empty when ALLOW-FROM option is selected.");
+            }
             AllowFromUrl = allowFromUrl;
         }
 

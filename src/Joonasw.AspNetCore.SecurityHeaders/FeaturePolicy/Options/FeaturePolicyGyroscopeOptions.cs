@@ -3,6 +3,6 @@
     public class FeaturePolicyGyroscopeOptions : FeaturePolicyOptionsBase
     {
         public FeaturePolicyGyroscopeOptions()
-            : base(FeaturePolicyOptions.FeaturePolicyValues.Gyroscope.DefaultValue()) { }
+            : base(FeaturePolicyOptions.FeaturePolicyValue.Gyroscope.DefaultValue()) { }
     }
 }

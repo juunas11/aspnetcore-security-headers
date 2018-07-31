@@ -3,6 +3,6 @@
     public class FeaturePolicyFullscreenOptions : FeaturePolicyOptionsBase
     {
         public FeaturePolicyFullscreenOptions()
-            : base(FeaturePolicyOptions.FeaturePolicyValues.Fullscreen.DefaultValue()) { }
+            : base(FeaturePolicyOptions.FeaturePolicyValue.Fullscreen.DefaultValue()) { }
     }
 }

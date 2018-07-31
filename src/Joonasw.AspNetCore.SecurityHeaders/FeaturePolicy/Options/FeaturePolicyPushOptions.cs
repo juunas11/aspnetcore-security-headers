@@ -3,6 +3,6 @@
     public class FeaturePolicyPushOptions : FeaturePolicyOptionsBase
     {
         public FeaturePolicyPushOptions()
-            : base(FeaturePolicyOptions.FeaturePolicyValues.Push.DefaultValue()) { }
+            : base(FeaturePolicyOptions.FeaturePolicyValue.Push.DefaultValue()) { }
     }
 }

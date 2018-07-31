@@ -3,6 +3,6 @@
     public class FeaturePolicyMidiOptions : FeaturePolicyOptionsBase
     {
         public FeaturePolicyMidiOptions() 
-            : base(FeaturePolicyOptions.FeaturePolicyValues.Midi.DefaultValue()) { }
+            : base(FeaturePolicyOptions.FeaturePolicyValue.Midi.DefaultValue()) { }
     }
 }

@@ -34,7 +34,7 @@ namespace Joonasw.AspNetCore.SecurityHeaders
             var builder = new CspBuilder();
             builderAction(builder);
 
-            var options = builder.BuildCspOptions();
+            CspOptions options = builder.BuildCspOptions();
 
             return app.UseMiddleware<CspMiddleware>(new OptionsWrapper<CspOptions>(options));
         }
@@ -88,7 +88,7 @@ namespace Joonasw.AspNetCore.SecurityHeaders
         {
             var builder = new HpkpBuilder();
             builderAction(builder);
-            var options = builder.BuildHpkpOptions();
+            HpkpOptions options = builder.BuildHpkpOptions();
             return app.UseMiddleware<HpkpMiddleware>(new OptionsWrapper<HpkpOptions>(options));
         }
 
@@ -196,8 +196,8 @@ namespace Joonasw.AspNetCore.SecurityHeaders
         }
 
         /// <summary>
-        /// Adds a Feature Policy header
-        /// to the response.
+        /// Adds a Feature Policy headerto the response.
+        /// See https://github.com/WICG/feature-policy/blob/master/features.md for more information
         /// </summary>
         /// <param name="app">The <see cref="IApplicationBuilder"/></param>
         /// <param name="builderAction">Configuration action for the header.</param>
@@ -213,8 +213,8 @@ namespace Joonasw.AspNetCore.SecurityHeaders
         }
 
         /// <summary>
-        /// Adds a Feature Policy header
-        /// to the response.
+        /// Adds a Feature Policy header to the response.
+        /// See https://github.com/WICG/feature-policy/blob/master/features.md for more information
         /// </summary>
         /// <param name="app">The <see cref="IApplicationBuilder"/></param>
         /// <returns>The <see cref="IApplicationBuilder"/></returns>

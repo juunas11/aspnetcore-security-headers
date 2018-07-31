@@ -3,6 +3,6 @@
     public class FeaturePolicyGeolocationOptions : FeaturePolicyOptionsBase
     {
         public FeaturePolicyGeolocationOptions() 
-            : base(FeaturePolicyOptions.FeaturePolicyValues.Geolocation.DefaultValue()) { }
+            : base(FeaturePolicyOptions.FeaturePolicyValue.Geolocation.DefaultValue()) { }
     }
 }

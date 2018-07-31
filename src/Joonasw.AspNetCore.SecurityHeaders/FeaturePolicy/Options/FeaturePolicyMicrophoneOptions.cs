@@ -3,6 +3,6 @@
     public class FeaturePolicyMicrophoneOptions : FeaturePolicyOptionsBase
     {
         public FeaturePolicyMicrophoneOptions()
-            : base(FeaturePolicyOptions.FeaturePolicyValues.Microphone.DefaultValue()) { }
+            : base(FeaturePolicyOptions.FeaturePolicyValue.Microphone.DefaultValue()) { }
     }
 }

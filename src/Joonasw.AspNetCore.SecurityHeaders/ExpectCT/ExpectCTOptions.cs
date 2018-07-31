@@ -7,6 +7,10 @@ namespace Joonasw.AspNetCore.SecurityHeaders.ExpectCT
     /// </summary>
     public class ExpectCTOptions
     {
+        /// <summary>
+        /// Defines the parameters for the Expect-CT header with only the max-age set to 30 days.
+        /// Please see https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Expect-CT for support and more info
+        /// </summary>
         public ExpectCTOptions()
         {
             
@@ -14,16 +18,15 @@ namespace Joonasw.AspNetCore.SecurityHeaders.ExpectCT
 
         /// <summary>
         /// Defines the parameters for the Expect-CT header sent to clients.
-        /// NOT CURRENTLY SUPPORTED
+        /// Please see https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Expect-CT for support and more info
         /// </summary>
         /// <param name="maxAge">The required max-age directive specifies the number of seconds that
         /// the browser should cache and apply the received policy for, whether enforced or report-only.</param>
         /// <param name="reportUri">the report-uri directive specifies where the browser should send reports
         /// if it does not receive valid CT information. This is specified as an absolute URI.</param>
         /// <param name="enforce">The optional enforce directive controls whether the browser should
-        /// enforce the policy or treat it as report-only mode. The directive has no value so you simply
-        /// include it or not depending on whether or not you want the browser to enforce the policy
-        /// or just report on it.</param>
+        /// enforce the policy. Omitting this will treat it as report-only mode. The directive has no value so you simply
+        /// include it or not depending on whether or not you want the browser to enforce the policy.</param>
         public ExpectCTOptions(TimeSpan maxAge, string reportUri, bool enforce = false)
         {
             MaxAge = maxAge;
@@ -32,26 +35,26 @@ namespace Joonasw.AspNetCore.SecurityHeaders.ExpectCT
         }
 
         /// <summary>
-        /// Gets the maxAge browsers should remember that
-        /// this domain should only be accessed over HTTPS.
+        /// Specifies the TimeSpan from seconds after reception of the Expect-CT header field
+        /// during which the user agent should regard the host from whom the message was
+        /// received as a known Expect-CT host.
         /// </summary>
         public TimeSpan MaxAge { get; set; } = TimeSpan.FromDays(30);
 
         /// <summary>
-        /// Gets the maxAge browsers should remember
-        /// this domain should only be accessed over HTTPS,
-        /// in seconds.
+        /// Specifies the number of seconds after reception of the Expect-CT header field
+        /// during which the user agent should regard the host from whom the message was
+        /// received as a known Expect-CT host.
         /// </summary>
         public int DurationSeconds => (int)MaxAge.TotalSeconds;
 
         /// <summary>
-        /// Gets if this rule should apply to the current host.
+        /// If true, browsers will enforce the Certificate Transparency policy and refuse future connections that violate the policy.
         /// </summary>
         public bool Enforce { get; set; }
 
         /// <summary>
-        /// Gets if this domain should be allowed to be
-        /// added to preload lists in browsers.
+        /// The URL where violation reports should be sent.
         /// </summary>
         public string ReportUri { get; set; }
 
@@ -66,11 +69,11 @@ namespace Joonasw.AspNetCore.SecurityHeaders.ExpectCT
                     value += "enforce";
                 }
 
-                value += "; " + "max-age=" + DurationSeconds;
+                value += ", " + "max-age=" + DurationSeconds;
 
                 if (ReportUri != null)
                 {
-                    value += "; report-uri=\"" + ReportUri + "\"";
+                    value += ", report-uri=\"" + ReportUri + "\"";
                 }
 
                 return value;

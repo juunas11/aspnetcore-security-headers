@@ -2,6 +2,9 @@
 {
     public class XXssProtectionOptions
     {
+        /// <summary>
+        /// Defines the parameters for the X-Xss-Protection header with protection and block enabled
+        /// </summary>
         public XXssProtectionOptions()
         {
             

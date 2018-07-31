@@ -3,7 +3,7 @@
     internal interface IFeaturePolicyBuilder<out T>
     {
         /// <summary>
-        /// Block all
+        /// Block access to feature from all domains.
         /// </summary>
         void FromNowhere();
         /// <summary>
@@ -12,8 +12,7 @@
         /// <returns></returns>
         T FromSelf();
         /// <summary>
-        /// Allowed from anywhere, except
-        /// data:, blob:, and filesystem: schemes.
+        /// Allowed from any domain.
         /// </summary>
         /// <returns></returns>
         T FromAnywhere();

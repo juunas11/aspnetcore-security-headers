@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Joonasw.AspNetCore.SecurityHeaders.Hpkp
+namespace Joonasw.AspNetCore.SecurityHeaders
 {
     public class HpkpOptions
     {

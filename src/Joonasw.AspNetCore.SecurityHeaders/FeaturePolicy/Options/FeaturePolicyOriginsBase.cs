@@ -58,11 +58,7 @@ namespace Joonasw.AspNetCore.SecurityHeaders.FeaturePolicy.Options
         {
             var parts = GetParts();
 
-            if (parts.Count == 0)
-            {
-                return string.Empty;
-            }
-            return $"{_directiveName} {string.Join(" ", parts)}";
+            return parts.Count == 0 ? string.Empty : $"{_directiveName} {string.Join(" ", parts)}";
         }
     }
 }
