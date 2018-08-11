@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Joonasw.AspNetCore.SecurityHeaders.Csp;
 using Joonasw.AspNetCore.SecurityHeaders.Csp.Options;
 using Xunit;
 
