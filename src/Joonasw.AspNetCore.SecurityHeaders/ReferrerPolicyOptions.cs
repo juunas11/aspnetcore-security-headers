@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace Joonasw.AspNetCore.SecurityHeaders.ReferrerPolicy
+namespace Joonasw.AspNetCore.SecurityHeaders
 {
     public class ReferrerPolicyOptions
     {
@@ -9,7 +9,7 @@ namespace Joonasw.AspNetCore.SecurityHeaders.ReferrerPolicy
         /// </summary>
         public ReferrerPolicyOptions()
         {
-            
+
         }
 
         /// <summary>
@@ -18,14 +18,14 @@ namespace Joonasw.AspNetCore.SecurityHeaders.ReferrerPolicy
         /// <param name="value">The value to be applied to the Referrer Policy header</param>
         public ReferrerPolicyOptions(ReferrerPolicyValue value)
         {
-            HeaderValue = value;
+            PolicyValue = value;
         }
 
         /// <summary>
         /// Gets the referrer policy value to be applied to the ReferrerPolicy header
         /// no-referrer is set by default
         /// </summary>
-        public ReferrerPolicyValue HeaderValue { get; set; } = ReferrerPolicyValue.NoReferrer;
+        public ReferrerPolicyValue PolicyValue { get; set; } = ReferrerPolicyValue.NoReferrer;
 
         public enum ReferrerPolicyValue
         {

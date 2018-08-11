@@ -15,7 +15,7 @@ namespace Joonasw.AspNetCore.SecurityHeaders.ReferrerPolicy
         public ReferrerPolicyMiddleware(RequestDelegate next, IOptions<ReferrerPolicyOptions> options)
         {
             _next = next;
-            _headerValue = options.Value.HeaderValue.DefaultValue();
+            _headerValue = options.Value.PolicyValue.DefaultValue();
         }
 
         public async Task Invoke(HttpContext context)

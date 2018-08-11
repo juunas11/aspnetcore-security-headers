@@ -224,7 +224,7 @@ namespace Joonasw.AspNetCore.SecurityHeaders
         }
 
         /// <summary>
-        /// Adds a Expect-CT Header to the response. (NOT YET SUPPORTED)
+        /// Adds a Expect-CT Header to the response.
         /// </summary>
         /// <param name="app">The <see cref="IApplicationBuilder"/></param>
         /// <param name="options"></param>

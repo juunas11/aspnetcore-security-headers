@@ -3,6 +3,8 @@
     public class FeaturePolicyAutoplayOptions : FeaturePolicyOptionsBase
     {
         public FeaturePolicyAutoplayOptions()
-            : base(FeaturePolicyOptions.FeaturePolicyValue.Autoplay.DefaultValue()) { }
+        {
+            FeatureName = FeaturePolicyOptions.FeaturePolicyValue.Autoplay.DefaultValue();
+        }
     }
 }

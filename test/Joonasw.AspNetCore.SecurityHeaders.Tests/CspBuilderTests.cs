@@ -107,12 +107,13 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Tests
         [Fact]
         public async Task OnSendingHeader_ShouldNotSendTest()
         {
-            var builder = new CspBuilder();
-
-            builder.OnSendingHeader = context =>
+            var builder = new CspBuilder
             {
-                context.ShouldNotSend = true;
-                return Task.CompletedTask;
+                OnSendingHeader = context =>
+                {
+                    context.ShouldNotSend = true;
+                    return Task.CompletedTask;
+                }
             };
 
             var sendingHeaderContext = new CspSendingHeaderContext(null);

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 
-namespace Joonasw.AspNetCore.SecurityHeaders.XFrameOptions
+namespace Joonasw.AspNetCore.SecurityHeaders
 {
     public class XFrameOptionsOptions
     {
@@ -9,8 +9,9 @@ namespace Joonasw.AspNetCore.SecurityHeaders.XFrameOptions
         /// Defines the parameters for the X-Frame-Options header with the 'deny' option set
         /// </summary>
         public XFrameOptionsOptions()
+            : this(XFrameOptionsValues.Deny)
         {
-            
+
         }
 
         /// <summary>
@@ -29,6 +30,7 @@ namespace Joonasw.AspNetCore.SecurityHeaders.XFrameOptions
             {
                 throw new ArgumentException("ALLOW-FROM URL string cannot be empty when ALLOW-FROM option is selected.");
             }
+
             AllowFromUrl = allowFromUrl;
         }
 
@@ -37,7 +39,7 @@ namespace Joonasw.AspNetCore.SecurityHeaders.XFrameOptions
         /// DENY is set by default.
         /// Note: Chrome does not support the ALLOW-FROM option
         /// </summary>
-        public XFrameOptionsValues HeaderValue { get; set; } = XFrameOptionsValues.Deny;
+        public XFrameOptionsValues HeaderValue { get; set; }
 
         /// <summary>
         /// Gets the url allowed from a single domain.
@@ -52,9 +54,7 @@ namespace Joonasw.AspNetCore.SecurityHeaders.XFrameOptions
             [DefaultValue("SAMEORIGIN")]
             SameOrigin = 1,
             [DefaultValue("ALLOW-FROM")]
-            AllowFrom = 2,
-            [DefaultValue("ALLOWALL")]
-            AllowAll = 3
+            AllowFrom = 2
         }
     }
 }

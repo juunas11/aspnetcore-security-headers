@@ -3,6 +3,8 @@
     public class FeaturePolicyCameraOptions : FeaturePolicyOptionsBase
     {
         public FeaturePolicyCameraOptions()
-            : base(FeaturePolicyOptions.FeaturePolicyValue.Camera.DefaultValue()) { }
+        {
+            FeatureName = FeaturePolicyOptions.FeaturePolicyValue.Camera.DefaultValue();
+        }
     }
 }

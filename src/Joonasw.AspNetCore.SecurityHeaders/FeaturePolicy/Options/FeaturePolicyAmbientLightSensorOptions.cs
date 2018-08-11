@@ -3,6 +3,8 @@
     public class FeaturePolicyAmbientLightSensorOptions : FeaturePolicyOptionsBase
     {
         public FeaturePolicyAmbientLightSensorOptions()
-            : base(FeaturePolicyOptions.FeaturePolicyValue.AmbientLightSensor.DefaultValue()) { }
+        {
+            FeatureName = FeaturePolicyOptions.FeaturePolicyValue.AmbientLightSensor.DefaultValue();
+        }
     }
 }

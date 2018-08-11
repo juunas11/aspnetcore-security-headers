@@ -1,6 +1,6 @@
 ﻿namespace Joonasw.AspNetCore.SecurityHeaders.FeaturePolicy.Builder
 {
-    internal interface IFeaturePolicyBuilder<out T>
+    internal interface IFeaturePolicyFeatureBuilder<out T>
     {
         /// <summary>
         /// Block access to feature from all domains.

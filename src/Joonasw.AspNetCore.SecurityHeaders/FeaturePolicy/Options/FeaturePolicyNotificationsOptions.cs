@@ -3,6 +3,8 @@
     public class FeaturePolicyNotificationsOptions : FeaturePolicyOptionsBase
     {
         public FeaturePolicyNotificationsOptions()
-            : base(FeaturePolicyOptions.FeaturePolicyValue.Notifications.DefaultValue()) { }
+        {
+            FeatureName = FeaturePolicyOptions.FeaturePolicyValue.Notifications.DefaultValue();
+        }
     }
 }

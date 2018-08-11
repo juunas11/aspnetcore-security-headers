@@ -3,6 +3,8 @@
     public class FeaturePolicyPaymentOptions : FeaturePolicyOptionsBase
     {
         public FeaturePolicyPaymentOptions()
-            : base(FeaturePolicyOptions.FeaturePolicyValue.Payment.DefaultValue()) { }
+        {
+            FeatureName = FeaturePolicyOptions.FeaturePolicyValue.Payment.DefaultValue();
+        }
     }
 }

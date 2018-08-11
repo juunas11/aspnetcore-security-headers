@@ -1,7 +1,4 @@
-﻿using Joonasw.AspNetCore.SecurityHeaders.Csp;
-using Joonasw.AspNetCore.SecurityHeaders.Hpkp;
-using Joonasw.AspNetCore.SecurityHeaders.Hsts;
-using Joonasw.AspNetCore.SecurityHeaders.Samples.Middleware;
+﻿using Joonasw.AspNetCore.SecurityHeaders.Samples.Middleware;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -26,6 +23,7 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Samples
             services.Configure<HstsOptions>(Configuration.GetSection("Hsts"));
             services.Configure<CspOptions>(Configuration.GetSection("Csp"));
             services.Configure<HpkpOptions>(Configuration.GetSection("Hpkp"));
+            services.Configure<FeaturePolicyOptions>(Configuration.GetSection("FeaturePolicy"));
 
             // Add framework services.
             services.AddMvc();
@@ -141,7 +139,7 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Samples
             //    new ExpectCTOptions(TimeSpan.FromSeconds(30), "/expect-ct-report", true));
 
             app.UseFeaturePolicy();
-            // Manual Configuration
+            // Inline configuration
             //app.UseFeaturePolicy(fp =>
             //{
             //    fp.AllowGeolocation
@@ -185,6 +183,9 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Samples
 
             //    fp.AllowPayment.
             //        FromNowhere();
+
+            //    fp.AllowOtherFeature("some-new-one")
+            //        .FromNowhere();
             //});
 
             app.UseMvc(routes =>

@@ -15,17 +15,6 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Tests
         }
 
         [Fact]
-        public void ValueSetIsMaintained_ResultIsCorrect()
-        {
-            const XFrameOptionsOptions.XFrameOptionsValues expected 
-                = XFrameOptionsOptions.XFrameOptionsValues.AllowAll;
-
-            var options = new XFrameOptionsOptions(expected);
-
-            Assert.Equal(expected, options.HeaderValue);
-        }
-
-        [Fact]
         public void WhenSetAllowFromUrlIsRequired_ResultIsCorrect()
         {
             Assert.Throws<ArgumentException>(() =>
@@ -37,7 +26,7 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Tests
         [Fact]
         public void WhenSetAllowFromUrlDoesNotThrow_ResultIsCorrect()
         {
-            var options = Record.Exception(() => 
+            var options = Record.Exception(() =>
                 new XFrameOptionsOptions(XFrameOptionsOptions.XFrameOptionsValues.AllowFrom, "https://google.com"));
 
             Assert.Null(options);

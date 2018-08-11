@@ -3,6 +3,8 @@
     public class FeaturePolicyMagnetometerOptions : FeaturePolicyOptionsBase
     {
         public FeaturePolicyMagnetometerOptions()
-            : base(FeaturePolicyOptions.FeaturePolicyValue.Magnetometer.DefaultValue()) { }
+        {
+            FeatureName = FeaturePolicyOptions.FeaturePolicyValue.Magnetometer.DefaultValue();
+        }
     }
 }

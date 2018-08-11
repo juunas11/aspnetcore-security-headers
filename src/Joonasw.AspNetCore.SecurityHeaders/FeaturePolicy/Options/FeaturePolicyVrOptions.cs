@@ -3,6 +3,8 @@
     public class FeaturePolicyVrOptions : FeaturePolicyOptionsBase
     {
         public FeaturePolicyVrOptions()
-            : base(FeaturePolicyOptions.FeaturePolicyValue.Vr.DefaultValue()) { }
+        {
+            FeatureName = FeaturePolicyOptions.FeaturePolicyValue.Vr.DefaultValue();
+        }
     }
 }

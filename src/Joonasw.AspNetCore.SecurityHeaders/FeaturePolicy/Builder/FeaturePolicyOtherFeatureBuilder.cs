@@ -3,32 +3,33 @@ using Joonasw.AspNetCore.SecurityHeaders.FeaturePolicy.Options;
 
 namespace Joonasw.AspNetCore.SecurityHeaders.FeaturePolicy.Builder
 {
-    public class FeaturePolicyEncryptedMediaBuilder : IFeaturePolicyBuilder<FeaturePolicyEncryptedMediaBuilder>
+    public class FeaturePolicyOtherFeatureBuilder : IFeaturePolicyFeatureBuilder<FeaturePolicyOtherFeatureBuilder>
     {
-        private readonly FeaturePolicyEncryptedMediaOptions _options = new FeaturePolicyEncryptedMediaOptions();
+        private readonly FeaturePolicyOtherFeatureOptions _options;
 
-        /// <inheritdoc />
+        public FeaturePolicyOtherFeatureBuilder(FeaturePolicyOtherFeatureOptions options)
+        {
+            _options = options;
+        }
+
         public void FromNowhere()
         {
             _options.AllowNone = true;
         }
 
-        /// <inheritdoc />
-        public FeaturePolicyEncryptedMediaBuilder FromSelf()
+        public FeaturePolicyOtherFeatureBuilder FromSelf()
         {
             _options.AllowSelf = true;
             return this;
         }
 
-        /// <inheritdoc />
-        public FeaturePolicyEncryptedMediaBuilder FromAnywhere()
+        public FeaturePolicyOtherFeatureBuilder FromAnywhere()
         {
             _options.AllowAny = true;
             return this;
         }
 
-        /// <inheritdoc />
-        public FeaturePolicyEncryptedMediaBuilder From(string uri)
+        public FeaturePolicyOtherFeatureBuilder From(string uri)
         {
             if (uri == null) throw new ArgumentNullException(nameof(uri));
             if (uri.Length == 0) throw new ArgumentException("Uri can't be empty", nameof(uri));
@@ -37,7 +38,7 @@ namespace Joonasw.AspNetCore.SecurityHeaders.FeaturePolicy.Builder
             return this;
         }
 
-        internal FeaturePolicyEncryptedMediaOptions BuildOptions()
+        internal FeaturePolicyOptionsBase BuildOptions()
         {
             return _options;
         }

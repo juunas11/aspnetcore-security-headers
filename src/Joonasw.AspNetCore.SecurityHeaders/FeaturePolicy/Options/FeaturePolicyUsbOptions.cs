@@ -3,6 +3,8 @@
     public class FeaturePolicyUsbOptions : FeaturePolicyOptionsBase
     {
         public FeaturePolicyUsbOptions()
-            : base(FeaturePolicyOptions.FeaturePolicyValue.Usb.DefaultValue()) { }
+        {
+            FeatureName = FeaturePolicyOptions.FeaturePolicyValue.Usb.DefaultValue();
+        }
     }
 }

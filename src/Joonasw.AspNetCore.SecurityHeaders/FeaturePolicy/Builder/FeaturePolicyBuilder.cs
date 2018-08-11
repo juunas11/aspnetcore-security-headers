@@ -1,115 +1,134 @@
-﻿namespace Joonasw.AspNetCore.SecurityHeaders.FeaturePolicy.Builder
+﻿using System.Collections.Generic;
+using System.Linq;
+using Joonasw.AspNetCore.SecurityHeaders.FeaturePolicy.Options;
+
+namespace Joonasw.AspNetCore.SecurityHeaders.FeaturePolicy.Builder
 {
     public class FeaturePolicyBuilder
     {
-        private readonly  FeaturePolicyOptions _options = new FeaturePolicyOptions();
+        private readonly FeaturePolicyOptions _options = new FeaturePolicyOptions();
+        private readonly List<FeaturePolicyOtherFeatureBuilder> _otherBuilders = new List<FeaturePolicyOtherFeatureBuilder>();
 
         /// <summary>
         /// Set up rules for Geolocation.
         /// </summary>
-        public FeaturePolicyGeolocationBuilder AllowGeolocation { get; } = new FeaturePolicyGeolocationBuilder();
+        public FeaturePolicyFeatureBuilder<FeaturePolicyGeolocationOptions> AllowGeolocation { get; } = new FeaturePolicyFeatureBuilder<FeaturePolicyGeolocationOptions>();
         /// <summary>
         /// Set up rules for Midi
         /// </summary>
-        public FeaturePolicyMidiBuilder AllowMidi { get; } = new FeaturePolicyMidiBuilder();
+        public FeaturePolicyFeatureBuilder<FeaturePolicyMidiOptions> AllowMidi { get; } = new FeaturePolicyFeatureBuilder<FeaturePolicyMidiOptions>();
         /// <summary>
         /// Set up rules for Notifications
         /// No Chrome support as of 2017-07-30
         /// </summary>
-        public FeaturePolicyNotificationsBuilder AllowNotifications { get; } = new FeaturePolicyNotificationsBuilder();
+        public FeaturePolicyFeatureBuilder<FeaturePolicyNotificationsOptions> AllowNotifications { get; } = new FeaturePolicyFeatureBuilder<FeaturePolicyNotificationsOptions>();
         /// <summary>
         /// Set up rules for Push
         /// No Chrome support as of 2017-07-30
         /// </summary>
-        public FeaturePolicyPushBuilder AllowPush { get; } = new FeaturePolicyPushBuilder();
+        public FeaturePolicyFeatureBuilder<FeaturePolicyPushOptions> AllowPush { get; } = new FeaturePolicyFeatureBuilder<FeaturePolicyPushOptions>();
         /// <summary>
         /// Set up rules for Sync Xhr
         /// </summary>
-        public FeaturePolicySyncXhrBuilder AllowSyncXhr { get; } = new FeaturePolicySyncXhrBuilder();
+        public FeaturePolicyFeatureBuilder<FeaturePolicySyncXhrOptions> AllowSyncXhr { get; } = new FeaturePolicyFeatureBuilder<FeaturePolicySyncXhrOptions>();
         /// <summary>
         /// Set up rules for Microphone use
         /// </summary>
-        public FeaturePolicyMicrophoneBuilder AllowMicrophone { get; } = new FeaturePolicyMicrophoneBuilder();
+        public FeaturePolicyFeatureBuilder<FeaturePolicyMicrophoneOptions> AllowMicrophone { get; } = new FeaturePolicyFeatureBuilder<FeaturePolicyMicrophoneOptions>();
         /// <summary>
         /// Set up rules for Camera use
         /// </summary>
-        public FeaturePolicyCameraBuilder AllowCamera { get; } = new FeaturePolicyCameraBuilder();
+        public FeaturePolicyFeatureBuilder<FeaturePolicyCameraOptions> AllowCamera { get; } = new FeaturePolicyFeatureBuilder<FeaturePolicyCameraOptions>();
         /// <summary>
         /// Set up rules for Magnetometer
         /// </summary>
-        public FeaturePolicyMagnetometerBuilder AllowMagnetometer { get; } = new FeaturePolicyMagnetometerBuilder();
+        public FeaturePolicyFeatureBuilder<FeaturePolicyMagnetometerOptions> AllowMagnetometer { get; } = new FeaturePolicyFeatureBuilder<FeaturePolicyMagnetometerOptions>();
         /// <summary>
         /// Set up rules for Gyroscope
         /// </summary>
-        public FeaturePolicyGyroscopeBuilder AllowGyroscope { get; } = new FeaturePolicyGyroscopeBuilder();
+        public FeaturePolicyFeatureBuilder<FeaturePolicyGyroscopeOptions> AllowGyroscope { get; } = new FeaturePolicyFeatureBuilder<FeaturePolicyGyroscopeOptions>();
         /// <summary>
         /// Set up rules for Speaker use
         /// </summary>
-        public FeaturePolicySpeakerBuilder AllowSpeaker { get; } = new FeaturePolicySpeakerBuilder();
+        public FeaturePolicyFeatureBuilder<FeaturePolicySpeakerOptions> AllowSpeaker { get; } = new FeaturePolicyFeatureBuilder<FeaturePolicySpeakerOptions>();
         /// <summary>
         /// Set up rules for Vibrate
         /// No Chrome support as of 2017-07-30
         /// </summary>
-        public FeaturePolicyVibrateBuilder AllowVibrate { get; } = new FeaturePolicyVibrateBuilder();
+        public FeaturePolicyFeatureBuilder<FeaturePolicyVibrateOptions> AllowVibrate { get; } = new FeaturePolicyFeatureBuilder<FeaturePolicyVibrateOptions>();
         /// <summary>
         /// Set up rules for Fullscreen use
         /// </summary>
-        public FeaturePolicyFullscreenBuilder AllowFullscreen { get; } = new FeaturePolicyFullscreenBuilder();
+        public FeaturePolicyFeatureBuilder<FeaturePolicyFullscreenOptions> AllowFullscreen { get; } = new FeaturePolicyFeatureBuilder<FeaturePolicyFullscreenOptions>();
         /// <summary>
         /// Set up rules for Payment use
         /// </summary>
-        public FeaturePolicyPaymentBuilder AllowPayment { get; } = new FeaturePolicyPaymentBuilder();
+        public FeaturePolicyFeatureBuilder<FeaturePolicyPaymentOptions> AllowPayment { get; } = new FeaturePolicyFeatureBuilder<FeaturePolicyPaymentOptions>();
         /// <summary>
         /// Set up rules for Accelerometer use
         /// </summary>
-        public FeaturePolicyAccelerometerBuilder AllowAccelerometer { get; } = new FeaturePolicyAccelerometerBuilder();
+        public FeaturePolicyFeatureBuilder<FeaturePolicyAccelerometerOptions> AllowAccelerometer { get; } = new FeaturePolicyFeatureBuilder<FeaturePolicyAccelerometerOptions>();
         /// <summary>
         /// Set up rules for Ambient Light Sensor use
         /// </summary>
-        public FeaturePolicyAmbientLightSensorBuilder AllowAmbientLightSensor { get; } = new FeaturePolicyAmbientLightSensorBuilder();
+        public FeaturePolicyFeatureBuilder<FeaturePolicyAmbientLightSensorOptions> AllowAmbientLightSensor { get; } = new FeaturePolicyFeatureBuilder<FeaturePolicyAmbientLightSensorOptions>();
         /// <summary>
         /// Set up rules for Autoplay use
         /// </summary>
-        public FeaturePolicyAutoplayBuilder AllowAutoplay { get; } = new FeaturePolicyAutoplayBuilder();
+        public FeaturePolicyFeatureBuilder<FeaturePolicyAutoplayOptions> AllowAutoplay { get; } = new FeaturePolicyFeatureBuilder<FeaturePolicyAutoplayOptions>();
         /// <summary>
         /// Set up rules for Encrypted Media use
         /// </summary>
-        public FeaturePolicyEncryptedMediaBuilder AllowEncryptedMedia { get; } = new FeaturePolicyEncryptedMediaBuilder();
+        public FeaturePolicyFeatureBuilder<FeaturePolicyEncryptedMediaOptions> AllowEncryptedMedia { get; } = new FeaturePolicyFeatureBuilder<FeaturePolicyEncryptedMediaOptions>();
         /// <summary>
         /// Set up rules for Picture in Picture use
         /// </summary>
-        public FeaturePolicyPictureInPictureBuilder AllowPictureInPicture { get; } = new FeaturePolicyPictureInPictureBuilder();
+        public FeaturePolicyFeatureBuilder<FeaturePolicyPictureInPictureOptions> AllowPictureInPicture { get; } = new FeaturePolicyFeatureBuilder<FeaturePolicyPictureInPictureOptions>();
         /// <summary>
         /// Set up rules for USB use
         /// </summary>
-        public FeaturePolicyUsbBuilder AllowUsb { get; } = new FeaturePolicyUsbBuilder();
+        public FeaturePolicyFeatureBuilder<FeaturePolicyUsbOptions> AllowUsb { get; } = new FeaturePolicyFeatureBuilder<FeaturePolicyUsbOptions>();
         /// <summary>
         /// Set up rules for VR use
         /// </summary>
-        public FeaturePolicyVrBuilder AllowVr { get; } = new FeaturePolicyVrBuilder();
+        public FeaturePolicyFeatureBuilder<FeaturePolicyVrOptions> AllowVr { get; } = new FeaturePolicyFeatureBuilder<FeaturePolicyVrOptions>();
 
-        internal FeaturePolicyOptions BuildFeaturePolicyOptions()
+        /// <summary>
+        /// Set up rules for any feature
+        /// </summary>
+        /// <param name="featureName">Name of the feature you want rules for.
+        /// The official list is at https://github.com/WICG/feature-policy/blob/master/features.md</param>
+        public FeaturePolicyOtherFeatureBuilder AllowOtherFeature(string featureName)
         {
-            _options.GeolocationOptions = AllowGeolocation.BuildOptions();
-            _options.MidiOptions = AllowMidi.BuildOptions();
-            _options.NotificationsOptions = AllowNotifications.BuildOptions();
-            _options.PushOptions = AllowPush.BuildOptions();
-            _options.SyncXhrOptions = AllowSyncXhr.BuildOptions();
-            _options.MicrophoneOptions = AllowMicrophone.BuildOptions();
-            _options.CameraOptions = AllowCamera.BuildOptions();
-            _options.MagnetometerOptions = AllowMagnetometer.BuildOptions();
-            _options.GyroscopeOptions = AllowGyroscope.BuildOptions();
-            _options.SpeakerOptions = AllowSpeaker.BuildOptions();
-            _options.VibrateOptions = AllowVibrate.BuildOptions();
-            _options.FullscreenOptions = AllowFullscreen.BuildOptions();
-            _options.PaymentOptions = AllowPayment.BuildOptions();
-            _options.AccelerometerOptions = AllowAccelerometer.BuildOptions();
-            _options.AmbientLightSensorOptions = AllowAmbientLightSensor.BuildOptions();
-            _options.AutoplayOptions = AllowAutoplay.BuildOptions();
-            _options.EncryptedMediaOptions = AllowEncryptedMedia.BuildOptions();
-            _options.PictureInPictureOptions = AllowPictureInPicture.BuildOptions();
-            _options.UsbOptions = AllowUsb.BuildOptions();
-            _options.VrOptions = AllowVr.BuildOptions();
+            var options = new FeaturePolicyOtherFeatureOptions(featureName);
+            var builder = new FeaturePolicyOtherFeatureBuilder(options);
+            _otherBuilders.Add(builder);
+            return builder;
+        }
+
+        public FeaturePolicyOptions BuildFeaturePolicyOptions()
+        {
+            _options.Geolocation = AllowGeolocation.BuildOptions();
+            _options.Midi = AllowMidi.BuildOptions();
+            _options.Notifications = AllowNotifications.BuildOptions();
+            _options.Push = AllowPush.BuildOptions();
+            _options.SyncXhr = AllowSyncXhr.BuildOptions();
+            _options.Microphone = AllowMicrophone.BuildOptions();
+            _options.Camera = AllowCamera.BuildOptions();
+            _options.Magnetometer = AllowMagnetometer.BuildOptions();
+            _options.Gyroscope = AllowGyroscope.BuildOptions();
+            _options.Speaker = AllowSpeaker.BuildOptions();
+            _options.Vibrate = AllowVibrate.BuildOptions();
+            _options.Fullscreen = AllowFullscreen.BuildOptions();
+            _options.Payment = AllowPayment.BuildOptions();
+            _options.Accelerometer = AllowAccelerometer.BuildOptions();
+            _options.AmbientLightSensor = AllowAmbientLightSensor.BuildOptions();
+            _options.Autoplay = AllowAutoplay.BuildOptions();
+            _options.EncryptedMedia = AllowEncryptedMedia.BuildOptions();
+            _options.PictureInPicture = AllowPictureInPicture.BuildOptions();
+            _options.Usb = AllowUsb.BuildOptions();
+            _options.Vr = AllowVr.BuildOptions();
+            _options.Other = _otherBuilders.Select(b => b.BuildOptions()).ToDictionary(o => o.FeatureName);
 
             return _options;
         }

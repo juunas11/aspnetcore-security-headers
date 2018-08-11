@@ -3,6 +3,8 @@
     public class FeaturePolicyAccelerometerOptions : FeaturePolicyOptionsBase
     {
         public FeaturePolicyAccelerometerOptions()
-            : base(FeaturePolicyOptions.FeaturePolicyValue.Accelerometer.DefaultValue()) { }
+        {
+            FeatureName = FeaturePolicyOptions.FeaturePolicyValue.Accelerometer.DefaultValue();
+        }
     }
 }

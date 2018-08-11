@@ -8,7 +8,7 @@ namespace Joonasw.AspNetCore.SecurityHeaders.XXssProtection
 {
     public class XXssProtectionMiddleware
     {
-        private const string HeaderName = "X-Xss-Protection";
+        private const string HeaderName = "X-XSS-Protection";
         private readonly RequestDelegate _next;
         private readonly string _headerValue;
 

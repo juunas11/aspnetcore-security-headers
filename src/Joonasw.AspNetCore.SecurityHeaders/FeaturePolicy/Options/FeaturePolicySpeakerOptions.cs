@@ -3,6 +3,8 @@
     public class FeaturePolicySpeakerOptions : FeaturePolicyOptionsBase
     {
         public FeaturePolicySpeakerOptions()
-            : base(FeaturePolicyOptions.FeaturePolicyValue.Speaker.DefaultValue()) { }
+        {
+            FeatureName = FeaturePolicyOptions.FeaturePolicyValue.Speaker.DefaultValue();
+        }
     }
 }

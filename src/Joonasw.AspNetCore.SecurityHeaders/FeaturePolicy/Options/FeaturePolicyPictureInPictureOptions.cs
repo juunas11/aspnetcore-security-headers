@@ -3,6 +3,8 @@
     public class FeaturePolicyPictureInPictureOptions : FeaturePolicyOptionsBase
     {
         public FeaturePolicyPictureInPictureOptions()
-            : base(FeaturePolicyOptions.FeaturePolicyValue.PictureInPicture.DefaultValue()) { }
+        {
+            FeatureName = FeaturePolicyOptions.FeaturePolicyValue.PictureInPicture.DefaultValue();
+        }
     }
 }

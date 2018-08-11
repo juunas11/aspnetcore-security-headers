@@ -3,9 +3,15 @@ using Joonasw.AspNetCore.SecurityHeaders.FeaturePolicy.Options;
 
 namespace Joonasw.AspNetCore.SecurityHeaders.FeaturePolicy.Builder
 {
-    public class FeaturePolicyPushBuilder : IFeaturePolicyBuilder<FeaturePolicyPushBuilder>
+    public class FeaturePolicyFeatureBuilder<TOptions> : IFeaturePolicyFeatureBuilder<FeaturePolicyFeatureBuilder<TOptions>>
+        where TOptions : FeaturePolicyOptionsBase, new()
     {
-        private readonly FeaturePolicyPushOptions _options = new FeaturePolicyPushOptions();
+        private readonly FeaturePolicyOptionsBase _options;
+
+        public FeaturePolicyFeatureBuilder()
+        {
+            _options = new TOptions();
+        }
 
         /// <inheritdoc />
         public void FromNowhere()
@@ -14,21 +20,21 @@ namespace Joonasw.AspNetCore.SecurityHeaders.FeaturePolicy.Builder
         }
 
         /// <inheritdoc />
-        public FeaturePolicyPushBuilder FromSelf()
+        public FeaturePolicyFeatureBuilder<TOptions> FromSelf()
         {
             _options.AllowSelf = true;
             return this;
         }
 
         /// <inheritdoc />
-        public FeaturePolicyPushBuilder FromAnywhere()
+        public FeaturePolicyFeatureBuilder<TOptions> FromAnywhere()
         {
             _options.AllowAny = true;
             return this;
         }
 
         /// <inheritdoc />
-        public FeaturePolicyPushBuilder From(string uri)
+        public FeaturePolicyFeatureBuilder<TOptions> From(string uri)
         {
             if (uri == null) throw new ArgumentNullException(nameof(uri));
             if (uri.Length == 0) throw new ArgumentException("Uri can't be empty", nameof(uri));
@@ -37,7 +43,7 @@ namespace Joonasw.AspNetCore.SecurityHeaders.FeaturePolicy.Builder
             return this;
         }
 
-        internal FeaturePolicyPushOptions BuildOptions()
+        internal FeaturePolicyOptionsBase BuildOptions()
         {
             return _options;
         }

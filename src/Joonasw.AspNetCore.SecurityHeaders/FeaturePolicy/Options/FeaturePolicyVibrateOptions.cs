@@ -3,6 +3,8 @@
     public class FeaturePolicyVibrateOptions : FeaturePolicyOptionsBase
     {
         public FeaturePolicyVibrateOptions()
-            : base(FeaturePolicyOptions.FeaturePolicyValue.Vibrate.DefaultValue()) { }
+        {
+            FeatureName = FeaturePolicyOptions.FeaturePolicyValue.Vibrate.DefaultValue();
+        }
     }
 }

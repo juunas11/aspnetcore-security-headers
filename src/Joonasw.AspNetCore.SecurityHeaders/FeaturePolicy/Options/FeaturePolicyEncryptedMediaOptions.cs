@@ -3,6 +3,8 @@
     public class FeaturePolicyEncryptedMediaOptions : FeaturePolicyOptionsBase
     {
         public FeaturePolicyEncryptedMediaOptions()
-            : base(FeaturePolicyOptions.FeaturePolicyValue.EncryptedMedia.DefaultValue()) { }
+        {
+            FeatureName = FeaturePolicyOptions.FeaturePolicyValue.EncryptedMedia.DefaultValue();
+        }
     }
 }

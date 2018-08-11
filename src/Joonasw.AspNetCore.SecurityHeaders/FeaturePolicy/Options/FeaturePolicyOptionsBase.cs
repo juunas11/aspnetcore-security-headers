@@ -2,9 +2,9 @@
 
 namespace Joonasw.AspNetCore.SecurityHeaders.FeaturePolicy.Options
 {
-    public abstract class FeaturePolicyOptionsBase
+    public class FeaturePolicyOptionsBase
     {
-        private readonly string _directiveName;
+        public string FeatureName { get; set; }
         /// <summary>
         /// Collection of origins from where these resources can be loaded.
         /// </summary>
@@ -22,11 +22,16 @@ namespace Joonasw.AspNetCore.SecurityHeaders.FeaturePolicy.Options
         /// </summary>
         public bool AllowAny { get; set; }
 
-        protected FeaturePolicyOptionsBase(string directiveName)
+        public FeaturePolicyOptionsBase()
         {
-            _directiveName = directiveName;
-            AllowedOrigins = new List<string>();   
+            AllowedOrigins = new List<string>();
         }
+
+        //protected FeaturePolicyOptionsBase(string featureName)
+        //{
+        //    FeatureName = featureName;
+        //    AllowedOrigins = new List<string>();
+        //}
 
         protected virtual ICollection<string> GetParts()
         {
@@ -58,7 +63,7 @@ namespace Joonasw.AspNetCore.SecurityHeaders.FeaturePolicy.Options
         {
             var parts = GetParts();
 
-            return parts.Count == 0 ? string.Empty : $"{_directiveName} {string.Join(" ", parts)}";
+            return parts.Count == 0 ? string.Empty : $"{FeatureName} {string.Join(" ", parts)}";
         }
     }
 }

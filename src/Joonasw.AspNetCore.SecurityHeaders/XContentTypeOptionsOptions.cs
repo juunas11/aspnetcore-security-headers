@@ -1,4 +1,4 @@
-﻿namespace Joonasw.AspNetCore.SecurityHeaders.XContentTypeOptions
+﻿namespace Joonasw.AspNetCore.SecurityHeaders
 {
     public class XContentTypeOptionsOptions
     {
@@ -6,8 +6,9 @@
         /// Defines the X-Content-Type-Options header with the 'nosniff' option
         /// </summary>
         public XContentTypeOptionsOptions()
+            : this(false)
         {
-            
+
         }
 
         /// <summary>

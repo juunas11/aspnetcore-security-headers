@@ -3,6 +3,8 @@
     public class FeaturePolicySyncXhrOptions : FeaturePolicyOptionsBase
     {
         public FeaturePolicySyncXhrOptions()
-            : base(FeaturePolicyOptions.FeaturePolicyValue.SyncXhr.DefaultValue()) { }
+        {
+            FeatureName = FeaturePolicyOptions.FeaturePolicyValue.SyncXhr.DefaultValue();
+        }
     }
 }

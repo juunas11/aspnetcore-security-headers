@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Joonasw.AspNetCore.SecurityHeaders.ExpectCT
 {
@@ -13,7 +14,7 @@ namespace Joonasw.AspNetCore.SecurityHeaders.ExpectCT
         /// </summary>
         public ExpectCTOptions()
         {
-            
+
         }
 
         /// <summary>
@@ -62,21 +63,22 @@ namespace Joonasw.AspNetCore.SecurityHeaders.ExpectCT
         {
             get
             {
-                var value = string.Empty;
+                var values = new List<string>(3)
+                {
+                    "max-age=" + DurationSeconds
+                };
 
                 if (Enforce)
                 {
-                    value += "enforce";
+                    values.Add("enforce");
                 }
-
-                value += ", " + "max-age=" + DurationSeconds;
 
                 if (ReportUri != null)
                 {
-                    value += ", report-uri=\"" + ReportUri + "\"";
+                    values.Add($"report-uri=\"{ReportUri}\"");
                 }
 
-                return value;
+                return string.Join(", ", values);
             }
         }
     }

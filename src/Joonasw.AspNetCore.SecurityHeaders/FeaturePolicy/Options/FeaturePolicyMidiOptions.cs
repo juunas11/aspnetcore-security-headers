@@ -2,7 +2,9 @@
 {
     public class FeaturePolicyMidiOptions : FeaturePolicyOptionsBase
     {
-        public FeaturePolicyMidiOptions() 
-            : base(FeaturePolicyOptions.FeaturePolicyValue.Midi.DefaultValue()) { }
+        public FeaturePolicyMidiOptions()
+        {
+            FeatureName = FeaturePolicyOptions.FeaturePolicyValue.Midi.DefaultValue();
+        }
     }
 }
