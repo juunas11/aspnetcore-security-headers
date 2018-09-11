@@ -16,12 +16,7 @@ steps:
   inputs:
     command: test
     projects: '**/*Tests/*.csproj'
-    arguments: '--configuration $(buildConfiguration) --logger trx'
-
-- task: PublishTestResults@2
-  inputs:
-    testRunner: VSTest
-    testResultsFiles: '**/*.trx'
+    arguments: '--configuration $(buildConfiguration)'
 
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Artifact: Build results'
