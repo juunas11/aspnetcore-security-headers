@@ -1,21 +1,18 @@
-pool:
-  vmImage: 'Ubuntu 16.04'
-  
+queue:
+  name: Hosted VS2017
+
 variables:
   buildConfiguration: 'Release'
 
 steps:
-- task: DotNetCoreInstaller@0
-  inputs:
-    version: '1.1.10'
-
 - task: DotNetCoreCLI@2
+  displayName: 'dotnet build'
   inputs:
-    command: build
     projects: '**/*.csproj'
     arguments: '--configuration $(buildConfiguration)'
 
 - task: DotNetCoreCLI@2
+  displayName: 'dotnet test'
   inputs:
     command: test
     projects: '**/*Tests/*.csproj'
@@ -27,3 +24,7 @@ steps:
     testResultsFiles: '**/*.trx'
 
 - task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact: Build results'
+  inputs:
+    PathtoPublish: 'src/Joonasw.AspNetCore.SecurityHeaders/bin/$(buildConfiguration)'
+    ArtifactName: 'Build results'
