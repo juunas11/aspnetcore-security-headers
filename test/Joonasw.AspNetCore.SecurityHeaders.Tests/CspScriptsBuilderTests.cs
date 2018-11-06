@@ -6,7 +6,9 @@ using Xunit;
 
 namespace Joonasw.AspNetCore.SecurityHeaders.Tests
 {
-    public class CspScriptsBuilderTests
+  using Csp;
+
+  public class CspScriptsBuilderTests
     {
         [Fact]
         public void FromNowhere_SetsAllowNoneToTrue()
@@ -28,6 +30,24 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Tests
             CspScriptSrcOptions options = builder.BuildOptions();
 
             Assert.True(options.AllowSelf);
+        }
+
+        [Fact]
+        public void FromSelf_WithNonce_HasValue()
+        {
+          var nonceService = new CspNonceService(32);
+          var nonce = nonceService.GetNonce();
+      
+          var builder = new CspBuilder();
+          builder.AllowScripts.FromSelf().AddNonce();
+            
+          var headerValue = builder.BuildCspOptions().ToString(nonceService).headerValue;
+
+          Assert.DoesNotContain("+", nonce);
+          Assert.DoesNotContain("/", nonce);
+          Assert.DoesNotContain("=", nonce);
+      
+          Assert.Equal($"script-src 'self' 'nonce-{nonce}'", headerValue);
         }
 
         [Fact]
