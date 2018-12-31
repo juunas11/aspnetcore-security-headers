@@ -33,14 +33,14 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Csp.Builder
         /// Set up rules for AJAX, WebSockets and EventSource.
         /// </summary>
         public CspConnectionBuilder AllowConnections { get; } = new CspConnectionBuilder();
-	    /// <summary>
-	    /// Sets up rules for where this app can load web manifests from
-	    /// </summary>
-	    public CspManifestBuilder AllowManifest { get; } = new CspManifestBuilder();
-		/// <summary>
-		/// Set up rules for fonts.
-		/// </summary>
-		public CspFontsBuilder AllowFonts { get; } = new CspFontsBuilder();
+        /// <summary>
+        /// Sets up rules for where this app can load web manifests from
+        /// </summary>
+        public CspManifestBuilder AllowManifest { get; } = new CspManifestBuilder();
+        /// <summary>
+        /// Set up rules for fonts.
+        /// </summary>
+        public CspFontsBuilder AllowFonts { get; } = new CspFontsBuilder();
         /// <summary>
         /// Set up rules for audio and video in e.g. HTML5 audio and video elements.
         /// </summary>
@@ -129,7 +129,7 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Csp.Builder
             _options.Child = AllowChildren.BuildOptions();
 #pragma warning restore CS0618 // Type or member is obsolete
             _options.Connect = AllowConnections.BuildOptions();
-			_options.Manifest = AllowManifest.BuildOptions();
+            _options.Manifest = AllowManifest.BuildOptions();
             _options.Default = ByDefaultAllow.BuildOptions();
             _options.Font = AllowFonts.BuildOptions();
             _options.FormAction = AllowFormActions.BuildOptions();
@@ -142,8 +142,8 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Csp.Builder
             _options.Sandbox = _sandboxBuilder.BuildOptions();
             _options.Frame = AllowFrames.BuildOptions();
             _options.Worker = AllowWorkers.BuildOptions();
-	        _options.Prefetch = AllowPrefetch.BuildOptions();
-			_options.BaseUri = AllowBaseUri.BuildOptions();
+            _options.Prefetch = AllowPrefetch.BuildOptions();
+            _options.BaseUri = AllowBaseUri.BuildOptions();
             _options.OnSendingHeader = OnSendingHeader;
             return _options;
         }

@@ -95,26 +95,26 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Tests
         [Fact]
         public void WithPrefetch_ReturnsCorrectHeader()
         {
-	        var builder = new CspBuilder();
+            var builder = new CspBuilder();
 
-	        builder.AllowPrefetch.From("https://www.google.com");
+            builder.AllowPrefetch.From("https://www.google.com");
 
-	        var headerValue = builder.BuildCspOptions().ToString(null).headerValue;
+            var headerValue = builder.BuildCspOptions().ToString(null).headerValue;
 
-	        Assert.Equal("prefetch-src https://www.google.com", headerValue);
+            Assert.Equal("prefetch-src https://www.google.com", headerValue);
         }
 
-		[Fact]
-		public void WithManifest_ReturnsCorrectHeader() 
-		{
-			var builder = new CspBuilder();
+        [Fact]
+        public void WithManifest_ReturnsCorrectHeader() 
+        {
+            var builder = new CspBuilder();
 
-			builder.AllowManifest.From("https://www.google.com");
+            builder.AllowManifest.From("https://www.google.com");
 
-			var headerValue = builder.BuildCspOptions().ToString(null).headerValue;
+            var headerValue = builder.BuildCspOptions().ToString(null).headerValue;
 
-			Assert.Equal("manifest-src https://www.google.com", headerValue);
-		}
+            Assert.Equal("manifest-src https://www.google.com", headerValue);
+        }
 
         [Fact]
         public async Task OnSendingHeader_ShouldNotSendTest()
