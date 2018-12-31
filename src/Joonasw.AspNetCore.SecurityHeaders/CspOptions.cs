@@ -37,6 +37,10 @@ namespace Joonasw.AspNetCore.SecurityHeaders
         /// Rules to apply for AJAX, WebSockets and EventSource.
         /// </summary>
         public CspConnectSrcOptions Connect { get; set; }
+		/// <summary>
+		/// Rules to control where web manifests can be loaded from
+		/// </summary>
+		public CspManifestSrcOptions Manifest { get; set; }
         /// <summary>
         /// Rules to apply for fonts.
         /// </summary>
@@ -141,6 +145,7 @@ namespace Joonasw.AspNetCore.SecurityHeaders
             Child = new CspChildSrcOptions();
 #pragma warning restore CS0618 // Type or member is obsolete
             Connect = new CspConnectSrcOptions();
+			Manifest = new CspManifestSrcOptions();
             Font = new CspFontSrcOptions();
             FormAction = new CspFormActionOptions();
             Img = new CspImgSrcOptions();
@@ -176,6 +181,7 @@ namespace Joonasw.AspNetCore.SecurityHeaders
                 Child.ToString(nonceService),
 #pragma warning restore CS0618 // Type or member is obsolete
                 Connect.ToString(nonceService),
+				Manifest.ToString(nonceService),
                 Font.ToString(nonceService),
                 FormAction.ToString(nonceService),
                 Img.ToString(nonceService),

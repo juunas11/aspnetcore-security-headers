@@ -104,6 +104,18 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Tests
 	        Assert.Equal("prefetch-src https://www.google.com", headerValue);
         }
 
+		[Fact]
+		public void WithManifest_ReturnsCorrectHeader() 
+		{
+			var builder = new CspBuilder();
+
+			builder.AllowManifest.From("https://www.google.com");
+
+			var headerValue = builder.BuildCspOptions().ToString(null).headerValue;
+
+			Assert.Equal("manifest-src https://www.google.com", headerValue);
+		}
+
         [Fact]
         public async Task OnSendingHeader_ShouldNotSendTest()
         {
