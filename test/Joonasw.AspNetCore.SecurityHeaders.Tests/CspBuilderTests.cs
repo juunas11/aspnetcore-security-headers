@@ -105,7 +105,7 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Tests
         }
 
         [Fact]
-        public void WithManifest_ReturnsCorrectHeader() 
+        public void WithManifest_ReturnsCorrectHeader()
         {
             var builder = new CspBuilder();
 

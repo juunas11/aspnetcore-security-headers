@@ -3,7 +3,7 @@
     public class CspManifestSrcOptions : CspSrcOptionsBase
     {
         public CspManifestSrcOptions()
-            :base ("manifest-src") 
+            : base ("manifest-src")
         {
         }
     }

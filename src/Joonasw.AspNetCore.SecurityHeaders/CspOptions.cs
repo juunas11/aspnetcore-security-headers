@@ -38,7 +38,7 @@ namespace Joonasw.AspNetCore.SecurityHeaders
         /// </summary>
         public CspConnectSrcOptions Connect { get; set; }
         /// <summary>
-        /// Rules to control where web manifests can be loaded from
+        /// Rules to control where web manifests can be loaded from.
         /// </summary>
         public CspManifestSrcOptions Manifest { get; set; }
         /// <summary>

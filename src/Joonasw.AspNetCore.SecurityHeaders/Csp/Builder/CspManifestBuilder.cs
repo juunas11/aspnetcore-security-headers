@@ -3,16 +3,18 @@
 namespace Joonasw.AspNetCore.SecurityHeaders.Csp.Builder
 {
     /// <summary>
-    /// Builder for controlling where web manifests can be loaded from
+    /// Builder for controlling where web manifests can be loaded from.
     /// </summary>
-    public class CspManifestBuilder {
+    public class CspManifestBuilder
+    {
         private readonly CspManifestSrcOptions _options = new CspManifestSrcOptions();
 
         /// <summary>
         /// Allow manifests to be loaded from the current domain.
         /// </summary>
         /// <returns>The builder for call chaining</returns>
-        public CspManifestBuilder FromSelf() {
+        public CspManifestBuilder FromSelf()
+        {
             _options.AllowSelf = true;
             return this;
         }
@@ -22,7 +24,8 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Csp.Builder
         /// </summary>
         /// <param name="uri">The URI to allow.</param>
         /// <returns>The builder for call chaining</returns>
-        public CspManifestBuilder From(string uri) {
+        public CspManifestBuilder From(string uri)
+        {
             _options.AllowedSources.Add(uri);
             return this;
         }
@@ -31,7 +34,8 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Csp.Builder
         /// Allow manifests to load from anywhere.
         /// </summary>
         /// <returns>The builder for call chaining</returns>
-        public CspManifestBuilder FromAnywhere() {
+        public CspManifestBuilder FromAnywhere()
+        {
             _options.AllowAny = true;
             return this;
         }
@@ -40,7 +44,8 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Csp.Builder
         /// Block all loading of manifests.
         /// </summary>
         /// <returns>The builder for call chaining</returns>
-        public void FromNowhere() {
+        public void FromNowhere()
+        {
             _options.AllowNone = true;
         }
 
@@ -48,12 +53,14 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Csp.Builder
         /// Allow manifests to load from secure connections.
         /// </summary>
         /// <returns>The builder for call chaining</returns>
-        public CspManifestBuilder OnlyOverHttps() {
+        public CspManifestBuilder OnlyOverHttps()
+        {
             _options.AllowOnlyHttps = true;
             return this;
         }
 
-        public CspManifestSrcOptions BuildOptions() {
+        public CspManifestSrcOptions BuildOptions()
+        {
             return _options;
         }
     }

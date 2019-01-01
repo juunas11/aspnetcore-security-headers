@@ -34,7 +34,7 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Csp.Builder
         /// </summary>
         public CspConnectionBuilder AllowConnections { get; } = new CspConnectionBuilder();
         /// <summary>
-        /// Sets up rules for where this app can load web manifests from
+        /// Sets up rules for where this app can load web manifests from.
         /// </summary>
         public CspManifestBuilder AllowManifest { get; } = new CspManifestBuilder();
         /// <summary>
