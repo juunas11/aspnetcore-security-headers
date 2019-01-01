@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="15.0">
   <PropertyGroup>
     <TargetFrameworks>netstandard1.5;netstandard2.0</TargetFrameworks>
-    <Version>2.8.0</Version>
+    <Version>2.8.1</Version>
     <Title>Joonasw.AspNetCore.SecurityHeaders</Title>
     <Authors>Joonas Westlin</Authors>
     <Description>Middleware for adding security headers to an ASP.NET Core application. Allows you to easily add Content Security Policy, Strict Transport Security, and Public Key Pins to an app.</Description>
@@ -9,12 +9,19 @@
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <PackageLicenseUrl>https://github.com/juunas11/aspnetcore-security-headers/blob/master/LICENSE.txt</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/juunas11/aspnetcore-security-headers</PackageProjectUrl>
-    <PackageReleaseNotes>Adds support for manifest-src in CSP.</PackageReleaseNotes>
+    <PackageReleaseNotes>Enabled Source Link support.</PackageReleaseNotes>
     <PackageTags>aspnetcore security headers hsts hpkp csp</PackageTags>
     <RepositoryUrl>https://github.com/juunas11/aspnetcore-security-headers</RepositoryUrl>
+    <!-- Source Link support -->
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <!-- /Source Link support-->
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="System.ValueTuple" Version="4.4.0" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-beta2-18618-05" PrivateAssets="All" />
   </ItemGroup>
   <ItemGroup Condition="$(TargetFramework) == 'netstandard1.5'">
     <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="1.0.0" />
