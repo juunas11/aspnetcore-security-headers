@@ -8,6 +8,7 @@ using Joonasw.AspNetCore.SecurityHeaders.Hpkp;
 using Joonasw.AspNetCore.SecurityHeaders.Hpkp.Builder;
 using Joonasw.AspNetCore.SecurityHeaders.Hsts;
 using Joonasw.AspNetCore.SecurityHeaders.ReferrerPolicy;
+using Joonasw.AspNetCore.SecurityHeaders.ReportTo;
 using Joonasw.AspNetCore.SecurityHeaders.XContentTypeOptions;
 using Joonasw.AspNetCore.SecurityHeaders.XFrameOptions;
 using Joonasw.AspNetCore.SecurityHeaders.XXssProtection;
@@ -101,6 +102,13 @@ namespace Joonasw.AspNetCore.SecurityHeaders
         public static IApplicationBuilder UseHpkp(this IApplicationBuilder app)
         {
             return app.UseMiddleware<HpkpMiddleware>();
+        }
+
+        public static IApplicationBuilder UseReportTo(
+            this IApplicationBuilder app,
+            ReportToOptions options)
+        {
+            return app.UseMiddleware<ReportToMiddleware>(new OptionsWrapper<ReportToOptions>(options));
         }
 
         /// <summary>
