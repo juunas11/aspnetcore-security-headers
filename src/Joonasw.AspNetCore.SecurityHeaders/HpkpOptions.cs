@@ -11,6 +11,7 @@ namespace Joonasw.AspNetCore.SecurityHeaders
         public bool IncludeSubDomains { get; set; }
         public bool ReportOnly { get; set; }
         public string ReportUri { get; set; }
+        public string ReportTo { get; set; }
 
         public string HeaderName => ReportOnly ? ReportOnlyHeaderName : BlockingHeaderName;
 
@@ -30,6 +31,11 @@ namespace Joonasw.AspNetCore.SecurityHeaders
                 if (ReportUri != null)
                 {
                     value += "; report-uri=\"" + ReportUri + "\"";
+                }
+
+                if (!string.IsNullOrWhiteSpace(ReportTo))
+                {
+                    value += "; report-to=" + ReportTo;
                 }
 
                 return value;
