@@ -21,13 +21,19 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Tests
             };
             var options = new ReportToOptions()
             {
-                GroupMemeberName = "a",
-                MaxAgeSeconds = 60,
-                Endpoints = new List<ReportToOptions.Endpoint>()
+                Groups = new[]
                 {
-                    new ReportToOptions.Endpoint() { Url = "a" },
-                }
+                    new ReportToOptions.Group {
+                        GroupName = "a",
+                        MaxAgeSeconds = 60,
+                        Endpoints = new []
+                        {
+                            new ReportToOptions.Group.Endpoint() { Url = "a" },
+                        }
+                    },
+                },
             };
+            
             var sut = new ReportToMiddleware(mockNext, Options.Create(options));
             var mockContext = new DefaultHttpContext();
 

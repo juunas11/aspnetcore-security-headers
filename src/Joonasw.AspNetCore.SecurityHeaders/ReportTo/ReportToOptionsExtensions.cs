@@ -12,37 +12,50 @@ namespace Joonasw.AspNetCore.SecurityHeaders.ReportTo
                 throw new ArgumentNullException(nameof(options));
             }
 
-            if (options.MaxAgeSeconds <= 0)
+            if (options.Groups == null || options.Groups.Count <= 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(options.MaxAgeSeconds), "ReportTo max age must be positive");
+                throw new ArgumentOutOfRangeException(nameof(options.Groups), "ReportToOptions must have at least one group");
             }
 
-            if (options.Endpoints == null || options.Endpoints.Count <= 0)
+            var values = new string[0];
+            for (var i = 0; i < options.Groups.Count; i++)
             {
-                throw new ArgumentNullException(nameof(options.Endpoints), "At least one endpoint required");
+                var group = options.Groups[i];
+
+                if (group.MaxAgeSeconds <= 0)
+                {
+                    throw new ArgumentOutOfRangeException(nameof(group.MaxAgeSeconds), "ReportTo max age must be positive");
+                }
+
+                if (group.Endpoints == null || group.Endpoints.Count <= 0)
+                {
+                    throw new ArgumentNullException(nameof(group.Endpoints), "At least one endpoint required");
+                }
+
+                for (var j = 0; j < group.Endpoints.Count; j++)
+                {
+                    var e = group.Endpoints[j];
+
+                    if (string.IsNullOrWhiteSpace(e.Url))
+                    {
+                        throw new ArgumentException($"{nameof(group.Endpoints)}[{j}].Url", "Url for endpoint required");
+                    }
+
+                    if (e.Priority.HasValue && e.Priority <= 0)
+                    {
+                        throw new ArgumentException($"{nameof(group.Endpoints)}[{j}].Priority", "Priority must be positive if present");
+                    }
+
+                    if (e.Weight.HasValue && e.Weight <= 0)
+                    {
+                        throw new ArgumentException($"{nameof(group.Endpoints)}[{j}].Weight", "Weight must be positive if present");
+                    }
+                }
+
+                values[i] = JsonConvert.SerializeObject(group);
             }
 
-            for (var i = 0; i < options.Endpoints.Count; i++)
-            {
-                var e = options.Endpoints[i];
-
-                if (string.IsNullOrWhiteSpace(e.Url))
-                {
-                    throw new ArgumentException($"{nameof(options.Endpoints)}[{i}].Url", "Url for endpoint required");
-                }
-
-                if (e.Priority.HasValue && e.Priority <= 0)
-                {
-                    throw new ArgumentException($"{nameof(options.Endpoints)}[{i}].Priority", "Priority must be positive if present");
-                }
-
-                if (e.Weight.HasValue && e.Weight <= 0)
-                {
-                    throw new ArgumentException($"{nameof(options.Endpoints)}[{i}].Weight", "Weight must be positive if present");
-                }
-            }
-
-            return JsonConvert.SerializeObject(options);
+            return string.Join(",\r\n", values);
         }
     }
 }
