@@ -41,5 +41,46 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Tests
 
             Assert.True(reportToHeaderExists);
         }
+
+        [Fact]
+        public async Task ReportToHeaderSupportsMultiple()
+        {
+            bool reportToHeaderExists = false;
+            RequestDelegate mockNext = (HttpContext ctx) =>
+            {
+                var header = ctx.Response.Headers["Report-To"];
+                reportToHeaderExists = !string.IsNullOrEmpty(header);
+                return Task.CompletedTask;
+            };
+            var options = new ReportToOptions()
+            {
+                Groups = new[]
+                {
+                    new ReportToOptions.Group {
+                        GroupName = "a",
+                        MaxAgeSeconds = 60,
+                        Endpoints = new []
+                        {
+                            new ReportToOptions.Group.Endpoint() { Url = "a" },
+                        }
+                    },
+                    new ReportToOptions.Group {
+                        GroupName = "b",
+                        MaxAgeSeconds = 60,
+                        Endpoints = new []
+                        {
+                            new ReportToOptions.Group.Endpoint() { Url = "b" },
+                        }
+                    },
+                },
+            };
+
+            var sut = new ReportToMiddleware(mockNext, Options.Create(options));
+            var mockContext = new DefaultHttpContext();
+
+            await sut.Invoke(mockContext);
+
+            Assert.True(reportToHeaderExists);
+        }
     }
 }

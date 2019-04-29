@@ -17,7 +17,7 @@ namespace Joonasw.AspNetCore.SecurityHeaders.ReportTo
                 throw new ArgumentOutOfRangeException(nameof(options.Groups), "ReportToOptions must have at least one group");
             }
 
-            var values = new string[0];
+            var values = new string[options.Groups.Count];
             for (var i = 0; i < options.Groups.Count; i++)
             {
                 var group = options.Groups[i];
