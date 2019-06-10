@@ -60,14 +60,6 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Samples
             app.UseStaticFiles();
 
             app.UseCsp();
-
-			app.UseCsp(csp =>
-			{
-				csp.RequireSriFor
-					.ForScripts();
-			}
-				);
-
             // Manual configuration
             //app.UseCsp(csp =>
             //{
