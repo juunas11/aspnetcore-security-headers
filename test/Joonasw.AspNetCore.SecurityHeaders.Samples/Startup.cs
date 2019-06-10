@@ -61,6 +61,13 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Samples
 
             app.UseCsp();
 
+			app.UseCsp(csp =>
+			{
+				csp.RequireSriFor
+					.ForScripts();
+			}
+				);
+
             // Manual configuration
             //app.UseCsp(csp =>
             //{

@@ -64,13 +64,18 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Tests
                     {
                         "userscripts.example.com"
                     }
+                },
+                RequireSriFor = new CspRequireSriForOptions()
+                {
+                    Script = true,
+                    Style = true
                 }
             };
 
             var (headerName, headerValue) = options.ToString(null);
 
             Assert.Equal("Content-Security-Policy", headerName);
-            Assert.Equal("default-src 'self';script-src userscripts.example.com;img-src *;media-src media1.com media2.com", headerValue);
+            Assert.Equal("default-src 'self';script-src userscripts.example.com;img-src *;media-src media1.com media2.com;require-sri-for script style", headerValue);
         }
 
         [Fact]
