@@ -108,7 +108,7 @@ namespace Joonasw.AspNetCore.SecurityHeaders
         /// <summary>
         /// Options for controlling what subresource integrity attributes should be required on
         /// </summary>
-        public CspRequireSriForOptions RequireSriFor { get; set; }
+        public CspRequireSriOptions RequireSri { get; set; }
 
         /// <summary>
         /// The URL where violation reports should be sent.
@@ -160,7 +160,7 @@ namespace Joonasw.AspNetCore.SecurityHeaders
             FrameAncestors = new CspFrameAncestorsOptions();
             PluginTypes = new CspPluginTypesOptions();
             Sandbox = new CspSandboxOptions();
-            RequireSriFor = new CspRequireSriForOptions();
+            RequireSri = new CspRequireSriOptions();
             Frame = new CspFrameSrcOptions();
             Worker = new CspWorkerSrcOptions();
             Prefetch = new CspPrefetchSrcOptions();
@@ -200,7 +200,7 @@ namespace Joonasw.AspNetCore.SecurityHeaders
                 Worker.ToString(nonceService),
                 Prefetch.ToString(nonceService),
                 BaseUri.ToString(nonceService),
-                RequireSriFor.ToString()
+                RequireSri.ToString()
             };
             if (BlockAllMixedContent)
             {

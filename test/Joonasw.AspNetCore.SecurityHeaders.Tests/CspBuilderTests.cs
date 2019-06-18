@@ -121,7 +121,7 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Tests
         {
             var builder = new CspBuilder();
 
-            builder.RequireSriFor.ForScripts();
+            builder.RequireSri.ForScripts();
 
             var headerValue = builder.BuildCspOptions().ToString(null).headerValue;
 

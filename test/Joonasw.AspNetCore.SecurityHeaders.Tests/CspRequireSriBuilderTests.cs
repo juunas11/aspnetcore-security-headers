@@ -3,12 +3,12 @@ using Xunit;
 
 namespace Joonasw.AspNetCore.SecurityHeaders.Tests
 {
-    public class CspRequireSriForBuilderTests
+    public class CspRequireSriBuilderTests
     {
         [Fact]
         public void NoOptions_DoesNotGenerateHeader()
         {
-            var builder = new CspRequireSriForBuilder();
+            var builder = new CspRequireSriBuilder();
 
             var options = builder.BuildOptions();
 
@@ -18,7 +18,7 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Tests
         [Fact]
         public void RequireScript_GeneratesHeader()
         {
-            var builder = new CspRequireSriForBuilder();
+            var builder = new CspRequireSriBuilder();
             builder.ForScripts();
 
             var options = builder.BuildOptions();
@@ -29,7 +29,7 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Tests
         [Fact]
         public void RequireStyle_GeneratesHeader()
         {
-            var builder = new CspRequireSriForBuilder();
+            var builder = new CspRequireSriBuilder();
             builder.ForStyles();
 
             var options = builder.BuildOptions();
@@ -40,7 +40,7 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Tests
         [Fact]
         public void RequireScriptAndStyle_GeneratesHeader()
         {
-            var builder = new CspRequireSriForBuilder();
+            var builder = new CspRequireSriBuilder();
             builder.ForScripts();
             builder.ForStyles();
 

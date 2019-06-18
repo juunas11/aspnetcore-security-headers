@@ -1,30 +1,30 @@
 ﻿using System.Collections.Generic;
 
 namespace Joonasw.AspNetCore.SecurityHeaders.Csp.Options {
-    public class CspRequireSriForOptions {
+    public class CspRequireSriOptions {
         /// <summary>
         /// If <c>true</c> subresource integrity attributes will be required for scripts loaded from this page
         /// </summary>
-        public bool Script { get; set; }
+        public bool ForScripts { get; set; }
 
         /// <summary>
         /// If <c>true</c> subresource integrity attributes will be required for stylesheets loaded from this page
         /// </summary>
-        public bool Style { get; set; }
+        public bool ForStyles { get; set; }
 
         /// <inheritdoc />
         public override string ToString() {
-            if ((Script == false) && (Style == false))
+            if ((ForScripts == false) && (ForStyles == false))
             {
                 return string.Empty;
             }
 
             List<string> requiredOn = new List<string>(2);
-            if (Script == true)
+            if (ForScripts == true)
             {
                 requiredOn.Add("script");
             }
-            if (Style == true)
+            if (ForStyles == true)
             {
                 requiredOn.Add("style");
             }

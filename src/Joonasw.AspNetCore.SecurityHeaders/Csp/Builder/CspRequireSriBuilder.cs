@@ -1,28 +1,28 @@
 ﻿using Joonasw.AspNetCore.SecurityHeaders.Csp.Options;
 
 namespace Joonasw.AspNetCore.SecurityHeaders.Csp.Builder {
-	public class CspRequireSriForBuilder {
-		private readonly CspRequireSriForOptions _options = new CspRequireSriForOptions();
+	public class CspRequireSriBuilder {
+		private readonly CspRequireSriOptions _options = new CspRequireSriOptions();
 
 		/// <summary>
 		/// Require subresource integrity attributes for scripts loaded on this page
 		/// </summary>
-		public CspRequireSriForBuilder ForScripts()
+		public CspRequireSriBuilder ForScripts()
 		{
-			_options.Script = true;
+			_options.ForScripts = true;
 			return this;
 		}
 
 		/// <summary>
 		/// Require subresource integrity attributes for styles loaded on this page
 		/// </summary>
-		public CspRequireSriForBuilder ForStyles()
+		public CspRequireSriBuilder ForStyles()
 		{
-			_options.Style = true;
+			_options.ForStyles = true;
 			return this;
 		}
 
-		public CspRequireSriForOptions BuildOptions()
+		public CspRequireSriOptions BuildOptions()
 		{
 			return _options;
 		}

@@ -65,10 +65,10 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Tests
                         "userscripts.example.com"
                     }
                 },
-                RequireSriFor = new CspRequireSriForOptions()
+                RequireSri = new CspRequireSriOptions()
                 {
-                    Script = true,
-                    Style = true
+                    ForScripts = true,
+                    ForStyles = true
                 }
             };
 
