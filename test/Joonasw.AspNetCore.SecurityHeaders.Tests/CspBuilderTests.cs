@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Threading.Tasks;
 using Joonasw.AspNetCore.SecurityHeaders.Csp;
 using Joonasw.AspNetCore.SecurityHeaders.Csp.Builder;
@@ -114,6 +114,18 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Tests
             var headerValue = builder.BuildCspOptions().ToString(null).headerValue;
 
             Assert.Equal("manifest-src https://www.google.com", headerValue);
+        }
+
+        [Fact]
+        public void RequireSriFor_ReturnsCorrectHeader()
+        {
+            var builder = new CspBuilder();
+
+            builder.RequireSri.ForScripts();
+
+            var headerValue = builder.BuildCspOptions().ToString(null).headerValue;
+
+            Assert.Equal("require-sri-for script", headerValue);
         }
 
         [Fact]

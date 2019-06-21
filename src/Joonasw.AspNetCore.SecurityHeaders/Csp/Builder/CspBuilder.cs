@@ -77,6 +77,11 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Csp.Builder
         /// </summary>
         public CspBaseUriBuilder AllowBaseUri { get; } = new CspBaseUriBuilder();
 
+        /// <summary>
+        /// Setups up rules for controlling when subresource integrity must be used
+        /// </summary>
+        public CspRequireSriBuilder RequireSri { get; } = new CspRequireSriBuilder();
+
         public Func<CspSendingHeaderContext, Task> OnSendingHeader { get; set; } = context => Task.CompletedTask;
 
         /// <summary>
@@ -144,6 +149,7 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Csp.Builder
             _options.Worker = AllowWorkers.BuildOptions();
             _options.Prefetch = AllowPrefetch.BuildOptions();
             _options.BaseUri = AllowBaseUri.BuildOptions();
+            _options.RequireSri = RequireSri.BuildOptions();
             _options.OnSendingHeader = OnSendingHeader;
             return _options;
         }

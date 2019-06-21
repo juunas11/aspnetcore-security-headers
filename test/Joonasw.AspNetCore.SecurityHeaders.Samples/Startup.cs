@@ -60,7 +60,6 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Samples
             app.UseStaticFiles();
 
             app.UseCsp();
-
             // Manual configuration
             //app.UseCsp(csp =>
             //{
