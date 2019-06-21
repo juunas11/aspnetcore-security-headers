@@ -103,6 +103,10 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Samples
             //    csp.AllowFraming
             //        .FromNowhere();
 
+            //    csp.RequireSri
+            //        .ForScripts()
+            //        .ForStyles(); // Require subresource integrity for scripts and stylesheets
+
             //    csp.SetReportOnly();
             //    csp.ReportViolationsTo("/csp-report");
             //    csp.SetUpgradeInsecureRequests(); //Upgrade HTTP URIs to HTTPS

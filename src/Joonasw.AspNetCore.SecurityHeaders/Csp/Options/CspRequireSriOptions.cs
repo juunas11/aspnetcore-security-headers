@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 
-namespace Joonasw.AspNetCore.SecurityHeaders.Csp.Options {
-    public class CspRequireSriOptions {
+namespace Joonasw.AspNetCore.SecurityHeaders.Csp.Options
+{
+    public class CspRequireSriOptions
+    {
         /// <summary>
         /// If <c>true</c> subresource integrity attributes will be required for scripts loaded from this page
         /// </summary>
@@ -13,18 +15,20 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Csp.Options {
         public bool ForStyles { get; set; }
 
         /// <inheritdoc />
-        public override string ToString() {
-            if ((ForScripts == false) && (ForStyles == false))
+        public override string ToString()
+        {
+            if (!ForScripts && !ForStyles)
             {
                 return string.Empty;
             }
 
-            List<string> requiredOn = new List<string>(2);
-            if (ForScripts == true)
+            var requiredOn = new List<string>(2);
+            if (ForScripts)
             {
                 requiredOn.Add("script");
             }
-            if (ForStyles == true)
+
+            if (ForStyles)
             {
                 requiredOn.Add("style");
             }

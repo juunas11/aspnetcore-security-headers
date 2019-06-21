@@ -1,7 +1,9 @@
 ﻿using Joonasw.AspNetCore.SecurityHeaders.Csp.Options;
 
-namespace Joonasw.AspNetCore.SecurityHeaders.Csp.Builder {
-	public class CspRequireSriBuilder {
+namespace Joonasw.AspNetCore.SecurityHeaders.Csp.Builder
+{
+	public class CspRequireSriBuilder
+    {
 		private readonly CspRequireSriOptions _options = new CspRequireSriOptions();
 
 		/// <summary>
