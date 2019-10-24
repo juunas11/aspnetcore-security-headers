@@ -1,18 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TargetFramework>netcoreapp3.0</TargetFramework>
     <UserSecretsId>33ce3d09-4099-4a8e-93af-049b12b6eb90</UserSecretsId>
   </PropertyGroup>
-  <ItemGroup>
-    <None Remove="Properties\PublishProfiles\secheadertest - FTP.pubxml" />
-    <None Remove="Properties\PublishProfiles\secheadertest - Web Deploy.pubxml" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.App" />
-  </ItemGroup>
-  <ItemGroup>
-    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.4" />
-  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\Joonasw.AspNetCore.SecurityHeaders\Joonasw.AspNetCore.SecurityHeaders.csproj" />
   </ItemGroup>

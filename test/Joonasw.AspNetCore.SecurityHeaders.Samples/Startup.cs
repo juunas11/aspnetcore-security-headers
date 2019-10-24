@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 
 namespace Joonasw.AspNetCore.SecurityHeaders.Samples
@@ -15,7 +16,7 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Samples
             Configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
+        private IConfiguration Configuration { get; }
 
         public void ConfigureServices(IServiceCollection services)
         {
@@ -26,13 +27,13 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Samples
             services.Configure<FeaturePolicyOptions>(Configuration.GetSection("FeaturePolicy"));
 
             // Add framework services.
-            services.AddMvc();
+            services.AddControllersWithViews();
 
             // Add CSP nonce support
             services.AddCsp(nonceByteAmount: 32);
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
         {
             if (env.IsDevelopment())
             {
@@ -190,21 +191,22 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Samples
             //        .FromNowhere();
             //});
 
-            app.UseMvc(routes =>
+            app.UseRouting();
+            app.UseEndpoints(routes =>
             {
-                routes.MapRoute(
+                routes.MapControllerRoute(
                     name: "csp-report",
-                    template: "csp-report",
+                    pattern: "csp-report",
                     defaults: new { controller = "Report", action = "Csp" });
 
-                routes.MapRoute(
+                routes.MapControllerRoute(
                     name: "hpkp-report",
-                    template: "hpkp-report",
+                    pattern: "hpkp-report",
                     defaults: new { controller = "Report", action = "Hpkp" });
 
-                routes.MapRoute(
+                routes.MapControllerRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }
