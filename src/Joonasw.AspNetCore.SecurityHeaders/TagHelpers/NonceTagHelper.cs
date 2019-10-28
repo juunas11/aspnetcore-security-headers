@@ -26,7 +26,11 @@ namespace Joonasw.AspNetCore.SecurityHeaders.TagHelpers
             {
                 // The nonce service is created per request, so we
                 // get the same nonce here as the CSP header
-                output.Attributes.Add("nonce", _nonceService.GetNonce());
+                // when doing this, the nonce wasn't reliably being injected (that might have been due to the nonce have non url friendly chars). 
+                //output.Attributes.Add("nonce", _nonceService.GetNonce());
+                // this injected the nonce all the time.
+                var attribute = new TagHelperAttribute("nonce", _nonceService.GetNonce(), HtmlAttributeValueStyle.DoubleQuotes);
+                output.Attributes.SetAttribute(attribute);
             }
         }
     }
