@@ -14,6 +14,9 @@ namespace Joonasw.AspNetCore.SecurityHeaders
 
         internal void Validate()
         {
+            if (!Endpoints.Any())
+                throw new InvalidOperationException("No endpoints specified on UseReportingEndpoints");
+
             if (Endpoints.Values.Any(x => !x.StartsWith("https://")))
                 throw new InvalidOperationException("The endpoint URL must start with https://");
         }

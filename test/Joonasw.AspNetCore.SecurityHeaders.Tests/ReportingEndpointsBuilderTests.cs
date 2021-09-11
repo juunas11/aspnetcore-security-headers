@@ -53,6 +53,19 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Tests
         }
 
         [Fact]
+        public void ReportingEndpointsOptions_ShouldThrowException_WhenNoEndpointSpecified()
+        {
+            var options = new ReportingEndpointsOptions
+            {
+                Endpoints = new Dictionary<string, string>()
+            };
+
+            var builder = new ReportingEndpointsBuilder();
+
+            Assert.Throws<InvalidOperationException>(() => options.Validate());
+        }
+
+        [Fact]
         public void ReportingEndpointsOptions_ShouldThrowException_WhenAnUrlIsNotSecure()
         {
             var options = new ReportingEndpointsOptions
