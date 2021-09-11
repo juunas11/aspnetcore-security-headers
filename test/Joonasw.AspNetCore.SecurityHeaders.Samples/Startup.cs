@@ -110,6 +110,7 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Samples
 
             //    csp.SetReportOnly();
             //    csp.ReportViolationsTo("/csp-report");
+            //    csp.ReportViolationsToGroup("csp-report"); // Require UseReportingEndpoints with same group name
             //    csp.SetUpgradeInsecureRequests(); //Upgrade HTTP URIs to HTTPS
 
             //    csp.OnSendingHeader = context =>
@@ -190,6 +191,12 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Samples
             //    fp.AllowOtherFeature("some-new-one")
             //        .FromNowhere();
             //});
+
+            app.UseReportingEndpoints(builder =>
+            {
+                builder.AddEndpoint("csp-report", "https://example.com/csp-report")
+                       .AddEndpoint("hpkp-report", "https://example.com/hpkp-report");
+            });
 
             app.UseRouting();
             app.UseEndpoints(routes =>

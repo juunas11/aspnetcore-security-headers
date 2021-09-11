@@ -145,5 +145,28 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Tests
 
             Assert.True(sendingHeaderContext.ShouldNotSend);
         }
+
+        [Theory]
+        [InlineData("csp-endpoint")]
+        [InlineData("test-endpoint")]
+        public void ReportViolationsToGroup_SetCorrectly(string groupName)
+        {
+            var builder = new CspBuilder();
+
+            builder.ReportViolationsToGroup(groupName);
+            var options = builder.BuildCspOptions();
+
+            Assert.Equal(groupName, options.ReportTo);
+            Assert.Equal($"report-to {groupName}", options.ToString(null).headerValue);
+        }
+
+        [Fact]
+        public void ReportViolationsToGroup_ThrowsArgumentNullException_WhenIsMissingValue()
+        {
+            var builder = new CspBuilder();
+
+            Assert.Throws<ArgumentNullException>("groupName", () => builder.ReportViolationsToGroup(null));
+            Assert.Throws<ArgumentNullException>("groupName", () => builder.ReportViolationsToGroup(string.Empty));
+        }
     }
 }
