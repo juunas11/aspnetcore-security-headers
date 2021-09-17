@@ -38,7 +38,7 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Tests
             builder.FromSelf();
             CspWorkerSrcOptions options = builder.BuildOptions();
 
-            Assert.Equal("worker-src 'self'", options.ToString(null));
+            Assert.Equal("worker-src 'self'", options.ToString(null,null));
         }
 
         [Fact]

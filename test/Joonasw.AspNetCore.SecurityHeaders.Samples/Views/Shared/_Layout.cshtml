@@ -13,13 +13,13 @@
     <environment names="Staging,Production">
         <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.6/css/bootstrap.min.css" />
         <meta name="x-stylesheet-fallback-test" content="" class="sr-only" />
-        <script asp-add-nonce="true">!function (a, b, c) { var d, e = document, f = e.getElementsByTagName("SCRIPT"), g = f[f.length - 1].previousElementSibling, h = e.defaultView && e.defaultView.getComputedStyle ? e.defaultView.getComputedStyle(g) : g.currentStyle; if (h && h[a] !== b) for (d = 0; d < c.length; d++)e.write('<link rel="stylesheet" href="' + c[d] + '"/>') } ("position", "absolute", ["\/lib\/bootstrap\/dist\/css\/bootstrap.min.css"]);</script>
+        <script asp-add-nonce="true" asp-add-sha256="true">!function (a, b, c) { var d, e = document, f = e.getElementsByTagName("SCRIPT"), g = f[f.length - 1].previousElementSibling, h = e.defaultView && e.defaultView.getComputedStyle ? e.defaultView.getComputedStyle(g) : g.currentStyle; if (h && h[a] !== b) for (d = 0; d < c.length; d++)e.write('<link rel="stylesheet" href="' + c[d] + '"/>') } ("position", "absolute", ["\/lib\/bootstrap\/dist\/css\/bootstrap.min.css"]);</script>
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
     </environment>
-    <script asp-add-nonce="true">
+    <script asp-add-nonce="true" asp-add-sha256="true">
         console.log("Test");
     </script>
-    <style asp-add-nonce="true">
+    <style asp-add-nonce="true" asp-add-sha256="true">
         h2 {
             font-size: 40px;
         }
@@ -62,10 +62,10 @@
     <environment names="Staging,Production">
         <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js">
         </script>
-        <script asp-add-nonce="true">(window.jQuery || document.write("\u003Cscript src=\u0022\/lib\/jquery\/dist\/jquery.min.js\u0022\u003E\u003C\/script\u003E"));</script>
+        <script asp-add-nonce="true" asp-add-sha256="true">(window.jQuery || document.write("\u003Cscript src=\u0022\/lib\/jquery\/dist\/jquery.min.js\u0022\u003E\u003C\/script\u003E"));</script>
         <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.6/bootstrap.min.js">
         </script>
-        <script asp-add-nonce="true">(window.jQuery && window.jQuery.fn && window.jQuery.fn.modal || document.write("\u003Cscript src=\u0022\/lib\/bootstrap\/dist\/js\/bootstrap.min.js\u0022\u003E\u003C\/script\u003E"));</script>
+        <script asp-add-nonce="true" asp-add-sha256="true">(window.jQuery && window.jQuery.fn && window.jQuery.fn.modal || document.write("\u003Cscript src=\u0022\/lib\/bootstrap\/dist\/js\/bootstrap.min.js\u0022\u003E\u003C\/script\u003E"));</script>
         <script src="~/js/site.min.js" asp-append-version="true"></script>
     </environment>
 

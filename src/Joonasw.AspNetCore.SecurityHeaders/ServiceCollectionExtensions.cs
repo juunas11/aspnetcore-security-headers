@@ -15,7 +15,9 @@ namespace Joonasw.AspNetCore.SecurityHeaders
         /// <returns>The <see cref="IServiceCollection"/></returns>
         public static IServiceCollection AddCsp(this IServiceCollection services, int nonceByteAmount = 32)
         {
-            return services.AddScoped<ICspNonceService>(svcProvider => new CspNonceService(nonceByteAmount));
+            return services
+                .AddScoped<ICspNonceService>(svcProvider => new CspNonceService(nonceByteAmount))
+                .AddScoped<ICspSha256Service>(svcProvider => new CspSha256Service());
         }
     }
 }

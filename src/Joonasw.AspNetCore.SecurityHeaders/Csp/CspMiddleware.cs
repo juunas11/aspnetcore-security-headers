@@ -25,7 +25,7 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Csp
             _next = next;
             _options = options.Value;
             // If a nonce is needed to be generated, we can't cache the header value
-            if (_options.IsNonceNeeded)
+            if (_options.IsNonceNeeded || _options.IsSha256Needed)
             {
                 _headerName = null;
                 _headerValue = null;
@@ -33,7 +33,7 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Csp
             else
             {
                 //If nonces are not needed, we can cache them immediately
-                var (headerName, headerValue) = _options.ToString(null);
+                var (headerName, headerValue) = _options.ToString(null,null);
                 _headerName = headerName;
                 _headerValue = headerValue;
             }
@@ -41,9 +41,18 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Csp
 
         public async Task Invoke(HttpContext context)
         {
+            if (_options.IsSha256Needed)
+                context.Response.OnStarting(() => OrigInvoke(context));
+            else
+                await OrigInvoke(context);
+            await _next.Invoke(context);
+
+        }
+        public async Task OrigInvoke(HttpContext context)
+        {
             // Check if a CSP header has already been added to the response
             // This can happen for example if a middleware re-executes the pipeline
-            if (!ContainsCspHeader(context.Response))
+                if (!ContainsCspHeader(context.Response))
             {
                 var sendingHeaderContext = new CspSendingHeaderContext(context);
                 //Call the per-request check if CSP should be sent
@@ -53,10 +62,15 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Csp
                 {
                     string headerName;
                     string headerValue;
-                    if (_options.IsNonceNeeded)
+                    if (_options.IsSha256Needed)
+                    {
+                        var shaService = (ICspSha256Service)context.RequestServices.GetService(typeof(ICspSha256Service));
+                        (headerName, headerValue) = _options.ToString(null, shaService);
+                    }
+                    else if (_options.IsNonceNeeded)
                     {
                         var nonceService = (ICspNonceService)context.RequestServices.GetService(typeof(ICspNonceService));
-                        (headerName, headerValue) = _options.ToString(nonceService);
+                        (headerName, headerValue) = _options.ToString(nonceService,null);
                     }
                     else
                     {
@@ -67,7 +81,6 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Csp
                 }
             }
 
-            await _next.Invoke(context);
         }
 
         private bool ContainsCspHeader(HttpResponse response)

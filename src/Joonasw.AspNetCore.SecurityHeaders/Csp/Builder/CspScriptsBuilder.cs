@@ -81,6 +81,11 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Csp.Builder
             _options.AddNonce = true;
             return this;
         }
+        public CspScriptsBuilder AddSha256()
+        {
+            _options.AddSha256 = true;
+            return this;
+        }
 
         /// <summary>
         /// Allow JavaScript from anywhere, except

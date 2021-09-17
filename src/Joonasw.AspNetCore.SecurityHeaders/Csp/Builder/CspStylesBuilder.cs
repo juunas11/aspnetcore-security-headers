@@ -80,6 +80,11 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Csp.Builder
             _options.AddNonce = true;
             return this;
         }
+        public CspStylesBuilder AddSha256()
+        {
+            _options.AddSha256 = true;
+            return this;
+        }
 
         /// <summary>
         /// Allow CSS only over secure connections.
