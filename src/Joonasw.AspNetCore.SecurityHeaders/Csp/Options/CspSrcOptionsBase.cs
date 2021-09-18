@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace Joonasw.AspNetCore.SecurityHeaders.Csp.Options
 {
@@ -71,10 +72,49 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Csp.Options
             }
             return parts;
         }
-
-        public string ToString(ICspNonceService nonceService)
+        protected virtual ICollection<string> GetParts(ICspSha256Service nonceService)
         {
-            ICollection<string> parts = GetParts(nonceService);
+            ICollection<string> parts = new List<string>();
+
+            if (AllowNone)
+            {
+                parts.Add("'none'");
+            }
+            else
+            {
+                if (AllowAny)
+                {
+                    parts.Add("*");
+                }
+                if (AllowSelf)
+                {
+                    parts.Add("'self'");
+                }
+                if (AllowOnlyHttps)
+                {
+                    parts.Add("https:");
+                }
+                if (AllowDataScheme)
+                {
+                    parts.Add("data:");
+                }
+
+                foreach (string allowedSource in AllowedSources)
+                {
+                    parts.Add(allowedSource);
+                }
+            }
+            return parts;
+        }
+        public string ToString(ICspNonceService nonceService,ICspSha256Service shaService)
+        {
+            ICollection<string> parts;
+            if (shaService != null)
+                parts = GetParts(shaService);
+            else if (nonceService != null)
+                parts = GetParts(nonceService);
+            else
+                parts = GetParts(nonceService);
 
             if (parts.Count == 0)
             {

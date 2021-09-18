@@ -87,7 +87,7 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Tests
             builder.AllowFrames.From("https://www.google.com");
             builder.AllowWorkers.FromSelf().OnlyOverHttps();
 
-            var headerValue = builder.BuildCspOptions().ToString(null).headerValue;
+            var headerValue = builder.BuildCspOptions().ToString(null,null).headerValue;
 
             Assert.Equal("frame-src https://www.google.com;worker-src 'self' https:", headerValue);
         }
@@ -111,7 +111,7 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Tests
 
             builder.AllowManifest.From("https://www.google.com");
 
-            var headerValue = builder.BuildCspOptions().ToString(null).headerValue;
+            var headerValue = builder.BuildCspOptions().ToString(null,null).headerValue;
 
             Assert.Equal("manifest-src https://www.google.com", headerValue);
         }
@@ -123,7 +123,7 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Tests
 
             builder.RequireSri.ForScripts();
 
-            var headerValue = builder.BuildCspOptions().ToString(null).headerValue;
+            var headerValue = builder.BuildCspOptions().ToString(null,null).headerValue;
 
             Assert.Equal("require-sri-for script", headerValue);
         }

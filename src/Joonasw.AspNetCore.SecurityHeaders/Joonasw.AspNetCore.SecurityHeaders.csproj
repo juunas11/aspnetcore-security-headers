@@ -20,11 +20,11 @@
     <!-- /Source Link support-->
   </PropertyGroup>
   <ItemGroup>
-    <None Include="..\..\LICENSE.txt" Pack="true" PackagePath="LICENSE.txt"/>
+    <None Include="..\..\LICENSE.txt" Pack="true" PackagePath="LICENSE.txt" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="System.ValueTuple" Version="4.4.0" />
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-beta2-18618-05" PrivateAssets="All" />
+    <PackageReference Include="System.ValueTuple" Version="4.5.0" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
   </ItemGroup>
   <ItemGroup Condition="$(TargetFramework) == 'netstandard1.5'">
     <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="1.0.0" />

@@ -116,6 +116,7 @@ namespace Joonasw.AspNetCore.SecurityHeaders
         public string ReportUri { get; set; }
 
         public bool IsNonceNeeded => Script.AddNonce || Style.AddNonce;
+        public bool IsSha256Needed => Script.AddSha256 || Style.AddSha256;
 
         /// <summary>
         /// If true, the upgrade-insecure-requests directive
@@ -168,7 +169,7 @@ namespace Joonasw.AspNetCore.SecurityHeaders
             OnSendingHeader = context => Task.CompletedTask;
         }
 
-        public (string headerName, string headerValue) ToString(ICspNonceService nonceService)
+        public (string headerName, string headerValue) ToString(ICspNonceService nonceService=null,ICspSha256Service shaService=null)
         {
             string headerName;
             if (ReportOnly)
@@ -181,25 +182,25 @@ namespace Joonasw.AspNetCore.SecurityHeaders
             }
             var values = new List<string>
             {
-                Default.ToString(nonceService),
-                Script.ToString(nonceService),
-                Style.ToString(nonceService),
+                Default.ToString(nonceService,shaService),
+                Script.ToString(nonceService,shaService),
+                Style.ToString(nonceService,shaService),
 #pragma warning disable CS0618 // Type or member is obsolete
-                Child.ToString(nonceService),
+                Child.ToString(nonceService,shaService),
 #pragma warning restore CS0618 // Type or member is obsolete
-                Connect.ToString(nonceService),
-                Manifest.ToString(nonceService),
-                Font.ToString(nonceService),
-                FormAction.ToString(nonceService),
-                Img.ToString(nonceService),
-                Media.ToString(nonceService),
-                Object.ToString(nonceService),
+                Connect.ToString(nonceService,shaService),
+                Manifest.ToString(nonceService,shaService),
+                Font.ToString(nonceService,shaService),
+                FormAction.ToString(nonceService,shaService),
+                Img.ToString(nonceService,shaService),
+                Media.ToString(nonceService,shaService),
+                Object.ToString(nonceService,shaService),
                 FrameAncestors.ToString(),
                 PluginTypes.ToString(),
-                Frame.ToString(nonceService),
-                Worker.ToString(nonceService),
-                Prefetch.ToString(nonceService),
-                BaseUri.ToString(nonceService),
+                Frame.ToString(nonceService,shaService),
+                Worker.ToString(nonceService,shaService),
+                Prefetch.ToString(nonceService,shaService),
+                BaseUri.ToString(nonceService,shaService),
                 RequireSri.ToString()
             };
             if (BlockAllMixedContent)
@@ -223,5 +224,6 @@ namespace Joonasw.AspNetCore.SecurityHeaders
 
             return (headerName, headerValue);
         }
+
     }
 }
