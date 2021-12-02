@@ -81,6 +81,11 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Csp.Builder
         /// Setups up rules for controlling when subresource integrity must be used
         /// </summary>
         public CspRequireSriBuilder RequireSri { get; } = new CspRequireSriBuilder();
+        
+        /// <summary>
+        /// Setups up rules for controlling when to restrict the creation of Trusted Types policies
+        /// </summary>
+        public CspTrustedTypesBuilder RequireTrustedTypes { get; } = new CspTrustedTypesBuilder();
 
         public Func<CspSendingHeaderContext, Task> OnSendingHeader { get; set; } = context => Task.CompletedTask;
 
@@ -150,6 +155,7 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Csp.Builder
             _options.Prefetch = AllowPrefetch.BuildOptions();
             _options.BaseUri = AllowBaseUri.BuildOptions();
             _options.RequireSri = RequireSri.BuildOptions();
+            _options.TrustedTypes = RequireTrustedTypes.BuildOptions();
             _options.OnSendingHeader = OnSendingHeader;
             return _options;
         }

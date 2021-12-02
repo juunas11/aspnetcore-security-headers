@@ -109,6 +109,11 @@ namespace Joonasw.AspNetCore.SecurityHeaders
         /// Options for controlling what subresource integrity attributes should be required on
         /// </summary>
         public CspRequireSriOptions RequireSri { get; set; }
+        
+        /// <summary>
+        /// Options for controlling how user agents restricts the creation of Trusted Types policies
+        /// </summary>
+        public CspTrustedTypesOptions TrustedTypes { get; set; }
 
         /// <summary>
         /// The URL where violation reports should be sent.
@@ -144,6 +149,7 @@ namespace Joonasw.AspNetCore.SecurityHeaders
 
         public CspOptions()
         {
+            TrustedTypes = new CspTrustedTypesOptions();
             Script = new CspScriptSrcOptions();
             Style = new CspStyleSrcOptions();
             Default = new CspDefaultSrcOptions();
@@ -200,7 +206,8 @@ namespace Joonasw.AspNetCore.SecurityHeaders
                 Worker.ToString(nonceService),
                 Prefetch.ToString(nonceService),
                 BaseUri.ToString(nonceService),
-                RequireSri.ToString()
+                RequireSri.ToString(),
+                TrustedTypes.ToString()
             };
             if (BlockAllMixedContent)
             {

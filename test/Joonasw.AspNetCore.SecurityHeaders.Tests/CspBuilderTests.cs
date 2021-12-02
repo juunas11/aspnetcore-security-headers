@@ -127,6 +127,19 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Tests
 
             Assert.Equal("require-sri-for script", headerValue);
         }
+        
+        
+        [Fact]
+        public void RequireTrustedTypes_ReturnsCorrectHeader()
+        {
+            var builder = new CspBuilder();
+
+            builder.RequireTrustedTypes.DisallowAll();
+
+            var headerValue = builder.BuildCspOptions().ToString(null).headerValue;
+
+            Assert.Equal("trusted-types 'none'", headerValue);
+        }
 
         [Fact]
         public async Task OnSendingHeader_ShouldNotSendTest()
