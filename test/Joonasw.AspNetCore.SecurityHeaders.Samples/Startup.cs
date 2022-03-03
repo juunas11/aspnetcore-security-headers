@@ -44,9 +44,9 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Samples
             {
                 app.UseHttpsEnforcement();
 
-                app.UseHsts();
+                app.UseStrictTransportSecurity();
                 // Manual configuration
-                //app.UseHsts(new HstsOptions(TimeSpan.FromDays(30), includeSubDomains: false, preload: false));
+                //app.UseStrictTransportSecurity(new HstsOptions(TimeSpan.FromDays(30), includeSubDomains: false, preload: false));
             }
 
             app.UseStaticFiles();

@@ -10,7 +10,7 @@ You can get the library from NuGet: [https://www.nuget.org/packages/Joonasw.AspN
 // Enable Strict Transport Security with a 30-day caching period
 // Do not include subdomains
 // Do not allow preload
-app.UseHsts(new HstsOptions(TimeSpan.FromDays(30), includeSubDomains: false, preload: false));
+app.UseStrictTransportSecurity(new HstsOptions(TimeSpan.FromDays(30), includeSubDomains: false, preload: false));
 
 // Use certificate pinning with:
 // - 30-day caching period
