@@ -4,19 +4,20 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 
 namespace Joonasw.AspNetCore.SecurityHeaders.Samples
 {
     // ReSharper disable once ClassNeverInstantiated.Global
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IWebHostEnvironment environment)
         {
             Configuration = configuration;
+            Environment = environment;
         }
 
         private IConfiguration Configuration { get; }
+        private IWebHostEnvironment Environment { get; }
 
         public void ConfigureServices(IServiceCollection services)
         {
@@ -33,9 +34,9 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Samples
             services.AddCsp(nonceByteAmount: 32);
         }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app)
         {
-            if (env.IsDevelopment())
+            if (Environment.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
@@ -46,16 +47,6 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Samples
                 app.UseHsts();
                 // Manual configuration
                 //app.UseHsts(new HstsOptions(TimeSpan.FromDays(30), includeSubDomains: false, preload: false));
-
-                app.UseHpkp();
-                // Manual configuration
-                //app.UseHpkp(hpkp =>
-                //{
-                //    hpkp.UseMaxAgeSeconds(30 * 24 * 60 * 60)
-                //        .AddSha256Pin("nrmpk4ZI3wbRBmUZIT5aKAgP0LlKHRgfA2Snjzeg9iY=")
-                //        .SetReportOnly()
-                //        .ReportViolationsTo("/hpkp-report");
-                //});
             }
 
             app.UseStaticFiles();

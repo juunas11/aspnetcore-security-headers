@@ -1,41 +1,42 @@
-﻿<Project Sdk="Microsoft.NET.Sdk" ToolsVersion="15.0">
-  <PropertyGroup>
-    <TargetFrameworks>netstandard1.5;netstandard2.0</TargetFrameworks>
-    <Version>3.0.0</Version>
-    <Title>Joonasw.AspNetCore.SecurityHeaders</Title>
-    <Authors>Joonas Westlin</Authors>
-    <Description>Middleware for adding security headers to an ASP.NET Core application. Allows you to easily add Content Security Policy, Strict Transport Security, and Public Key Pins to an app.</Description>
-    <Copyright>Copyright 2019 Joonas Westlin</Copyright>
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
-    <PackageProjectUrl>https://github.com/juunas11/aspnetcore-security-headers</PackageProjectUrl>
-    <PackageReleaseNotes>Added support for require-sri-for CSP directive.</PackageReleaseNotes>
-    <PackageTags>aspnetcore security headers hsts hpkp csp</PackageTags>
-    <RepositoryUrl>https://github.com/juunas11/aspnetcore-security-headers</RepositoryUrl>
-    <!-- Source Link support -->
-    <PublishRepositoryUrl>true</PublishRepositoryUrl>
-    <EmbedUntrackedSources>true</EmbedUntrackedSources>
-    <IncludeSymbols>true</IncludeSymbols>
-    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-    <!-- /Source Link support-->
-  </PropertyGroup>
-  <ItemGroup>
-    <None Include="..\..\LICENSE.txt" Pack="true" PackagePath="LICENSE.txt"/>
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="System.ValueTuple" Version="4.4.0" />
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-beta2-18618-05" PrivateAssets="All" />
-  </ItemGroup>
-  <ItemGroup Condition="$(TargetFramework) == 'netstandard1.5'">
-    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="1.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.Razor.Runtime" Version="1.0.0" />
-    <PackageReference Include="Microsoft.Extensions.Options" Version="1.1.2" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="1.1.1" />
-  </ItemGroup>
-  <ItemGroup Condition="$(TargetFramework) == 'netstandard2.0'">
-    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.1.1" />
-    <PackageReference Include="Microsoft.AspNetCore.Razor" Version="2.1.2" />
-    <PackageReference Include="Microsoft.Extensions.Options" Version="2.1.1" />
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="2.1.1" />
-  </ItemGroup>
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <TargetFrameworks>netcoreapp3.1;net5.0;net6.0</TargetFrameworks>
+        <Version>4.0.0</Version>
+        <Title>Joonasw.AspNetCore.SecurityHeaders</Title>
+        <Authors>Joonas Westlin</Authors>
+        <Description>Middleware for adding security headers to an ASP.NET Core application. Allows you to easily add Content Security Policy, Strict Transport Security, and Public Key Pins to an app.</Description>
+        <Copyright>Copyright 2022 Joonas Westlin</Copyright>
+        <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+        <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+        <PackageProjectUrl>https://github.com/juunas11/aspnetcore-security-headers</PackageProjectUrl>
+        <PackageReleaseNotes>Updated target frameworks to .NET Core 3.1, .NET 5.0, and .NET 6.0.</PackageReleaseNotes>
+        <PackageTags>aspnetcore security headers hsts hpkp csp</PackageTags>
+        <RepositoryUrl>https://github.com/juunas11/aspnetcore-security-headers</RepositoryUrl>
+        <!-- Source Link support -->
+        <PublishRepositoryUrl>true</PublishRepositoryUrl>
+        <EmbedUntrackedSources>true</EmbedUntrackedSources>
+        <IncludeSymbols>true</IncludeSymbols>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+        <!-- /Source Link support-->
+    </PropertyGroup>
+    <ItemGroup>
+        <None Include="..\..\LICENSE.txt" Pack="true" PackagePath="LICENSE.txt"/>
+    </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.2.0" />
+        <PackageReference Include="Microsoft.AspNetCore.Razor" Version="2.2.0" />
+        <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All" />
+    </ItemGroup>
+    <ItemGroup Condition="$(TargetFramework) == 'netcoreapp3.1'">
+        <PackageReference Include="Microsoft.Extensions.Options" Version="3.1.21" />
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="3.1.21" />
+    </ItemGroup>
+    <ItemGroup Condition="$(TargetFramework) == 'net5.0'">
+        <PackageReference Include="Microsoft.Extensions.Options" Version="5.0.0" />
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="5.0.0" />
+    </ItemGroup>
+    <ItemGroup Condition="$(TargetFramework) == 'net6.0'">
+        <PackageReference Include="Microsoft.Extensions.Options" Version="6.0.0" />
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
+    </ItemGroup>
 </Project>
