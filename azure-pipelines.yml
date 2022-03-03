@@ -1,33 +1,25 @@
-queue:
-  name: Hosted VS2017
+pool:
+  name: windows-2022
 
 variables:
-  buildConfiguration: 'Release'
+  buildConfiguration: "Release"
 
 steps:
-- task: UseDotNet@2
-  displayName: 'Use .Net Core sdk 3.0.100'
-  inputs:
-    version: 3.0.100
-- task: UseDotNet@2
-  displayName: 'Use .Net Core sdk 2.1.802'
-  inputs:
-    version: 2.1.802
-- task: DotNetCoreCLI@2
-  displayName: 'dotnet build'
-  inputs:
-    projects: '**/*.csproj'
-    arguments: '--configuration $(buildConfiguration)'
+  - task: DotNetCoreCLI@2
+    displayName: "dotnet build"
+    inputs:
+      projects: "**/*.csproj"
+      arguments: "--configuration $(buildConfiguration)"
 
-- task: DotNetCoreCLI@2
-  displayName: 'dotnet test'
-  inputs:
-    command: test
-    projects: '**/*Tests/*.csproj'
-    arguments: '--configuration $(buildConfiguration)'
+  - task: DotNetCoreCLI@2
+    displayName: "dotnet test"
+    inputs:
+      command: test
+      projects: "**/*Tests/*.csproj"
+      arguments: "--configuration $(buildConfiguration)"
 
-- task: PublishBuildArtifacts@1
-  displayName: 'Publish Artifact: Build results'
-  inputs:
-    PathtoPublish: 'src/Joonasw.AspNetCore.SecurityHeaders/bin/$(buildConfiguration)'
-    ArtifactName: 'Build results'
+  - task: PublishBuildArtifacts@1
+    displayName: "Publish Artifact: Build results"
+    inputs:
+      PathtoPublish: "src/Joonasw.AspNetCore.SecurityHeaders/bin/$(buildConfiguration)"
+      ArtifactName: "Build results"
