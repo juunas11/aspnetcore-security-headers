@@ -57,7 +57,7 @@ namespace Joonasw.AspNetCore.SecurityHeaders
         /// <param name="app">The <see cref="IApplicationBuilder"/></param>
         /// <param name="options"></param>
         /// <returns>The <see cref="IApplicationBuilder"/></returns>
-        public static IApplicationBuilder UseHsts(
+        public static IApplicationBuilder UseStrictTransportSecurity(
             this IApplicationBuilder app,
             HstsOptions options)
         {
@@ -70,7 +70,7 @@ namespace Joonasw.AspNetCore.SecurityHeaders
         /// </summary>
         /// <param name="app">The <see cref="IApplicationBuilder"/></param>
         /// <returns>The <see cref="IApplicationBuilder"/></returns>
-        public static IApplicationBuilder UseHsts(this IApplicationBuilder app)
+        public static IApplicationBuilder UseStrictTransportSecurity(this IApplicationBuilder app)
         {
             return app.UseMiddleware<HstsMiddleware>();
         }
