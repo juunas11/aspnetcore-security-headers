@@ -5,7 +5,7 @@
         <Title>Joonasw.AspNetCore.SecurityHeaders</Title>
         <Authors>Joonas Westlin</Authors>
         <Description>Middleware for adding security headers to an ASP.NET Core application. Allows you to easily add Content Security Policy, Strict Transport Security, and Public Key Pins to an app.</Description>
-        <Copyright>Copyright 2021 Joonas Westlin</Copyright>
+        <Copyright>Copyright 2022 Joonas Westlin</Copyright>
         <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
         <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
         <PackageProjectUrl>https://github.com/juunas11/aspnetcore-security-headers</PackageProjectUrl>
