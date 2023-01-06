@@ -18,7 +18,7 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Tests
             string headerValue = null;
             RequestDelegate mockNext = (HttpContext ctx) =>
             {
-                headerValue = ctx.Response.Headers["Feature-Policy"];
+                headerValue = ctx.Response.Headers["Permissions-Policy"];
                 return Task.CompletedTask;
             };
             var options = Options.Create(new FeaturePolicyOptions
