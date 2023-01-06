@@ -8,7 +8,7 @@ namespace Joonasw.AspNetCore.SecurityHeaders.FeaturePolicy
 {
     public class FeaturePolicyMiddleware
     {
-        private const string HeaderName = "Feature-Policy";
+        private const string HeaderName = "Permissions-Policy";
         private readonly RequestDelegate _next;
         private readonly string _headerValue;
 
