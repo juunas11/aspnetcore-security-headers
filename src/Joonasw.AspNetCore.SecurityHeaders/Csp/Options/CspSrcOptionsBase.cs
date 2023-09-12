@@ -10,6 +10,12 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Csp.Options
         /// Collection of sources from where these resources can be loaded.
         /// </summary>
         public ICollection<string> AllowedSources { get; set; }
+        
+        /// <summary>
+        /// Collection of hashes that can be loaded.
+        /// </summary>
+        public ICollection<string> AllowedHashes { get; set; }
+        
         /// <summary>
         /// Allow loading these resources from the same domain as the app.
         /// </summary>
@@ -35,6 +41,7 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Csp.Options
         {
             _directiveName = directiveName + " ";
             AllowedSources = new List<string>();
+            AllowedHashes = new List<string>();
         }
 
         protected virtual ICollection<string> GetParts(ICspNonceService nonceService)
@@ -67,6 +74,11 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Csp.Options
                 foreach (string allowedSource in AllowedSources)
                 {
                     parts.Add(allowedSource);
+                }
+                
+                foreach (string allowedHash in AllowedHashes)
+                {
+                    parts.Add($"'{allowedHash}'");
                 }
             }
             return parts;

@@ -91,6 +91,21 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Tests
 
             Assert.Equal("frame-src https://www.google.com;worker-src 'self' https:", headerValue);
         }
+        
+        [Fact]
+        public void WithHashesForStyleAndScript_ReturnsCorrectHeader()
+        {
+            var builder = new CspBuilder();
+
+            builder.AllowStyles
+                .From("https://www.google.com")
+                .WithHash("sha256-RFWPLDbv2BY+rCkDzsE+0fr8ylGr2R2faWMhq4lfEQc=");
+            builder.AllowScripts.WithHash("sha256-RFWPLDbv2BY+rCkDzsE+0fr8ylGr2R2faWMhq4lfEQc=");
+
+            var headerValue = builder.BuildCspOptions().ToString(null).headerValue;
+
+            Assert.Equal("script-src 'sha256-RFWPLDbv2BY+rCkDzsE+0fr8ylGr2R2faWMhq4lfEQc=';style-src https://www.google.com 'sha256-RFWPLDbv2BY+rCkDzsE+0fr8ylGr2R2faWMhq4lfEQc='", headerValue);
+        }
 
         [Fact]
         public void WithPrefetch_ReturnsCorrectHeader()
