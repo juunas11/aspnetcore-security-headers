@@ -43,6 +43,21 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Csp.Builder
             _options.AllowedSources.Add(uri);
             return this;
         }
+        
+        /// <summary>
+        /// Allow JavaScript with the given hash
+        /// <paramref name="hash"/>.
+        /// </summary>
+        /// <param name="hash">The URI to allow.</param>
+        /// <returns>The builder for call chaining</returns>
+        public CspScriptsBuilder WithHash(string hash)
+        {
+            if (hash == null) throw new ArgumentNullException(nameof(hash));
+            if(hash.Length == 0) throw new ArgumentException("Hash can't be empty", nameof(hash));
+            
+            _options.AllowedHashes.Add(hash);
+            return this;
+        }
 
         /// <summary>
         /// Allow inline scripts.
