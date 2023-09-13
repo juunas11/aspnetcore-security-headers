@@ -48,12 +48,12 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Csp.Builder
         /// Allow CSS with the given
         /// <paramref name="hash"/>.
         /// </summary>
-        /// <param name="hash">The Hash to allow.</param>
+        /// <param name="hash">The hash to allow.</param>
         /// <returns>The builder for call chaining</returns>
         public CspStylesBuilder WithHash(string hash)
         {
             if (hash == null) throw new ArgumentNullException(nameof(hash));
-            if(hash.Length == 0) throw new ArgumentException("Hash can't be empty", nameof(hash));
+            if (hash.Length == 0) throw new ArgumentException("Hash can't be empty", nameof(hash));
             
             _options.AllowedHashes.Add(hash);
             return this;

@@ -40,7 +40,7 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Tests
 
             Assert.Equal("www.google.com", options.AllowedSources.Single());
         }
-        
+
         [Fact]
         public void From_ThrowsArgumentNullException_WithNullUrl()
         {
