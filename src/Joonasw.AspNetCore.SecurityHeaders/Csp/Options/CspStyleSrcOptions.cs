@@ -7,6 +7,7 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Csp.Options
     {
         public bool AddNonce { get; set; }
         public bool AllowUnsafeInline { get; set; }
+
         public CspStyleSrcOptions()
             : base("style-src")
         {

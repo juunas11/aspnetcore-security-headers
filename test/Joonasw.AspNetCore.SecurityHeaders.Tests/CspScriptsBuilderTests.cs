@@ -56,6 +56,33 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Tests
 
             Assert.Throws<ArgumentException>(() => builder.From(string.Empty));
         }
+        
+        [Fact]
+        public void WithHash_AddsHashToAllowedHashes()
+        {
+            var builder = new CspScriptsBuilder();
+
+            builder.WithHash("sha256-RFWPLDbv2BY+rCkDzsE+0fr8ylGr2R2faWMhq4lfEQc=");
+            CspScriptSrcOptions options = builder.BuildOptions();
+
+            Assert.Equal("sha256-RFWPLDbv2BY+rCkDzsE+0fr8ylGr2R2faWMhq4lfEQc=", options.AllowedHashes.Single());
+        }
+        
+        [Fact]
+        public void WithHash_ThrowsArgumentNullException_WithNullUrl()
+        {
+            var builder = new CspScriptsBuilder();
+
+            Assert.Throws<ArgumentNullException>(() => builder.WithHash(null));
+        }
+
+        [Fact]
+        public void WithHash_ThrowsArgumentException_WithEmptyUrl()
+        {
+            var builder = new CspScriptsBuilder();
+
+            Assert.Throws<ArgumentException>(() => builder.WithHash(string.Empty));
+        }
 
         [Fact]
         public void AllowUnsafeEval_SetsUnsafeEvalToTrue()

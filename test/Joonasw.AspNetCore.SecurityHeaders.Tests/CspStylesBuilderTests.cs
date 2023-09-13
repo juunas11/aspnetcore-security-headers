@@ -40,7 +40,7 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Tests
 
             Assert.Equal("www.google.com", options.AllowedSources.Single());
         }
-
+        
         [Fact]
         public void From_ThrowsArgumentNullException_WithNullUrl()
         {
@@ -55,6 +55,33 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Tests
             var builder = new CspStylesBuilder();
 
             Assert.Throws<ArgumentException>(() => builder.From(string.Empty));
+        }
+        
+        [Fact]
+        public void WithHash_AddsHashToAllowedHashes()
+        {
+            var builder = new CspStylesBuilder();
+
+            builder.WithHash("sha256-RFWPLDbv2BY+rCkDzsE+0fr8ylGr2R2faWMhq4lfEQc=");
+            CspStyleSrcOptions options = builder.BuildOptions();
+
+            Assert.Equal("sha256-RFWPLDbv2BY+rCkDzsE+0fr8ylGr2R2faWMhq4lfEQc=", options.AllowedHashes.Single());
+        }
+        
+        [Fact]
+        public void WithHash_ThrowsArgumentNullException_WithNullUrl()
+        {
+            var builder = new CspStylesBuilder();
+
+            Assert.Throws<ArgumentNullException>(() => builder.WithHash(null));
+        }
+
+        [Fact]
+        public void WithHash_ThrowsArgumentException_WithEmptyUrl()
+        {
+            var builder = new CspStylesBuilder();
+
+            Assert.Throws<ArgumentException>(() => builder.WithHash(string.Empty));
         }
 
         [Fact]
