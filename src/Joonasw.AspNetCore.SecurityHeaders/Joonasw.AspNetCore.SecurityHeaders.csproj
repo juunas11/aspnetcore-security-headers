@@ -5,12 +5,13 @@
         <Title>Joonasw.AspNetCore.SecurityHeaders</Title>
         <Authors>Joonas Westlin</Authors>
         <Description>Middleware for adding security headers to an ASP.NET Core application. Allows you to easily add Content Security Policy, Strict Transport Security, and Public Key Pins to an app.</Description>
-        <Copyright>Copyright 2022 Joonas Westlin</Copyright>
+        <Copyright>Copyright 2023 Joonas Westlin</Copyright>
         <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
         <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
         <PackageProjectUrl>https://github.com/juunas11/aspnetcore-security-headers</PackageProjectUrl>
         <PackageReleaseNotes>Remove support for .NET Core 3.1 and .NET 5, add support for .NET 7. Add AllowedHashes to CSS and JS in CSP.</PackageReleaseNotes>
         <PackageTags>aspnetcore security headers hsts hpkp csp</PackageTags>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
         <RepositoryUrl>https://github.com/juunas11/aspnetcore-security-headers</RepositoryUrl>
         <!-- Source Link support -->
         <PublishRepositoryUrl>true</PublishRepositoryUrl>
@@ -21,6 +22,7 @@
     </PropertyGroup>
     <ItemGroup>
         <None Include="..\..\LICENSE.txt" Pack="true" PackagePath="LICENSE.txt"/>
+        <None Include="..\..\README.md" Pack="true" PackagePath="\"/>
     </ItemGroup>
     <ItemGroup>
         <FrameworkReference Include="Microsoft.AspNetCore.App" />
