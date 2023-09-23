@@ -110,10 +110,22 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Csp.Builder
         /// <param name="uri">The URL where violation reports should be sent.</param>
         public void ReportViolationsTo(string uri)
         {
-            if(uri == null) throw new ArgumentNullException(nameof(uri));
-            if(uri.Length == 0) throw new ArgumentException("Uri can't be empty", nameof(uri));
+            if (uri == null) throw new ArgumentNullException(nameof(uri));
+            if (uri.Length == 0) throw new ArgumentException("Uri can't be empty", nameof(uri));
 
             _options.ReportUri = uri;
+        }
+
+        /// <summary>
+        /// Sets the group name where violation reports are sent.
+        /// </summary>
+        /// <param name="groupName">The group name where violation reports should be sent.</param>
+        public void ReportViolationsToGroup(string groupName)
+        {
+            if (string.IsNullOrWhiteSpace(groupName))
+                throw new ArgumentNullException(nameof(groupName));
+
+            _options.ReportTo = groupName;
         }
 
         public void SetUpgradeInsecureRequests()

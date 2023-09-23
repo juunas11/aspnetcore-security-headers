@@ -115,6 +115,11 @@ namespace Joonasw.AspNetCore.SecurityHeaders
         /// </summary>
         public string ReportUri { get; set; }
 
+        /// <summary>
+        /// The group where violation reports should be sent.
+        /// </summary>
+        public string ReportTo { get; set; }
+
         public bool IsNonceNeeded => Script.AddNonce || Style.AddNonce;
 
         /// <summary>
@@ -217,6 +222,10 @@ namespace Joonasw.AspNetCore.SecurityHeaders
             if (ReportUri != null)
             {
                 values.Add("report-uri " + ReportUri);
+            }
+            if (!string.IsNullOrWhiteSpace(ReportTo))
+            {
+                values.Add("report-to " + ReportTo);
             }
 
             string headerValue = string.Join(";", values.Where(s => s.Length > 0));

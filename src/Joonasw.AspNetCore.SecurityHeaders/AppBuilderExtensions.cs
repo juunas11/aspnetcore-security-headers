@@ -8,6 +8,8 @@ using Joonasw.AspNetCore.SecurityHeaders.Hpkp;
 using Joonasw.AspNetCore.SecurityHeaders.Hpkp.Builder;
 using Joonasw.AspNetCore.SecurityHeaders.Hsts;
 using Joonasw.AspNetCore.SecurityHeaders.ReferrerPolicy;
+using Joonasw.AspNetCore.SecurityHeaders.ReportingEndpoints;
+using Joonasw.AspNetCore.SecurityHeaders.ReportingEndpoints.Builder;
 using Joonasw.AspNetCore.SecurityHeaders.XContentTypeOptions;
 using Joonasw.AspNetCore.SecurityHeaders.XFrameOptions;
 using Joonasw.AspNetCore.SecurityHeaders.XXssProtection;
@@ -244,6 +246,23 @@ namespace Joonasw.AspNetCore.SecurityHeaders
         public static IApplicationBuilder UseExpectCT(this IApplicationBuilder app)
         {
             return app.UseMiddleware<ExpectCTMiddleware>();
+        }
+
+        /// <summary>
+        /// Sets the Reporting-Endpoints header.
+        /// </summary>
+        /// <param name="app">The <see cref="IApplicationBuilder"/></param>
+        /// <param name="builderAction">The builder action.</param>
+        /// <returns>IApplicationBuilder.</returns>
+        public static IApplicationBuilder UseReportingEndpoints(this IApplicationBuilder app, Action<ReportingEndpointsBuilder> builderAction)
+        {
+            var builder = new ReportingEndpointsBuilder();
+            builderAction(builder);
+
+            var options = builder.BuildOptions();
+            options.Validate();
+
+            return app.UseMiddleware<ReportingEndpointsMiddleware>(new OptionsWrapper<ReportingEndpointsOptions>(options));
         }
     }
 }
