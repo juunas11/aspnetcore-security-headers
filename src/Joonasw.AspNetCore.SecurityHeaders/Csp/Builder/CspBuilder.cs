@@ -13,9 +13,25 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Csp.Builder
         /// </summary>
         public CspScriptsBuilder AllowScripts { get; } = new CspScriptsBuilder();
         /// <summary>
+        /// Set up rules for JavaScript attributes.
+        /// </summary>
+        public CspScriptAttributesBuilder AllowScriptAttributes { get; } = new CspScriptAttributesBuilder();
+        /// <summary>
+        /// Set up rules for JavaScript elements.
+        /// </summary>
+        public CspScriptElementsBuilder AllowScriptElements { get; } = new CspScriptElementsBuilder();
+        /// <summary>
         /// Set up rules for CSS.
         /// </summary>
         public CspStylesBuilder AllowStyles { get; } = new CspStylesBuilder();
+        /// <summary>
+        /// Set up rules for CSS attributes.
+        /// </summary>
+        public CspStyleAttributesBuilder AllowStyleAttributes { get; } = new CspStyleAttributesBuilder();
+        /// <summary>
+        /// Set up rules for CSS elements.
+        /// </summary>
+        public CspStyleElementsBuilder AllowStyleElements { get; } = new CspStyleElementsBuilder();
         /// <summary>
         /// Set up default rules for resources for which no rules exist.
         /// </summary>
@@ -129,7 +145,11 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Csp.Builder
         public CspOptions BuildCspOptions()
         {
             _options.Script = AllowScripts.BuildOptions();
+            _options.ScriptAttribute = AllowScriptAttributes.BuildOptions();
+            _options.ScriptElement = AllowScriptElements.BuildOptions();
             _options.Style = AllowStyles.BuildOptions();
+            _options.StyleAttribute = AllowStyleAttributes.BuildOptions();
+            _options.StyleElement = AllowStyleElements.BuildOptions();
 #pragma warning disable CS0618 // Type or member is obsolete
             _options.Child = AllowChildren.BuildOptions();
 #pragma warning restore CS0618 // Type or member is obsolete

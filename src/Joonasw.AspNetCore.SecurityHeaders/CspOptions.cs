@@ -18,9 +18,25 @@ namespace Joonasw.AspNetCore.SecurityHeaders
         /// </summary>
         public CspScriptSrcOptions Script { get; set; }
         /// <summary>
+        /// Rules to apply for JavaScript attributes.
+        /// </summary>
+        public CspScriptSrcAttributeOptions ScriptAttribute { get; set; }
+        /// <summary>
+        /// Rules to apply for JavaScript elements.
+        /// </summary>
+        public CspScriptSrcElementOptions ScriptElement { get; set; }
+        /// <summary>
         /// Rules to apply for CSS.
         /// </summary>
         public CspStyleSrcOptions Style { get; set; }
+        /// <summary>
+        /// Rules to apply for CSS attributes.
+        /// </summary>
+        public CspStyleSrcAttributeOptions StyleAttribute { get; set; }
+        /// <summary>
+        /// Rules to apply for CSS elements.
+        /// </summary>
+        public CspStyleSrcElementOptions StyleElement { get; set; }
         /// <summary>
         /// Default rules to apply if no directive is
         /// present for the resource type.
@@ -145,7 +161,11 @@ namespace Joonasw.AspNetCore.SecurityHeaders
         public CspOptions()
         {
             Script = new CspScriptSrcOptions();
+            ScriptAttribute = new CspScriptSrcAttributeOptions();
+            ScriptElement = new CspScriptSrcElementOptions();
             Style = new CspStyleSrcOptions();
+            StyleAttribute = new CspStyleSrcAttributeOptions();
+            StyleElement = new CspStyleSrcElementOptions();
             Default = new CspDefaultSrcOptions();
 #pragma warning disable CS0618 // Type or member is obsolete
             Child = new CspChildSrcOptions();
@@ -183,7 +203,11 @@ namespace Joonasw.AspNetCore.SecurityHeaders
             {
                 Default.ToString(nonceService),
                 Script.ToString(nonceService),
+                ScriptAttribute.ToString(nonceService),
+                ScriptElement.ToString(nonceService),
                 Style.ToString(nonceService),
+                StyleAttribute.ToString(nonceService),
+                StyleElement.ToString(nonceService),
 #pragma warning disable CS0618 // Type or member is obsolete
                 Child.ToString(nonceService),
 #pragma warning restore CS0618 // Type or member is obsolete
