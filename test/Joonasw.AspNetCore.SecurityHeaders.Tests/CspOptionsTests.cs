@@ -100,6 +100,31 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Tests
         }
 
         [Fact]
+        public void StyleAnyElemAttr_ResultIsCorrect()
+        {
+            var options = new CspOptions
+            {
+                Style = new CspStyleSrcOptions()
+                {
+                    AllowAny = true
+                },
+                StyleAttribute = new CspStyleSrcAttributeOptions()
+                {
+                    AllowAny = true,
+                },
+                StyleElement = new CspStyleSrcElementOptions()
+                {
+                    AllowAny = true,
+                },
+            };
+
+            var (headerName, headerValue) = options.ToString(null);
+
+            Assert.Equal("Content-Security-Policy", headerName);
+            Assert.Equal("style-src *;style-src-attr *;style-src-elem *", headerValue);
+        }
+
+        [Fact]
         public void WithoutReportOnly_HeaderNameIsCorrect()
         {
             var options = new CspOptions
