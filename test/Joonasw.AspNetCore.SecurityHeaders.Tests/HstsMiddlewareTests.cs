@@ -25,7 +25,7 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Tests
             var sut = new HstsMiddleware(mockNext, options);
             var mockContext = new DefaultHttpContext();
             mockContext.Request.Scheme = "https";
-            mockContext.Response.Headers.Add("Strict-Transport-Security", "max-age=31536000");
+            mockContext.Response.Headers.Append("Strict-Transport-Security", "max-age=31536000");
 
             await sut.Invoke(mockContext);
             //Invoke throws System.ArgumentException if it tries to add the header again

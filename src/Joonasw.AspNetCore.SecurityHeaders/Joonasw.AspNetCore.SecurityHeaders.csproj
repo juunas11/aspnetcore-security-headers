@@ -1,39 +1,39 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-    <PropertyGroup>
-        <TargetFrameworks>net6.0;net7.0</TargetFrameworks>
-        <Version>5.0.0</Version>
-        <Title>Joonasw.AspNetCore.SecurityHeaders</Title>
-        <Authors>Joonas Westlin</Authors>
-        <Description>Middleware for adding security headers to an ASP.NET Core application. Allows you to easily add Content Security Policy, Strict Transport Security, and Public Key Pins to an app.</Description>
-        <Copyright>Copyright 2023 Joonas Westlin</Copyright>
-        <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-        <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
-        <PackageProjectUrl>https://github.com/juunas11/aspnetcore-security-headers</PackageProjectUrl>
-        <PackageReleaseNotes>Remove support for .NET Core 3.1 and .NET 5, add support for .NET 7. Add AllowedHashes to CSS and JS in CSP.</PackageReleaseNotes>
-        <PackageTags>aspnetcore security headers hsts hpkp csp</PackageTags>
-        <PackageReadmeFile>README.md</PackageReadmeFile>
-        <RepositoryUrl>https://github.com/juunas11/aspnetcore-security-headers</RepositoryUrl>
-        <!-- Source Link support -->
-        <PublishRepositoryUrl>true</PublishRepositoryUrl>
-        <EmbedUntrackedSources>true</EmbedUntrackedSources>
-        <IncludeSymbols>true</IncludeSymbols>
-        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-        <!-- /Source Link support-->
-    </PropertyGroup>
-    <ItemGroup>
-        <None Include="..\..\LICENSE.txt" Pack="true" PackagePath="LICENSE.txt"/>
-        <None Include="..\..\README.md" Pack="true" PackagePath="\"/>
-    </ItemGroup>
-    <ItemGroup>
-        <FrameworkReference Include="Microsoft.AspNetCore.App" />
-        <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All" />
-    </ItemGroup>
-    <ItemGroup Condition="$(TargetFramework) == 'net6.0'">
-        <PackageReference Include="Microsoft.Extensions.Options" Version="6.0.0" />
-        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
-    </ItemGroup>
-    <ItemGroup Condition="$(TargetFramework) == 'net7.0'">
-        <PackageReference Include="Microsoft.Extensions.Options" Version="7.0.1" />
-        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="7.0.0" />
-    </ItemGroup>
+  <PropertyGroup>
+    <TargetFrameworks>net8.0;net9.0</TargetFrameworks>
+    <Version>6.0.0</Version>
+    <Title>Joonasw.AspNetCore.SecurityHeaders</Title>
+    <Authors>Joonas Westlin</Authors>
+    <Description>Middleware for adding security headers to an ASP.NET Core application. Allows you to easily add Content Security Policy, Strict Transport Security, and Public Key Pins to an app.</Description>
+    <Copyright>Copyright 2025 Joonas Westlin</Copyright>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+    <PackageProjectUrl>https://github.com/juunas11/aspnetcore-security-headers</PackageProjectUrl>
+    <PackageReleaseNotes>Remove support for .NET 6 and 7, add support for 8 and 9.</PackageReleaseNotes>
+    <PackageTags>aspnetcore security headers hsts hpkp csp</PackageTags>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <RepositoryUrl>https://github.com/juunas11/aspnetcore-security-headers</RepositoryUrl>
+    <!-- Source Link support -->
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <!-- /Source Link support-->
+  </PropertyGroup>
+  <ItemGroup>
+    <None Include="..\..\LICENSE.txt" Pack="true" PackagePath="LICENSE.txt" />
+    <None Include="..\..\README.md" Pack="true" PackagePath="\" />
+  </ItemGroup>
+  <ItemGroup>
+    <FrameworkReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All" />
+  </ItemGroup>
+  <ItemGroup Condition="$(TargetFramework) == 'net8.0'">
+    <PackageReference Include="Microsoft.Extensions.Options" Version="8.0.2" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.2" />
+  </ItemGroup>
+  <ItemGroup Condition="$(TargetFramework) == 'net9.0'">
+    <PackageReference Include="Microsoft.Extensions.Options" Version="9.0.3" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.3" />
+  </ItemGroup>
 </Project>

@@ -25,7 +25,7 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Tests
             });
             var sut = new HpkpMiddleware(mockNext, options);
             var mockContext = new DefaultHttpContext();
-            mockContext.Response.Headers.Add("Public-Key-Pins", "abc; max-age=60");
+            mockContext.Response.Headers.Append("Public-Key-Pins", "abc; max-age=60");
 
             await sut.Invoke(mockContext);
             //Invoke throws System.ArgumentException if it tries to add the header again
@@ -47,7 +47,7 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Tests
             });
             var sut = new HpkpMiddleware(mockNext, options);
             var mockContext = new DefaultHttpContext();
-            mockContext.Response.Headers.Add("Public-Key-Pins-Report-Only", "abc; max-age=60");
+            mockContext.Response.Headers.Append("Public-Key-Pins-Report-Only", "abc; max-age=60");
 
             await sut.Invoke(mockContext);
 

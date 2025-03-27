@@ -117,7 +117,7 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Tests
             });
             var sut = new CspMiddleware(mockNext, options);
             var mockContext = new DefaultHttpContext();
-            mockContext.Response.Headers.Add("Content-Security-Policy", "default-src https: 'unsafe-eval' 'unsafe-inline'; object-src 'none'");
+            mockContext.Response.Headers.Append("Content-Security-Policy", "default-src https: 'unsafe-eval' 'unsafe-inline'; object-src 'none'");
 
             await sut.Invoke(mockContext);
             //Invoke throws System.ArgumentException if it tries to add the header again
@@ -141,7 +141,7 @@ namespace Joonasw.AspNetCore.SecurityHeaders.Tests
             });
             var sut = new CspMiddleware(mockNext, options);
             var mockContext = new DefaultHttpContext();
-            mockContext.Response.Headers.Add("Content-Security-Policy-Report-Only", "default-src https: 'unsafe-eval' 'unsafe-inline'; object-src 'none'");
+            mockContext.Response.Headers.Append("Content-Security-Policy-Report-Only", "default-src https: 'unsafe-eval' 'unsafe-inline'; object-src 'none'");
 
             await sut.Invoke(mockContext);
 
